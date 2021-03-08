@@ -1,6 +1,7 @@
 module IL4model
 
 using ModelingToolkit, NLsolve
+import LinearAlgebra: norm
 
 
 const vars = @variables α Lαβ Lαγ
@@ -22,15 +23,16 @@ const ns = NonlinearSystem(eqs, collect(vars), collect(params))
 const nlsys_func = @eval eval(generate_function(ns)[2])
 
 
-function ligOut(ps::Vector; u0 = nothing)::Vector
+function ligOut(ps::Vector{T}; u0 = nothing)::Vector{T} where {T <: Real}
     @assert all(ps .>= 0.0)
+    @assert length(ps) == 8
     f2 = (du, u) -> nlsys_func(du, u, ps)
 
     if u0 === nothing
-        u0 = [0.1, 0.3, 0.2]
+        u0 = T[0.1, 0.3, 0.2]
     end
 
-    res = nlsolve(f2, u0, method = :newton, xtol = 1e-12, ftol = 1e-12)
+    res = nlsolve(f2, u0, method = :newton, xtol = 1e-12, ftol = 1e-12, autodiff = :forward)
     if !(res.x_converged | res.f_converged)
         println(res)
     end
@@ -40,11 +42,12 @@ function ligOut(ps::Vector; u0 = nothing)::Vector
     return res.zero
 end
 
-function ligOutLs(Ls::LinRange, ps::Vector)::Matrix
+function ligOutLs(Ls::LinRange, ps::Vector{T})::Matrix{T} where {T <: Real}
     @assert all(ps .>= 0.0)
+    @assert length(ps) == 7
     ps = copy(ps)
     pushfirst!(ps, 10 ^ Ls[1])
-    results = zeros(length(Ls), length(vars))
+    results = zeros(T, length(Ls), length(vars))
     results[1, :] = ligOut(ps)
 
     for ii in 2:length(Ls)
@@ -55,6 +58,15 @@ function ligOutLs(Ls::LinRange, ps::Vector)::Matrix
     return results
 end
 
-export ligOut, ligOutLs
+""" Calculate the cost of the difference between the model and data. """
+function diffcost(ps, c::LinRange, Y; species = 3)::Real
+    return norm(ligOutLs(c, ps)[:, species] .- Y)
+end
+
+const concs = LinRange(-12.6227, -6.60206, 11)
+const IL4sig = [0.1, 0.5, 7.5, 38.1, 82.8, 93.3, 97.1, 94.8, 96.3, 102.0, 101.7]
+const neo4sig = [0.7, -0.4, -0.8, -1.0, -0.1, 1.3, 6.7, 14.0, 18.0, 23.0, 24.8]
+
+export ligOut, ligOutLs, concs, IL4sig, neo4sig, diffcost
 
 end # module
