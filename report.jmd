@@ -1,0 +1,15 @@
+---
+weave_options:
+  error: false
+  echo: false
+---
+
+```julia
+import Pkg; Pkg.instantiate()
+Pkg.activate(".")
+using IL4model
+```
+
+Just with the type I receptors:
+
+$\frac{[L]}{\phi_\gamma\, (K_{D,\alpha} + [L])} = \frac{y}{(\alpha_T - y)(\gamma_T - y)}$

@@ -1,43 +1,60 @@
 module IL4model
 
-using ModelingToolkit, NLsolve, StatsFuns
+using ModelingToolkit, NLsolve
 
 
-@variables α β Lα Lβ Lαβ Lαγ
-@parameters Kdα Kdβ L θ αT γT Kdγ βT
+const vars = @variables α Lαβ Lαγ
+const params = @parameters L θ Kdα Kdβ Kdγ αT βT γT
 
-const eqs = [0 ~ Lα*Kdα - α*L,
-             0 ~ Lβ*Kdβ - β*L,
-             0 ~ θ*Kdα*Lαβ - Lβ*α,
-             #0 ~ θ*Kdβ*Lαβ - Lα*β,
-             0 ~ α + Lα + Lαβ + Lαγ - αT,
-             0 ~ Lα*(γT - Lαγ) - θ*Kdγ*Lαγ,
-             0 ~ β + Lβ + Lαβ - βT]
+#const eqs = [0 ~ Lα*Kdα - α*L,
+#             0 ~ Lβ*Kdβ - β*L,
+#             0 ~ θ*Kdα*Lαβ - Lβ*α,
+#             #0 ~ θ*Kdβ*Lαβ - Lα*β,
+#             0 ~ α + Lα + Lαβ + Lαγ - αT,
+#             0 ~ Lα*(γT - Lαγ) - θ*Kdγ*Lαγ,
+#             0 ~ β + Lβ + Lαβ - βT]
 
-# Just type 1
-const t1eqs = [0 ~ L * (αT - Lαγ) * (γT - Lαγ) - θ * Kdγ * (Kdα + L)]
+const eqs = [0 ~ θ*Kdα*Lαβ - (((βT - Lαβ) / (1 + L/Kdβ))*L/Kdβ)*α,
+             0 ~ α + α*L/Kdα + Lαβ + Lαγ - αT,
+             0 ~ (α*L/Kdα)*(γT - Lαγ) - θ*Kdγ*Lαγ]
 
-# Just type I: L * (αT - Lαγ) * (γT - Lαγ) = θ * Kdγ * (Kdα + L)
-
-const ns = NonlinearSystem(eqs, [α, β, Lα, Lβ, Lαβ, Lαγ], [Kdα, Kdβ, L, θ, αT, γT, Kdγ, βT])
+const ns = NonlinearSystem(eqs, collect(vars), collect(params))
 const nlsys_func = @eval eval(generate_function(ns)[2])
 
-const nst1 = NonlinearSystem(eqs, [α, Lαγ], [Kdα, L, θ, αT, γT, Kdγ])
-const nlsyst1_func = @eval eval(generate_function(nst1)[2])
 
-function ligOut(ps::Vector)::Vector
+function ligOut(ps::Vector; u0 = nothing)::Vector
     @assert all(ps .>= 0.0)
-    f2 = (du, u) -> nlsys_func(du, softplus.(u), ps)
+    f2 = (du, u) -> nlsys_func(du, u, ps)
 
-    res = nlsolve(f2, zeros(6), method = :newton, xtol = 1e-12, ftol = 1e-12)
+    if u0 === nothing
+        u0 = [0.1, 0.3, 0.2]
+    end
+
+    res = nlsolve(f2, u0, method = :newton, xtol = 1e-12, ftol = 1e-12)
     if !(res.x_converged | res.f_converged)
         println(res)
     end
 
     @assert res.x_converged | res.f_converged
-    return softplus.(res.zero)
+    @assert all(res.zero .>= 0.0)
+    return res.zero
 end
 
-export ligOut
+function ligOutLs(Ls::LinRange, ps::Vector)::Matrix
+    @assert all(ps .>= 0.0)
+    ps = copy(ps)
+    pushfirst!(ps, 10 ^ Ls[1])
+    results = zeros(length(Ls), length(vars))
+    results[1, :] = ligOut(ps)
+
+    for ii in 2:length(Ls)
+        ps[1] = 10 ^ Ls[ii]
+        results[ii, :] = ligOut(ps; u0 = results[ii - 1, :])
+    end
+
+    return results
+end
+
+export ligOut, ligOutLs
 
 end # module
