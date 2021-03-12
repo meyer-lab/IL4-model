@@ -24,14 +24,12 @@ const ns = NonlinearSystem(eqs, collect(vars), collect(params))
 const nlsys_func = @eval eval(generate_function(ns)[2])
 
 
-function ligOut(ps::Vector{T}; u0 = nothing)::Vector{T} where {T <: Real}
+""" Take in the parameters and calulate the solution for one condition.
+    Optionally provide a starting point for solving through u0. """
+function ligOut(ps::Vector{T}; u0 = T[0.01, 0.1])::Vector{T} where {T <: Real}
     @assert all(ps .>= 0.0)
     @assert length(ps) == 8
     f2 = (du, u) -> nlsys_func(du, u, ps)
-
-    if u0 === nothing
-        u0 = T[0.01, 0.1]
-    end
 
     res = nlsolve(f2, u0, method = :newton, xtol = 1e-12, ftol = 1e-12, autodiff = :forward)
     if !(res.x_converged | res.f_converged)
@@ -43,6 +41,7 @@ function ligOut(ps::Vector{T}; u0 = nothing)::Vector{T} where {T <: Real}
     return res.zero
 end
 
+""" Calculate a range of solutions. Ls defines the log10 concentration range. """
 function ligOutLs(Ls::LinRange, ps::Vector{T})::Matrix{T} where {T <: Real}
     @assert all(ps .>= 0.0)
     @assert length(ps) == 7
@@ -59,28 +58,27 @@ function ligOutLs(Ls::LinRange, ps::Vector{T})::Matrix{T} where {T <: Real}
     return results
 end
 
-""" Calculate the cost of the difference between the model and data. """
+""" Calculate the cost of the difference between the model and data.
+    Species 1 is type II signaling, species 2 is type I signaling. """
 function diffcost(ps, c::LinRange, Y; species = 2)::Real
     return norm(ligOutLs(c, ps)[:, species] .- Y)
 end
 
+""" Fit the two cell lines with two ligand responses. """
 function dcost(x)
     x = abs.(copy(x))
     cost = diffcost(x[1:7], concs, IL4sig) + diffcost(x[[1, 8, 9, 10, 5, 6, 7]], concs, neo4sig)
-    x[5] = 3000
-    x[6] = 0.00001
-    x[7] = 3000
-    cost = cost + diffcost(x[1:7], ramosConc, ramosIL4) + diffcost(x[[1, 8, 9, 10, 5, 6, 7]], ramosConc, ramosneo4)
     return cost
 end
 
+""" Optimization function. """
 function optimizeParam()
     # θ Kdα Kdβ Kdγ αT βT γT
-    psInit = [1e6, 1e-9, 1e-9, 1e-6, 1000, 12000, 8000, 1e-9, 1e-9, 1e-6]
+    psInit = [1e6, 1e-8, 1e-9, 1e-6, 1000, 12000, 8000, 1e-8, 1e-9, 1e-6]
 
-    opts = Optim.Options(iterations = 80,
-                         store_trace = true,
-                         show_trace = true,
+    opts = Optim.Options(iterations = 80000,
+                         store_trace = false,
+                         show_trace = false,
                          f_tol = 1e-11)
 
     return optimize(dcost, psInit, NewtonTrustRegion(), opts; autodiff = :forward)
