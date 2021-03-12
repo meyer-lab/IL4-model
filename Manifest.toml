@@ -175,9 +175,9 @@ version = "0.4.2"
 
 [[ForwardDiff]]
 deps = ["CommonSubexpressions", "DiffResults", "DiffRules", "NaNMath", "Random", "SpecialFunctions", "StaticArrays"]
-git-tree-sha1 = "d48a40c0f54f29a5c8748cfb3225719accc72b77"
+git-tree-sha1 = "c68fb7481b71519d313114dca639b35262ff105f"
 uuid = "f6369f11-7733-5829-9624-2563aa707210"
-version = "0.10.16"
+version = "0.10.17"
 
 [[FunctionWrappers]]
 git-tree-sha1 = "241552bc2209f0fa068b6415b1942cc0aa486bcc"
@@ -408,6 +408,10 @@ version = "0.2.4"
 [[Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
+
+[[Profile]]
+deps = ["Printf"]
+uuid = "9abbd945-dff8-562f-b5e8-e1ebf5ef1b79"
 
 [[QuadGK]]
 deps = ["DataStructures", "LinearAlgebra"]
