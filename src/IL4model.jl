@@ -2,9 +2,9 @@ module IL4model
 
 using ModelingToolkit, NLsolve
 import LinearAlgebra: norm
+using Optim
 
-
-const vars = @variables α Lαβ Lαγ
+const vars = @variables Lαβ Lαγ
 const params = @parameters L θ Kdα Kdβ Kdγ αT βT γT
 
 #const eqs = [0 ~ Lα*Kdα - α*L,
@@ -15,8 +15,9 @@ const params = @parameters L θ Kdα Kdβ Kdγ αT βT γT
 #             0 ~ Lα*(γT - Lαγ) - θ*Kdγ*Lαγ,
 #             0 ~ β + Lβ + Lαβ - βT]
 
+α = (αT - Lαβ - Lαγ) / (1 + L/Kdα)
+
 const eqs = [0 ~ θ*Kdα*Lαβ - (((βT - Lαβ) / (1 + L/Kdβ))*L/Kdβ)*α,
-             0 ~ α + α*L/Kdα + Lαβ + Lαγ - αT,
              0 ~ (α*L/Kdα)*(γT - Lαγ) - θ*Kdγ*Lαγ]
 
 const ns = NonlinearSystem(eqs, collect(vars), collect(params))
@@ -29,7 +30,7 @@ function ligOut(ps::Vector{T}; u0 = nothing)::Vector{T} where {T <: Real}
     f2 = (du, u) -> nlsys_func(du, u, ps)
 
     if u0 === nothing
-        u0 = T[0.1, 0.3, 0.2]
+        u0 = T[0.01, 0.1]
     end
 
     res = nlsolve(f2, u0, method = :newton, xtol = 1e-12, ftol = 1e-12, autodiff = :forward)
@@ -59,14 +60,39 @@ function ligOutLs(Ls::LinRange, ps::Vector{T})::Matrix{T} where {T <: Real}
 end
 
 """ Calculate the cost of the difference between the model and data. """
-function diffcost(ps, c::LinRange, Y; species = 3)::Real
+function diffcost(ps, c::LinRange, Y; species = 2)::Real
     return norm(ligOutLs(c, ps)[:, species] .- Y)
 end
 
+function dcost(x)
+    x = abs.(copy(x))
+    cost = diffcost(x[1:7], concs, IL4sig) + diffcost(x[[1, 8, 9, 10, 5, 6, 7]], concs, neo4sig)
+    x[5] = 3000
+    x[6] = 0.00001
+    x[7] = 3000
+    cost = cost + diffcost(x[1:7], ramosConc, ramosIL4) + diffcost(x[[1, 8, 9, 10, 5, 6, 7]], ramosConc, ramosneo4)
+    return cost
+end
+
+function optimizeParam()
+    # θ Kdα Kdβ Kdγ αT βT γT
+    psInit = [1e6, 1e-9, 1e-9, 1e-6, 1000, 12000, 8000, 1e-9, 1e-9, 1e-6]
+
+    opts = Optim.Options(iterations = 80,
+                         store_trace = true,
+                         show_trace = true,
+                         f_tol = 1e-11)
+
+    return optimize(dcost, psInit, NewtonTrustRegion(), opts; autodiff = :forward)
+end
+
 const concs = LinRange(-12.6227, -6.60206, 11)
+const ramosConc = LinRange(-14.2247, -7, 9)
 const IL4sig = [0.1, 0.5, 7.5, 38.1, 82.8, 93.3, 97.1, 94.8, 96.3, 102.0, 101.7]
 const neo4sig = [0.7, -0.4, -0.8, -1.0, -0.1, 1.3, 6.7, 14.0, 18.0, 23.0, 24.8]
+const ramosIL4 = [-0.5, -0.4, 0.5, 14.5, 74.9, 103.8, 107.4, 95.3, 100.8]
+const ramosneo4 = [-0.4, -0.4, -0.5, 0.1, 7.8, 61.8, 101.9, 104.1, 102.2]
 
-export ligOut, ligOutLs, concs, IL4sig, neo4sig, diffcost
+export ligOut, ligOutLs, concs, IL4sig, neo4sig, diffcost, ramosConc, ramosIL4, ramosneo4, optimizeParam
 
 end # module
