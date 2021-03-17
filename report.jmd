@@ -2,7 +2,7 @@
 weave_options:
   error: false
   echo: false
-  fig_ext: .svg
+  fig_ext: .pdf
 ---
 
 ```julia
@@ -10,48 +10,65 @@ using IL4model
 using Plots
 using Optim
 
-pyplot()
-
 results = optimizeParam()
 ```
 
 ```julia
 fitOut = abs.(Optim.minimizer(results))
+println(fitOut)
 concs2 = LinRange(-12.6227, -6.60206, 101)
-plot(concs2, ligOutLs(concs2, fitOut[1:7])[:, 2], label = "Predicted IL4", fmt = :svg)
+plot(concs2, ligOutLs(concs2, fitOut[1:7])[:, 2], label = "Predicted IL4", fmt = :pdf)
 plot!(concs, IL4sig, seriestype = :scatter, label = "Experimental IL4")
-plot!(concs2, ligOutLs(concs2, fitOut[[1, 8, 9, 10, 5, 6, 7]])[:, 2], label = "Experimental neo4")
+plot!(concs2, ligOutLs(concs2, fitOut[[1, 8, 9, 10, 5, 6, 7]])[:, 2], label = "Predicted neo4")
 plot!(concs, neo4sig, seriestype = :scatter, label = "Experimental neo4")
 xlabel!("log(Cytokine Concentration [M])")
-ylabel!("Type 1 Signaling (% max)")
+ylabel!("Type I Signaling (% max)")
 ```
 
+Changing IL13Rα1 amount.
+
 ```julia
-plot(concs2, ligOutLs(concs2, fitOut[1:7])[:, 2], label = "Predicted IL4, WT IL13Rα1", fmt = :svg)
-labels = ["Predicted neo4, 1/4 WT IL13Rα1", "Predicted neo4, 1/2 WT IL13Rα1", "Predicted neo4, WT IL13Rα1", "Predicted neo4, Double WT IL13Rα1", "Predicted neo4, 4 WT IL13Rα1"]
+plot(concs2, ligOutLs(concs2, fitOut[1:7])[:, 2], label = "Predicted IL4, wt IL13Rα1", fmt = :pdf)
+labels = ["1/4x wt IL13Rα1", "1/2x wt IL13Rα1", "wt IL13Rα1", "2x wt IL13Rα1", "4x wt IL13Rα1"]
 for i = -2:2
     loopFit = copy(fitOut)
     loopFit[6] *= 2^float(i)
     plot!(concs2, ligOutLs(concs2, loopFit[[1, 8, 9, 10, 5, 6, 7]])[:, 2], label = labels[i+3], legend=:topleft)
 end
-xlabel!("log(Cytokine Concentration (M))")
-ylabel!("Type 1 Signaling (% max)")
+xlabel!("log(Cytokine Concentration [M])")
+ylabel!("Type I Signaling (% max)")
 ```
 
+Changing IL13Rα1 Kd.
+
 ```julia
-plot(concs2, ligOutLs(concs2, fitOut[1:7])[:, 2], label = "Predicted IL4, WT IL13Rα1", fmt = :svg)
-labels = ["Predicted neo4, 1/4 WT IL13Rα1", "Predicted neo4, 1/2 WT IL13Rα1", "Predicted neo4, WT IL13Rα1", "Predicted neo4, Double WT IL13Rα1", "Predicted neo4, 4 WT IL13Rα1"]
+plot(concs2, ligOutLs(concs2, fitOut[1:7])[:, 2], label = "Predicted IL4, wt IL13Rα1 Kd", fmt = :pdf)
+labels = ["1/4x wt IL13Rα1 Kd", "1/2x wt IL13Rα1 Kd", "wt IL13Rα1 Kd", "2x wt IL13Rα1 Kd", "4x wt IL13Rα1 Kd"]
 for i = -2:2
     loopFit = copy(fitOut)
     loopFit[9] *= 2^float(i)
     plot!(concs2, ligOutLs(concs2, loopFit[[1, 8, 9, 10, 5, 6, 7]])[:, 2], label = labels[i+3], legend=:topleft)
 end
-xlabel!("log(Cytokine Concentration (M))")
-ylabel!("Type 1 Signaling (% max)")
+xlabel!("log(Cytokine Concentration [M])")
+ylabel!("Type I Signaling (% max)")
+```
+
+Changing IL4Rα Kd.
+
+```julia
+plot(concs2, ligOutLs(concs2, fitOut[1:7])[:, 2], label = "Predicted IL4, wt IL13Rα1 Kd", fmt = :pdf)
+labels = ["1/4x wt IL4Rα Kd", "1/2x wt IL4Rα Kd", "wt IL4Rα Kd", "2x wt IL4Rα Kd", "4x wt IL4Rα Kd"]
+for i = -2:2
+    loopFit = copy(fitOut)
+    loopFit[8] *= 2^float(i)
+    plot!(concs2, ligOutLs(concs2, loopFit[[1, 8, 9, 10, 5, 6, 7]])[:, 2], label = labels[i+3], legend=:topleft)
+end
+xlabel!("log(Cytokine Concentration [M])")
+ylabel!("Type I Signaling (% max)")
 ```
 
 ```julia
-mult = 10 .^ range(-1, 1, length = 91)
+mult = 10 .^ range(-2, 2, length = 201)
 EmaxNeo = Array{Float64}(undef, length(mult), length(mult))
 
 for i = 1:length(mult)
@@ -63,8 +80,8 @@ for i = 1:length(mult)
     end
 end
 
-heatmap(mult,
-    mult, EmaxNeo',
+contour(log2.(mult),
+    log2.(mult), EmaxNeo,
     c=cgrad([:blue, :white, :red, :yellow]),
-    xlabel="KD IL13Rα1", ylabel="KD IL4Rα", xscale = :log2, yscale = :log2, fmt = :svg, colorbar_title="Neo4 Emax Macrophage")
+    xlabel="log2(KD IL4Rα rel. wt)", ylabel="log2(KD IL13Rα1 rel. wt)", fmt = :pdf, colorbar_title="Neo4 Emax MO")
 ```
