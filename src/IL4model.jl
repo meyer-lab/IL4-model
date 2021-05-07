@@ -2,31 +2,32 @@ module IL4model
 
 import LinearAlgebra: norm
 using Optim
+using polyBindingModel
 
 
-""" Take in the parameters and calulate the solution for one condition.
-    Optionally provide a starting point for solving through u0. """
-function ligOut(ps::Vector{T}; u0 = T[0.01, 0.1])::Vector{T} where {T <: Real}
+""" Take in the parameters and calulate the solution for one condition. """
+function ligOut(ps::Vector{T})::T where {T <: Real}
     @assert all(ps .>= 0.0)
-    @assert length(ps) == 8
+    @assert length(ps) == 10
     
     # TODO: Add polyc here.
+    # ps: concentration, receptor affinities (3), receptor amounts (3), Kx, pSTAT weight, scaling
 
-    return [0.0, 0.0]
+    cplx = [0.0, 0.0]
+    return p[10] * (cplx[1] + p[9] * cplx[2])
 end
 
 """ Calculate a range of solutions. Ls defines the log10 concentration range. """
-function ligOutLs(Ls::LinRange, ps::Vector{T})::Matrix{T} where {T <: Real}
+function ligOutLs(Ls::LinRange, ps::Vector{T})::Vector{T} where {T <: Real}
     @assert all(ps .>= 0.0)
     @assert length(ps) == 7
     ps = copy(ps)
-    pushfirst!(ps, 10 ^ Ls[1])
-    results = zeros(T, length(Ls), length(vars))
-    results[1, :] = ligOut(ps)
+    pushfirst!(ps, 0.0)
+    results = zeros(T, length(Ls))
 
-    for ii in 2:length(Ls)
+    for ii in 1:length(Ls)
         ps[1] = 10 ^ Ls[ii]
-        results[ii, :] = ligOut(ps; u0 = results[ii - 1, :])
+        results[ii] = ligOut(ps)
     end
 
     return results
@@ -34,8 +35,8 @@ end
 
 """ Calculate the cost of the difference between the model and data.
     Species 1 is type II signaling, species 2 is type I signaling. """
-function diffcost(ps, c::LinRange, Y; species = 2)::Real
-    return norm(ligOutLs(c, ps)[:, species] .- Y)
+function diffcost(ps, c::LinRange, Y)::Real
+    return norm(ligOutLs(c, ps) .- Y)
 end
 
 """ Fit the two cell lines with two ligand responses. """
