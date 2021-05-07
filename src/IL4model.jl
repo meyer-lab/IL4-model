@@ -1,27 +1,7 @@
 module IL4model
 
-using ModelingToolkit, NLsolve
 import LinearAlgebra: norm
 using Optim
-
-const vars = @variables Lαβ Lαγ
-const params = @parameters L θ Kdα Kdβ Kdγ αT βT γT
-
-#const eqs = [0 ~ Lα*Kdα - α*L,
-#             0 ~ Lβ*Kdβ - β*L,
-#             0 ~ θ*Kdα*Lαβ - Lβ*α,
-#             #0 ~ θ*Kdβ*Lαβ - Lα*β,
-#             0 ~ α + Lα + Lαβ + Lαγ - αT,
-#             0 ~ Lα*(γT - Lαγ) - θ*Kdγ*Lαγ,
-#             0 ~ β + Lβ + Lαβ - βT]
-
-α = (αT - Lαβ - Lαγ) / (1 + L/Kdα)
-
-const eqs = [0 ~ θ*Kdα*Lαβ - (((βT - Lαβ) / (1 + L/Kdβ))*L/Kdβ)*α,
-             0 ~ (α*L/Kdα)*(γT - Lαγ) - θ*Kdγ*Lαγ]
-
-const ns = NonlinearSystem(eqs, collect(vars), collect(params))
-const nlsys_func = @eval eval(generate_function(ns)[2])
 
 
 """ Take in the parameters and calulate the solution for one condition.
@@ -29,16 +9,10 @@ const nlsys_func = @eval eval(generate_function(ns)[2])
 function ligOut(ps::Vector{T}; u0 = T[0.01, 0.1])::Vector{T} where {T <: Real}
     @assert all(ps .>= 0.0)
     @assert length(ps) == 8
-    f2 = (du, u) -> nlsys_func(du, u, ps)
+    
+    # TODO: Add polyc here.
 
-    res = nlsolve(f2, u0, method = :newton, xtol = 1e-12, ftol = 1e-12, autodiff = :forward)
-    if !(res.x_converged | res.f_converged)
-        println(res)
-    end
-
-    @assert res.x_converged | res.f_converged
-    @assert all(res.zero .>= 0.0)
-    return res.zero
+    return [0.0, 0.0]
 end
 
 """ Calculate a range of solutions. Ls defines the log10 concentration range. """
