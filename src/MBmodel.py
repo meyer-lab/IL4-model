@@ -65,23 +65,6 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, relRecp):
     output = np.zeros([doseVec.size, 2])
 
     for i, dose in enumerate(doseVec):
-        pass
-        #output[i, :] = polyc(np.power(10, dose), np.power(10, Kx), recCount, [[1, 1]], [1.0], Cplx)[0][1:2]
+        output[i, :] = IL4mod(np.power(10, dose), np.power(10, Kx), recCount, Cplx)
 
     return output[:, 0] +  output[:, 1] * relRecp
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
