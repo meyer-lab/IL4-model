@@ -2,9 +2,9 @@ Cell,Animal,Receptor,Amount
 Macrophage,Mouse,IL4Ra,17160.62
 Macrophage,Mouse,Gamma,22375.29
 Macrophage,Mouse,IL13Ra,14604.02
-3t3,Mouse,IL4Ra,11264.13
-3t3,Mouse,Gamma,4190.96
-3t3,Mouse,IL13Ra,15311.82
+3T3,Mouse,IL4Ra,11264.13
+3T3,Mouse,Gamma,4190.96
+3T3,Mouse,IL13Ra,15311.82
 A20,Mouse,IL4Ra,1851.36
 A20,Mouse,Gamma,2276.68
 A20,Mouse,IL13Ra,841.2
