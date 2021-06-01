@@ -8,9 +8,9 @@ Macrophage,Mouse,IL13Ra,14604.02
 A20,Mouse,IL4Ra,1851.36
 A20,Mouse,Gamma,2276.68
 A20,Mouse,IL13Ra,841.2
-Monocytes,Human,IL4Ra,66.51
-Monocytes,Human,Gamma,98042.31
-Monocytes,Human,IL13Ra,583.77
+Monocyte,Human,IL4Ra,66.51
+Monocyte,Human,Gamma,98042.31
+Monocyte,Human,IL13Ra,583.77
 Ramos,Human,IL4Ra,2949.67
 Ramos,Human,Gamma,16713.67
 Ramos,Human,IL13Ra,0
