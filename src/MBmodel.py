@@ -152,8 +152,8 @@ def residsSeq(x, retDF=False):
     "hIL4": [xPow[6], xPow[7], xPow[8]],
     "hNeo4": [xPow[9], xPow[10], 10000]}
 
-    if not retDF:
-        SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
+    #if not retDF:
+    #    SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
 
 
     for cell in SigData.Cell.unique():
