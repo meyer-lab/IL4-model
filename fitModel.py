@@ -8,7 +8,6 @@ from sklearn.metrics import r2_score
 from src.MBmodel import resids, fitFunc
 
 
-
 xOpt = fitFunc()
 
 modelDF = resids(xOpt, True)

@@ -79,8 +79,7 @@ def fitFunc():
     x0 = np.array([-11, 1, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     bnds = ([-14, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, -1], [-10, 10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 2.7])
     parampredicts = least_squares(resids, x0, bounds=bnds)
-    #parampredicts = minimize(resids, x0, method="trust-constr", bounds=bnds, options={"disp": 999}, constraints=cons)
-    assert parampredicts.success
+    #assert parampredicts.success
     return parampredicts.x
 
 
@@ -96,8 +95,8 @@ def resids(x, retDF=False):
     "mNeo4": [xPow[5], xPow[6], 1e2],
     "hIL4": [xPow[7], xPow[8], xPow[9]],
     "hNeo4": [xPow[10], xPow[11], 1e2]}
-    if not retDF:
-        SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
+    #if not retDF:
+    #    SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
 
 
     for cell in SigData.Cell.unique():
@@ -136,7 +135,7 @@ def fitFuncSeq():
     x0 = np.array([1, -5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     bnds = ([0.2, -11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -1], [3, -3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 2.7])
     parampredicts = least_squares(residsSeq, x0, bounds=bnds)
-    assert parampredicts.success
+    #assert parampredicts.success
     return parampredicts.x
 
 
