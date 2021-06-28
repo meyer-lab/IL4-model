@@ -83,6 +83,21 @@ def fitFunc():
     return parampredicts.x
 
 
+def getConfInterval():
+    "Runs least squares fitting for various model parameters, and returns the minimizers"
+    x0 = np.array(pd.read_csv("src/data/CurrentFit.csv").x) # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
+    bnds = (x0 - 0.0000001, x0 + 0.0000001)
+    parampredicts = least_squares(resids, x0, bounds=bnds)
+    Hess = np.matmul(parampredicts.jac.T, parampredicts.jac)
+    conf = np.linalg.inv(Hess)
+    confs = np.sqrt(np.diagonal(conf))
+    #assert parampredicts.success
+    conf95 = 1.96 * confs
+    residSolve = resids(x0)
+    sigr = np.linalg.norm(residSolve) / (len(residSolve) - len(x0))
+    return conf95 * sigr
+
+
 def resids(x, retDF=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
@@ -127,7 +142,7 @@ def resids(x, retDF=False):
     else:
         print(x)
         print(np.linalg.norm(masterSTAT.Predicted.values - masterSTAT.Experimental.values))
-        return np.linalg.norm(masterSTAT.Predicted.values - masterSTAT.Experimental.values)
+        return masterSTAT.Predicted.values - masterSTAT.Experimental.values
 
 
 def fitFuncSeq():
@@ -137,6 +152,21 @@ def fitFuncSeq():
     parampredicts = least_squares(residsSeq, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
+
+
+def getConfIntervalSeq():
+    "Runs least squares fitting for various model parameters, and returns the minimizers"
+    x0 = np.array(pd.read_csv("src/data/CurrentFitSeq.csv").x) # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
+    bnds = (x0 - 0.0000001, x0 + 0.0000001)
+    parampredicts = least_squares(residsSeq, x0, bounds=bnds)
+    Hess = np.matmul(parampredicts.jac.T, parampredicts.jac)
+    conf = np.linalg.inv(Hess)
+    confs = np.sqrt(np.diagonal(conf))
+    #assert parampredicts.success
+    conf95 = 1.96 * confs
+    residSolve = residsSeq(x0)
+    sigr = np.linalg.norm(residSolve) / (len(residSolve) - len(x0))
+    return conf95 * sigr
 
 
 def residsSeq(x, retDF=False):
@@ -183,7 +213,7 @@ def residsSeq(x, retDF=False):
     else:
         print(x)
         print(np.linalg.norm(masterSTAT.Predicted.values - masterSTAT.Experimental.values))
-        return np.linalg.norm(masterSTAT.Predicted.values - masterSTAT.Experimental.values)
+        return masterSTAT.Predicted.values - masterSTAT.Experimental.values
 
 
 def IL4Func(x, KDs, recs, conc):
