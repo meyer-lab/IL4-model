@@ -76,8 +76,8 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, relRecp, macIL4=False):
 
 def fitFunc():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
-    x0 = np.array([-11, 1, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
-    bnds = ([-14, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, -1], [-10, 10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 2.7])
+    x0 = np.array([-11, 1, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 8, 5, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
+    bnds = ([-14, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, -1], [-10, 10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 11, 6, 2.7])
     parampredicts = least_squares(resids, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
@@ -109,7 +109,8 @@ def resids(x, retDF=False):
     CplxDict = {"mIL4": [xPow[2], xPow[3], xPow[4]],
     "mNeo4": [xPow[5], xPow[6], 1e2],
     "hIL4": [xPow[7], xPow[8], xPow[9]],
-    "hNeo4": [xPow[10], xPow[11], 1e2]}
+    "hNeo4": [xPow[10], xPow[11], 1e2],
+    "hIL13": [xPow[12], 1e2, xPow[13]]}
     #if not retDF:
     #    SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
 
@@ -123,7 +124,7 @@ def resids(x, retDF=False):
                 ligCplx = CplxDict[ligand]
                 if animal == "Human":
                     if cell == "Macrophage":
-                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, relRecp, macIL4=x[12])
+                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, relRecp, macIL4=x[14])
                     else:
                         results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, relRecp)
                 else:
@@ -147,8 +148,8 @@ def resids(x, retDF=False):
 
 def fitFuncSeq():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
-    x0 = np.array([1, -5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
-    bnds = ([0.2, -11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -1], [3, -3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 2.7])
+    x0 = np.array([1, -5, 1, 1, -5, 1, -5, 1, 1, -5, 1, -5, 1, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
+    bnds = ([0.2, -11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -11, -4, -1], [3, -3, 4, 4, -3, 4, -3, 4, 4, -3, 4, -3, 4, 2.7])
     parampredicts = least_squares(residsSeq, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
@@ -179,7 +180,8 @@ def residsSeq(x, retDF=False):
     KdDict = {"mIL4": [xPow[1], xPow[2], xPow[3]],
     "mNeo4": [xPow[4], xPow[5], 10000],
     "hIL4": [xPow[6], xPow[7], xPow[8]],
-    "hNeo4": [xPow[9], xPow[10], 10000]}
+    "hNeo4": [xPow[9], xPow[10], 10000],
+    "hIL13": [xPow[11], 10000, xPow[12]]}
 
     #if not retDF:
     #    SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
@@ -194,7 +196,7 @@ def residsSeq(x, retDF=False):
                 ligKDs = KdDict[ligand]
                 if animal == "Human":
                     if cell == "Macrophage":
-                        results = seqBindingModel(ligKDs, Concs, cell, animal, relRecp, macIL4=x[11])
+                        results = seqBindingModel(ligKDs, Concs, cell, animal, relRecp, macIL4=x[13])
                     else:
                         results = seqBindingModel(ligKDs, Concs, cell, animal, relRecp)
                 else:
