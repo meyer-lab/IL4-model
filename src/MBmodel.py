@@ -5,6 +5,8 @@ Implementation of a simple multivalent binding model.
 import pathlib
 import numpy as np
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 from os.path import join
 from scipy.optimize import root, least_squares
 
@@ -77,7 +79,7 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, relRecp, macIL4=False):
 def fitFunc():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
     x0 = np.array([-11, 1, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 8, 5, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
-    bnds = ([-14, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, -1], [-10, 10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 11, 6, 2.7])
+    bnds = ([-14, 0.5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, -1], [-10, 10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 11, 6, 2.7])
     parampredicts = least_squares(resids, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
@@ -111,9 +113,9 @@ def resids(x, retDF=False):
     "hIL4": [xPow[7], xPow[8], xPow[9]],
     "hNeo4": [xPow[10], xPow[11], 1e2],
     "hIL13": [xPow[12], 1e2, xPow[13]]}
+
     #if not retDF:
     #    SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
-
 
     for cell in SigData.Cell.unique():
         for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
@@ -244,3 +246,48 @@ def seqBindingModel(KdVec, doseVec, cellType, animal, relRecp, macIL4=False):
         solvedIL4Ra = least_squares(IL4Func, x0=recCount[0], bounds=bnds, args=(KdVec, recCount, dose)).x
         output[i, 0] = SignalingFunc(solvedIL4Ra, KdVec, recCount, dose, relRecp)
     return output
+
+
+def affFit():
+    """Displays fit affinities for the MB model."""
+    fit = pd.read_csv("src/data/CurrentFit.csv").x.values
+    fitDict = pd.DataFrame(columns=["Ligand", "Receptor", r"K_D"])
+    receptorList = ["IL4Rα", "gc", "IL13Rα"]
+    xPow = fit * -1
+    xPow += 9
+
+    CplxDict = {"mIL4": [xPow[2], xPow[3], xPow[4]],
+    "mNeo4": [xPow[5], xPow[6], 1e2],
+    "hIL4": [xPow[7], xPow[8], xPow[9]],
+    "hNeo4": [xPow[10], xPow[11], 1e2],
+    "hIL13": [xPow[12], 1e2, xPow[13]]}
+    for lig in CplxDict:
+        for i, receptor in enumerate(receptorList):
+            KD = CplxDict[lig][i]
+            fitDict = fitDict.append(pd.DataFrame({"Ligand": [lig], "Receptor": [receptor], r"K_D": [KD]}))
+
+    sns.barplot(x="Ligand", y=r"K_D", hue="Receptor", data=fitDict)
+    plt.ylabel(r"log_{10}(KD (nM))")
+    plt.ylim(((-2, 5)))
+
+
+def affFitSeq():
+    """Displays fit affinities for the MB model."""
+    fit = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
+    fitDict = pd.DataFrame(columns=["Ligand", "Receptor", r"K_D"])
+    receptorList = ["IL4Rα", "gc", "IL13Rα"]
+    xPow = fit
+
+    KdDict = {"mIL4": [xPow[1], xPow[2], xPow[3]],
+    "mNeo4": [xPow[4], xPow[5], 10000],
+    "hIL4": [xPow[6], xPow[7], xPow[8]],
+    "hNeo4": [xPow[9], xPow[10], 10000],
+    "hIL13": [xPow[11], 10000, xPow[12]]}
+    for lig in KdDict:
+        for i, receptor in enumerate(receptorList):
+            KD = KdDict[lig][i]
+            fitDict = fitDict.append(pd.DataFrame({"Ligand": [lig], "Receptor": [receptor], r"K_D": [KD]}))
+
+    sns.barplot(x="Ligand", y=r"K_D", hue="Receptor", data=fitDict)
+    plt.ylabel(r"log_{10}(KD (nM))")
+    plt.ylim(((-11, 5)))
