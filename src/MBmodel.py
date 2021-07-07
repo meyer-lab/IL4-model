@@ -9,6 +9,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from os.path import join
 from scipy.optimize import root, least_squares
+from sklearn.metrics import r2_score
 
 
 def Req_func2(Req: np.ndarray, L0, KxStar, Rtot: np.ndarray, Kav: np.ndarray):
@@ -291,3 +292,40 @@ def affFitSeq():
     sns.barplot(x="Ligand", y=r"K_D", hue="Receptor", data=fitDict)
     plt.ylabel(r"log_{10}(KD (nM))")
     plt.ylim(((-11, 5)))
+
+def R2_Plot_Cells(df, ax=False):
+    """Plots all accuracies per cell"""
+    accDF = pd.DataFrame(columns={"Cell Type", "Accuracy"})
+    for cell in df.Cell.unique():
+        preds = df.loc[(df.Cell == cell)].Predicted.values
+        exps = df.loc[(df.Cell == cell)].Experimental.values
+        r2 = r2_score(exps, preds)
+        accDF = accDF.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
+    if not ax:
+        sns.barplot(x="Cell Type", y="Accuracy", data=accDF)
+        plt.ylabel(r"Accuracy ($R^2$)")
+        plt.ylim((0, 1))
+        plt.xticks(rotation=45)
+    else:
+        sns.barplot(x="Cell Type", y="Accuracy", data=accDF, ax=ax)
+        ax.set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
+        ax.set_xticklabels(rotation=45)   
+
+
+def R2_Plot_Ligs(df, ax=False):
+    """Plots all accuracies per ligand"""
+    accDF = pd.DataFrame(columns={"Ligand", "Accuracy"})
+    for ligand in df.Ligand.unique():
+            preds = df.loc[(df.Ligand == ligand)].Predicted.values
+            exps = df.loc[(df.Ligand == ligand)].Experimental.values
+            r2 = r2_score(exps, preds)
+            accDF = accDF.append(pd.DataFrame({"Ligand": [ligand], "Accuracy": [r2]}))
+    if not ax:
+        sns.barplot(x="Ligand", y="Accuracy", data=accDF)
+        plt.ylabel(r"Accuracy ($R^2$)")
+        plt.ylim((0, 1))
+        plt.xticks(rotation=45)
+    else:
+        sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax)
+        ax.set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
+        ax.set_xticklabels(rotation=45)    
