@@ -79,7 +79,7 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, relRecp, macIL4=False):
 def fitFunc():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
     x0 = np.array([-9, 1, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 8, 5, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
-    bnds = ([-14, 0.5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, -1], [-8, 10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 11, 6, 2.7])
+    bnds = ([-14, 0.5, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, -1], [-8, 10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 11, 9, 2.7])
     parampredicts = least_squares(resids, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
