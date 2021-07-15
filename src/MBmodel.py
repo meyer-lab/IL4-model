@@ -104,6 +104,7 @@ def getConfInterval():
 def resids(x, retDF=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted"})
     Kx = x[0]
     xPow = np.power(10, x)
@@ -114,8 +115,8 @@ def resids(x, retDF=False):
     "hNeo4": [xPow[9], xPow[10], 1e2],
     "hIL13": [xPow[11], 1e2, xPow[12]]}
 
-    #if not retDF:
-    #    SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
+    #SigData = SigData.loc[SigData.Cell != "Monocyte"]
+    #SigData = SigData.loc[SigData.Ligand == "hNeo4"]
 
     for cell in SigData.Cell.unique():
         for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
@@ -150,8 +151,8 @@ def resids(x, retDF=False):
 
 def fitFuncSeq():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
-    x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, -5, 1, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
-    bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -11, -4, -1], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, -3, 4, 2.7])
+    x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 1, -5, 2])  # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
+    bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -4, -11, -1], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 4, -3, 2.7])
     parampredicts = least_squares(residsSeq, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
@@ -175,6 +176,7 @@ def getConfIntervalSeq():
 def residsSeq(x, retDF=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted"})
     xPow = np.power(10, x)
 
@@ -185,7 +187,8 @@ def residsSeq(x, retDF=False):
     "hIL13": [xPow[10], 10000, xPow[11]]}
 
     #if not retDF:
-    #    SigData = SigData.loc[(SigData.Cell != "Macrophage") & (SigData.Cell != "Monocyte")]
+    #SigData = SigData.loc[SigData.Cell != "Monocyte"]
+    #SigData = SigData.loc[SigData.Ligand == "hNeo4"]
 
 
     for cell in SigData.Cell.unique():
@@ -197,11 +200,11 @@ def residsSeq(x, retDF=False):
                 ligKDs = KdDict[ligand]
                 if animal == "Human":
                     if cell == "Macrophage":
-                        results = seqBindingModel(ligKDs, Concs, cell, animal, macIL4=x[12])
+                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macIL4=x[12])
                     else:
-                        results = seqBindingModel(ligKDs, Concs, cell, animal)
+                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand)
                 else:
-                    results = seqBindingModel(ligKDs, Concs, cell, animal)
+                    results = seqBindingModel(ligKDs, Concs, cell, animal, ligand)
                 masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs, "Animal": animal, "Experimental": normSigs, "Predicted": np.ravel(results)}))
             
             # Normalize
@@ -229,7 +232,17 @@ def SignalingFunc(IL4Ra, KDs, recs, conc):
     return recs[1]/(KDs[0]*KDs[1]/(IL4Ra*conc)+1) + recs[2]/((KDs[0]*KDs[2])/(IL4Ra*conc)+1)
 
 
-def seqBindingModel(KdVec, doseVec, cellType, animal, macIL4=False):
+def IL13Func(x, KDs, recs, conc):
+    conc = np.power(10, conc)
+    return recs[2] - (x + (x*conc)/KDs[2] + recs[1]/(KDs[2]*KDs[1]/(x*conc)+1) + recs[0]/((KDs[2]*KDs[0])/(x*conc)+1))
+
+
+def SignalingFunc13(IL13Ra, KDs, recs, conc):
+    conc = np.power(10, conc)
+    return recs[1]/(KDs[2]*KDs[1]/(IL13Ra*conc)+1) + recs[0]/((KDs[0]*KDs[2])/(IL13Ra*conc)+1)
+
+
+def seqBindingModel(KdVec, doseVec, cellType, animal, lig, macIL4=False):
     """Runs binding model for a given mutein, valency, dose, and cell type."""
     if not macIL4:
         recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.values,
@@ -240,10 +253,17 @@ def seqBindingModel(KdVec, doseVec, cellType, animal, macIL4=False):
                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.values,
                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.values])
     output = np.zeros([doseVec.size, 1])
-    bnds = ((0, recCount[0]))
-    for i, dose in enumerate(doseVec):
-        solvedIL4Ra = least_squares(IL4Func, x0=recCount[0], bounds=bnds, args=(KdVec, recCount, dose)).x
-        output[i, 0] = SignalingFunc(solvedIL4Ra, KdVec, recCount, dose)
+    if lig != "hIL13":
+        for i, dose in enumerate(doseVec):
+            bnds = ((0, recCount[0]))
+            solvedIL4Ra = least_squares(IL4Func, x0=recCount[0], bounds=bnds, args=(KdVec, recCount, dose)).x
+            output[i, 0] = SignalingFunc(solvedIL4Ra, KdVec, recCount, dose)
+    else:
+        for i, dose in enumerate(doseVec):
+            bnds = ((0, recCount[2]+0.01))
+            solvedIL13Ra = least_squares(IL13Func, x0=recCount[2], bounds=bnds, args=(KdVec, recCount, dose)).x
+            output[i, 0] = SignalingFunc13(solvedIL13Ra, KdVec, recCount, dose)
+        
     return output
 
 
@@ -309,19 +329,23 @@ def affFitSeq(confInt=False):
         fitDict = fitDict.append(pd.DataFrame({"Ligand": ligs, "Receptor": rec, r"$K_D$": xPow[0:-1] + confInt[0:-1]}))
         fitDict = fitDict.append(pd.DataFrame({"Ligand": ligs, "Receptor": rec, r"$K_D$": xPow[0:-1] - confInt[0:-1]}))
 
-    fitDictKDNorm = fitDict.loc[fitDict.Receptor == "IL4Rα"]
+    fitDictKDNorm = fitDict.loc[(fitDict.Receptor == "IL4Rα") & (fitDict.Ligand != "hIL13")]
+    fitDictKDNorm = fitDictKDNorm.append(fitDict.loc[(fitDict.Receptor == "IL13Rα") & (fitDict.Ligand == "hIL13")])
     fitDictKDNorm[r"$K_D$"] += 9
-    fitDictKDSurf = fitDict.loc[fitDict.Receptor != "IL4Rα"]
+    fitDictKDSurf = fitDict.loc[(fitDict.Receptor != "IL4Rα") & (fitDict.Ligand != "hIL13")]
+    fitDictKDSurf = fitDictKDSurf.append(fitDict.loc[(fitDict.Receptor == "IL4Rα") & (fitDict.Ligand == "hIL13")])
 
     sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm)
     plt.ylabel(r"IL4Rα $log_{10}(K_D)$ (nM))")
     plt.ylim(((-1, 7)))
+    plt.savefig("KDNorm.svg")
 
     plt.figure()
     print(fitDictKDSurf)
     sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf)
     plt.ylabel(r"$log_{10}(K_D)$ (#/cell)")
     plt.ylim(((-5, 5)))
+    plt.savefig("KDSurf.svg")
 
 
 def R2_Plot_Cells(df, ax=False):
