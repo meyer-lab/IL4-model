@@ -1,0 +1,55 @@
+Cell,Animal,Donor,Receptor,Amount
+Monocyte,Human,210903,IL4Ra,129
+Monocyte,Human,210903,Gamma,141225.8347
+Monocyte,Human,210903,IL13Ra,766.4034949
+Monocyte,Human,210831,IL4Ra,81
+Monocyte,Human,210831,Gamma,227468.7498
+Monocyte,Human,210831,IL13Ra,544.7727201
+Macrophage,Human,210820,IL4Ra,0
+Macrophage,Human,210820,Gamma,843885.3793
+Macrophage,Human,210820,IL13Ra,2213.970252
+Macrophage,Human,210806,IL4Ra,0
+Macrophage,Human,210806,Gamma,778759.3033
+Macrophage,Human,210806,IL13Ra,1686.34342
+Monocyte,Human,210722,IL4Ra,111.5305538
+Monocyte,Human,210722,Gamma,133559.6656
+Monocyte,Human,210722,IL13Ra,486.9179744
+Fibroblast,Human,210526,IL4Ra,694.9026908
+Fibroblast,Human,210526,Gamma,82826.10211
+Fibroblast,Human,210526,IL13Ra,967.8609288
+Macrophage,Human,210522,IL4Ra,0
+Macrophage,Human,210522,Gamma,1686134.27
+Macrophage,Human,210522,IL13Ra,5189.768973
+Fibroblast,Human,210517,IL4Ra,841.9778769
+Fibroblast,Human,210517,Gamma,30705.63066
+Fibroblast,Human,210517,IL13Ra,255.617694
+Macrophage,Human,210504,IL4Ra,0
+Macrophage,Human,210504,Gamma,960148.3586
+Macrophage,Human,210504,IL13Ra,2214.31972
+Monocyte,Human,210426,IL4Ra,169
+Monocyte,Human,210426,Gamma,60489.08182
+Monocyte,Human,210426,IL13Ra,678.1702287
+Monocyte,Human,210319,IL4Ra,183.7076503
+Monocyte,Human,210319,Gamma,125764.2571
+Monocyte,Human,210319,IL13Ra,549.9746073
+Monocyte,Human,210312,IL4Ra,49.58936655
+Monocyte,Human,210312,Gamma,53643.93996
+Monocyte,Human,210312,IL13Ra,495.2931227
+Ramos,Human,Cell Line,IL4Ra,3120.487623
+Ramos,Human,Cell Line,Gamma,20817.61212
+Ramos,Human,Cell Line,IL13Ra,0
+A549,Human,Cell Line,IL4Ra,110.1112383
+A549,Human,Cell Line,Gamma,9086.483973
+A549,Human,Cell Line,IL13Ra,1510.38867
+Macrophage,Mouse,210518,IL4Ra,33534.2225
+Macrophage,Mouse,210518,Gamma,30255.95538
+Macrophage,Mouse,210518,IL13Ra,34139.83069
+Macrophage,Mouse,210415,IL4Ra,23599.9103
+Macrophage,Mouse,210415,Gamma,22763.76346
+Macrophage,Mouse,210415,IL13Ra,15708.14888
+3T3,Mouse,Cell Line,IL4Ra,7094.703679
+3T3,Mouse,Cell Line,Gamma,4642.316287
+3T3,Mouse,Cell Line,IL13Ra,16119.18275
+A20,Mouse,Cell Line,IL4Ra,1947.963639
+A20,Mouse,Cell Line,Gamma,2114.184626
+A20,Mouse,Cell Line,IL13Ra,883.3043523

@@ -1,944 +1,1372 @@
-Cell,Ligand,Concentration,Animal,Signal
-Ramos,hIL4,-14.2247,Human,-0.41719
-Ramos,hIL4,-13.3216,Human,-0.40918
-Ramos,hIL4,-12.4185,Human,0.421297
-Ramos,hIL4,-11.5154,Human,14.41065
-Ramos,hIL4,-10.6124,Human,74.50629
-Ramos,hIL4,-9.70927,Human,103.26
-Ramos,hIL4,-8.80618,Human,104.6745
-Ramos,hIL4,-7.90309,Human,92.2063
-Ramos,hIL4,-7,Human,99.74775
-Ramos,hIL4,-14.2247,Human,-0.586
-Ramos,hIL4,-13.3216,Human,-0.31184
-Ramos,hIL4,-12.4185,Human,0.523566
-Ramos,hIL4,-11.5154,Human,14.65092
-Ramos,hIL4,-10.6124,Human,75.22217
-Ramos,hIL4,-9.70927,Human,104.3813
-Ramos,hIL4,-8.80618,Human,110.1762
-Ramos,hIL4,-7.90309,Human,98.44412
-Ramos,hIL4,-7,Human,101.9096
-Ramos,hNeo4,-14.2247,Human,-0.37345
-Ramos,hNeo4,-13.3216,Human,-0.25701
-Ramos,hNeo4,-12.4185,Human,-0.14057
-Ramos,hNeo4,-11.5154,Human,0.232776
-Ramos,hNeo4,-10.6124,Human,7.662714
-Ramos,hNeo4,-9.70927,Human,61.23836
-Ramos,hNeo4,-8.80618,Human,104.8193
-Ramos,hNeo4,-7.90309,Human,104.2433
-Ramos,hNeo4,-7,Human,105.7231
-Ramos,hNeo4,-14.2247,Human,-0.37961
-Ramos,hNeo4,-13.3216,Human,-0.57244
-Ramos,hNeo4,-12.4185,Human,-0.87186
-Ramos,hNeo4,-11.5154,Human,-0.00195
-Ramos,hNeo4,-10.6124,Human,7.988621
-Ramos,hNeo4,-9.70927,Human,62.27892
-Ramos,hNeo4,-8.80618,Human,98.92589
-Ramos,hNeo4,-7.90309,Human,103.9882
-Ramos,hNeo4,-7,Human,98.72505
-Macrophage,hIL4,-13.2247,Human,0.902542
-Macrophage,hIL4,-12.6227,Human,0.071806
-Macrophage,hIL4,-12.0206,Human,0.668345
-Macrophage,hIL4,-11.4185,Human,7.263419
-Macrophage,hIL4,-10.8165,Human,38.3387
-Macrophage,hIL4,-10.2144,Human,81.07301
-Macrophage,hIL4,-9.61236,Human,95.74788
-Macrophage,hIL4,-9.0103,Human,92.12224
-Macrophage,hIL4,-8.40824,Human,93.2623
-Macrophage,hIL4,-7.80618,Human,92.97066
-Macrophage,hIL4,-7.20412,Human,96.61175
-Macrophage,hIL4,-6.60206,Human,103.8299
-Macrophage,hIL4,-13.2247,Human,1.644902
-Macrophage,hIL4,-12.6227,Human,0.237511
-Macrophage,hIL4,-12.0206,Human,0.745674
-Macrophage,hIL4,-11.4185,Human,7.935078
-Macrophage,hIL4,-10.8165,Human,37.64936
-Macrophage,hIL4,-10.2144,Human,82.91344
-Macrophage,hIL4,-9.61236,Human,95.8716
-Macrophage,hIL4,-9.0103,Human,100.1954
-Macrophage,hIL4,-8.40824,Human,96.49466
-Macrophage,hIL4,-7.80618,Human,99.64085
-Macrophage,hIL4,-7.20412,Human,105.7167
-Macrophage,hIL4,-6.60206,Human,101.89
-Macrophage,hIL4,-13.2247,Human,1.644902
-Macrophage,hIL4,-12.6227,Human,0.237511
-Macrophage,hIL4,-12.0206,Human,0.745674
-Macrophage,hIL4,-11.4185,Human,7.935078
-Macrophage,hIL4,-10.8165,Human,37.64936
-Macrophage,hIL4,-10.2144,Human,82.91344
-Macrophage,hIL4,-9.61236,Human,95.8716
-Macrophage,hIL4,-9.0103,Human,100.1954
-Macrophage,hIL4,-8.40824,Human,96.49466
-Macrophage,hIL4,-7.80618,Human,99.64085
-Macrophage,hIL4,-7.20412,Human,105.7167
-Macrophage,hIL4,-6.60206,Human,101.89
-Macrophage,hNeo4,-12.6227,Human,1.004175
-Macrophage,hNeo4,-12.0206,Human,-0.306
-Macrophage,hNeo4,-11.4185,Human,-0.78323
-Macrophage,hNeo4,-10.8165,Human,-0.73021
-Macrophage,hNeo4,-10.2144,Human,0.257396
-Macrophage,hNeo4,-9.61236,Human,2.073527
-Macrophage,hNeo4,-9.0103,Human,7.946125
-Macrophage,hNeo4,-8.40824,Human,15.63264
-Macrophage,hNeo4,-7.80618,Human,17.75588
-Macrophage,hNeo4,-7.20412,Human,24.32002
-Macrophage,hNeo4,-6.60206,Human,24.92098
-Macrophage,hNeo4,-6,Human,27.88821
-Macrophage,hNeo4,-12.6227,Human,0.677183
-Macrophage,hNeo4,-12.0206,Human,-0.34577
-Macrophage,hNeo4,-11.4185,Human,-0.94231
-Macrophage,hNeo4,-10.8165,Human,-0.93347
-Macrophage,hNeo4,-10.2144,Human,-0.25298
-Macrophage,hNeo4,-9.61236,Human,0.904751
-Macrophage,hNeo4,-9.0103,Human,5.738929
-Macrophage,hNeo4,-8.40824,Human,13.70162
-Macrophage,hNeo4,-7.80618,Human,19.00641
-Macrophage,hNeo4,-7.20412,Human,22.65192
-Macrophage,hNeo4,-6.60206,Human,25.59706
-Macrophage,hNeo4,-6,Human,25.02041
-Macrophage,hNeo4,-12.6227,Human,0.451823
-Macrophage,hNeo4,-12.0206,Human,-0.51148
-Macrophage,hNeo4,-11.4185,Human,-0.76998
-Macrophage,hNeo4,-10.8165,Human,-1.27372
-Macrophage,hNeo4,-10.2144,Human,-0.28833
-Macrophage,hNeo4,-9.61236,Human,1.010803
-Macrophage,hNeo4,-9.0103,Human,6.430473
-Macrophage,hNeo4,-8.40824,Human,12.76263
-Macrophage,hNeo4,-7.80618,Human,17.47087
-Macrophage,hNeo4,-7.20412,Human,22.1526
-Macrophage,hNeo4,-6.60206,Human,23.77651
-Macrophage,hNeo4,-6,Human,26.52501
-A549,hIL4,-13.0206,Human,-7.00802
-A549,hIL4,-12.4185,Human,-5.50144
-A549,hIL4,-11.8165,Human,0.155518
-A549,hIL4,-11.2144,Human,13.19957
-A549,hIL4,-10.6124,Human,48.92977
-A549,hIL4,-10.0103,Human,95.98362
-A549,hIL4,-9.40824,Human,113.7807
-A549,hIL4,-8.80618,Human,102.7972
-A549,hIL4,-8.20412,Human,102.6612
-A549,hIL4,-7.60206,Human,98.2289
-A549,hIL4,-7,Human,90.21002
-A549,hIL4,-13.0206,Human,-5.35564
-A549,hIL4,-12.4185,Human,-5.03489
-A549,hIL4,-11.8165,Human,1.526018
-A549,hIL4,-11.2144,Human,15.21158
-A549,hIL4,-10.6124,Human,53.82858
-A549,hIL4,-10.0103,Human,91.49304
-A549,hIL4,-9.40824,Human,111.0591
-A549,hIL4,-8.80618,Human,97.25692
-A549,hIL4,-8.20412,Human,95.47818
-A549,hIL4,-7.60206,Human,80.57764
-A549,hIL4,-7,Human,38.45177
-A549,hIL4,-13.0206,Human,-5.46256
-A549,hIL4,-12.4185,Human,-4.97657
-A549,hIL4,-11.8165,Human,4.267018
-A549,hIL4,-11.2144,Human,15.94057
-A549,hIL4,-10.6124,Human,50.58215
-A549,hIL4,-10.0103,Human,80.25688
-A549,hIL4,-9.40824,Human,113.2364
-A549,hIL4,-8.80618,Human,102.1266
-A549,hIL4,-8.20412,Human,105.2661
-A549,hIL4,-7.60206,Human,93.24261
-A549,hIL4,-7,Human,94.07852
-A549,hNeo4,-13.0206,Human,-10.5169
-A549,hNeo4,-12.4185,Human,-8.95199
-A549,hNeo4,-11.8165,Human,-10.5849
-A549,hNeo4,-11.2144,Human,-10.0989
-A549,hNeo4,-10.6124,Human,-10.1087
-A549,hNeo4,-10.0103,Human,-9.02975
-A549,hNeo4,-9.40824,Human,-9.9823
-A549,hNeo4,-8.80618,Human,-1.73985
-A549,hNeo4,-8.20412,Human,-5.96799
-A549,hNeo4,-7.60206,Human,-0.20412
-A549,hNeo4,-7,Human,-3.98514
-A549,hNeo4,-13.0206,Human,-9.03947
-A549,hNeo4,-12.4185,Human,-5.47228
-A549,hNeo4,-11.8165,Human,-7.06634
-A549,hNeo4,-11.2144,Human,-6.93026
-A549,hNeo4,-10.6124,Human,-5.239
-A549,hNeo4,-10.0103,Human,-8.04804
-A549,hNeo4,-9.40824,Human,-6.8039
-A549,hNeo4,-8.80618,Human,-0.22356
-A549,hNeo4,-8.20412,Human,-5.52088
-A549,hNeo4,-7.60206,Human,-7.11494
-A549,hNeo4,-7,Human,-6.31791
-A549,hNeo4,-13.0206,Human,-0.51515
-A549,hNeo4,-12.4185,Human,-7.98972
-A549,hNeo4,-11.8165,Human,-5.73472
-A549,hNeo4,-11.2144,Human,-5.50144
-A549,hNeo4,-10.6124,Human,-3.19783
-A549,hNeo4,-10.0103,Human,-3.44083
-A549,hNeo4,-9.40824,Human,-4.61693
-A549,hNeo4,-8.80618,Human,2.05089
-A549,hNeo4,-8.20412,Human,-5.50144
-A549,hNeo4,-7.60206,Human,-9.24359
-A549,hNeo4,-7,Human,-2.39109
-Macrophage,mIL4,-13.2483,Mouse,0.943415
-Macrophage,mIL4,-12.7712,Mouse,1.170402
-Macrophage,mIL4,-12.2941,Mouse,3.058413
-Macrophage,mIL4,-11.817,Mouse,6.566071
-Macrophage,mIL4,-11.3398,Mouse,24.48031
-Macrophage,mIL4,-10.8627,Mouse,58.19378
-Macrophage,mIL4,-10.3856,Mouse,96.08996
-Macrophage,mIL4,-9.90849,Mouse,101.3367
-Macrophage,mIL4,-9.43136,Mouse,87.3356
-Macrophage,mIL4,-8.95424,Mouse,102.5165
-Macrophage,mIL4,-8.47712,Mouse,95.38891
-Macrophage,mIL4,-8,Mouse,106.4321
-Macrophage,mIL4,-13.2483,Mouse,2.224945
-Macrophage,mIL4,-12.7712,Mouse,2.350261
-Macrophage,mIL4,-12.2941,Mouse,2.579612
-Macrophage,mIL4,-11.817,Mouse,7.823957
-Macrophage,mIL4,-11.3398,Mouse,28.69139
-Macrophage,mIL4,-10.8627,Mouse,67.11484
-Macrophage,mIL4,-10.3856,Mouse,85.41094
-Macrophage,mIL4,-9.90849,Mouse,94.12747
-Macrophage,mIL4,-9.43136,Mouse,99.10463
-Macrophage,mIL4,-8.95424,Mouse,109.3344
-Macrophage,mIL4,-8.47712,Mouse,109.1228
-Macrophage,mIL4,-8,Mouse,108.5742
-Macrophage,mIL4,-13.2483,Mouse,0.497105
-Macrophage,mIL4,-12.7712,Mouse,0.811658
-Macrophage,mIL4,-12.2941,Mouse,2.711143
-Macrophage,mIL4,-11.817,Mouse,6.493261
-Macrophage,mIL4,-11.3398,Mouse,31.84188
-Macrophage,mIL4,-10.8627,Mouse,67.58852
-Macrophage,mIL4,-10.3856,Mouse,97.10496
-Macrophage,mIL4,-9.90849,Mouse,100.7438
-Macrophage,mIL4,-9.43136,Mouse,96.85781
-Macrophage,mIL4,-8.95424,Mouse,110.9771
-Macrophage,mIL4,-8.47712,Mouse,97.28283
-Macrophage,mIL4,-8,Mouse,107.9196
-Macrophage,mIL4,-13.2483,Mouse,0.233106
-Macrophage,mIL4,-12.7712,Mouse,16.47375
-Macrophage,mIL4,-12.2941,Mouse,1.033529
-Macrophage,mIL4,-11.817,Mouse,4.516074
-Macrophage,mIL4,-11.3398,Mouse,27.68155
-Macrophage,mIL4,-10.8627,Mouse,67.47244
-Macrophage,mIL4,-10.3856,Mouse,94.21969
-Macrophage,mIL4,-9.90849,Mouse,90.83451
-Macrophage,mIL4,-9.43136,Mouse,111.3731
-Macrophage,mIL4,-8.95424,Mouse,104.2114
-Macrophage,mIL4,-8.47712,Mouse,100.61
-Macrophage,mIL4,-8,Mouse,108.8773
-Macrophage,mNeo4,-10.0722,Mouse,1.519157514
-Macrophage,mNeo4,-9.59512,Mouse,0.889032257
-Macrophage,mNeo4,-9.118,Mouse,1.403299586
-Macrophage,mNeo4,-8.64088,Mouse,1.642108783
-Macrophage,mNeo4,-8.16376,Mouse,3.694449206
-Macrophage,mNeo4,-7.68664,Mouse,14.10038262
-Macrophage,mNeo4,-7.20952,Mouse,39.89650476
-Macrophage,mNeo4,-6.73239,Mouse,56.89806445
-Macrophage,mNeo4,-6.25527,Mouse,69.27003595
-Macrophage,mNeo4,-5.77815,Mouse,71.74797692
-Macrophage,mNeo4,-5.30103,Mouse,87.02467217
-Macrophage,mNeo4,-4.82391,Mouse,74.4753671
-Macrophage,mNeo4,-10.0722,Mouse,2.895265954
-Macrophage,mNeo4,-9.59512,Mouse,1.57472203
-Macrophage,mNeo4,-9.118,Mouse,1.780428961
-Macrophage,mNeo4,-8.64088,Mouse,1.759148934
-Macrophage,mNeo4,-8.16376,Mouse,2.85625257
-Macrophage,mNeo4,-7.68664,Mouse,11.37535688
-Macrophage,mNeo4,-7.20952,Mouse,34.82358266
-Macrophage,mNeo4,-6.73239,Mouse,66.34403218
-Macrophage,mNeo4,-6.25527,Mouse,78.95363065
-Macrophage,mNeo4,-5.77815,Mouse,78.18163855
-Macrophage,mNeo4,-5.30103,Mouse,88.98834581
-Macrophage,mNeo4,-4.82391,Mouse,94.58617524
-Macrophage,mNeo4,-10.0722,Mouse,1.132763275
-Macrophage,mNeo4,-9.59512,Mouse,0
-Macrophage,mNeo4,-9.118,Mouse,1.006380595
-Macrophage,mNeo4,-8.64088,Mouse,1.627059977
-Macrophage,mNeo4,-8.16376,Mouse,4.319479132
-Macrophage,mNeo4,-7.68664,Mouse,17.44174593
-Macrophage,mNeo4,-7.20952,Mouse,47.0976757
-Macrophage,mNeo4,-6.73239,Mouse,65.65346154
-Macrophage,mNeo4,-6.25527,Mouse,85.58260584
-Macrophage,mNeo4,-5.77815,Mouse,89.98259542
-Macrophage,mNeo4,-5.30103,Mouse,95.5144121
-Macrophage,mNeo4,-4.82391,Mouse,90.866338
-Macrophage,mNeo4,-10.0722,Mouse,50.87417739
-Macrophage,mNeo4,-9.59512,Mouse,0.639402741
-Macrophage,mNeo4,-9.118,Mouse,0.275233391
-Macrophage,mNeo4,-8.64088,Mouse,0.982040228
-Macrophage,mNeo4,-8.16376,Mouse,2.418121933
-Macrophage,mNeo4,-7.68664,Mouse,10.97469741
-Macrophage,mNeo4,-7.20952,Mouse,33.77319661
-Macrophage,mNeo4,-6.73239,Mouse,68.70630538
-Macrophage,mNeo4,-6.25527,Mouse,80.59563892
-Macrophage,mNeo4,-5.77815,Mouse,84.37494912
-Macrophage,mNeo4,-4.82391,Mouse,92.89688639
-3T3,mIL4,-12.0206,Mouse,10.64033
-3T3,mIL4,-11.4185,Mouse,10.99903
-3T3,mIL4,-10.8165,Mouse,9.844565
-3T3,mIL4,-10.2144,Mouse,15.71332
-3T3,mIL4,-9.61236,Mouse,45.60572
-3T3,mIL4,-9.0103,Mouse,85.27937
-3T3,mIL4,-8.40824,Mouse,99.04247
-3T3,mIL4,-7.80618,Mouse,110.352
-3T3,mIL4,-7.20412,Mouse,100.2542
-3T3,mIL4,-6.60206,Mouse,101.487
-3T3,mIL4,-6,Mouse,91.2687
-3T3,mIL4,-12.0206,Mouse,10.37206
-3T3,mIL4,-11.4185,Mouse,8.572548
-3T3,mIL4,-10.8165,Mouse,8.400735
-3T3,mIL4,-10.2144,Mouse,15.57165
-3T3,mIL4,-9.61236,Mouse,46.98022
-3T3,mIL4,-9.0103,Mouse,82.2621
-3T3,mIL4,-8.40824,Mouse,98.18944
-3T3,mIL4,-7.80618,Mouse,107.1177
-3T3,mIL4,-7.20412,Mouse,102.1532
-3T3,mIL4,-6.60206,Mouse,102.2768
-3T3,mIL4,-6,Mouse,90.70503
-3T3,mIL4,-12.0206,Mouse,9.136214
-3T3,mIL4,-11.4185,Mouse,9.760166
-3T3,mIL4,-10.8165,Mouse,8.608719
-3T3,mIL4,-10.2144,Mouse,15.18884
-3T3,mIL4,-9.61236,Mouse,44.59292
-3T3,mIL4,-9.0103,Mouse,84.28165
-3T3,mIL4,-8.40824,Mouse,93.11343
-3T3,mIL4,-7.80618,Mouse,103.3137
-3T3,mIL4,-7.20412,Mouse,100.6792
-3T3,mIL4,-6.60206,Mouse,102.7922
-3T3,mIL4,-6,Mouse,87.60035
-3T3,mNeo4,-11.4466,Mouse,12.38558
-3T3,mNeo4,-10.8445,Mouse,9.467783
-3T3,mNeo4,-10.2424,Mouse,8.768475
-3T3,mNeo4,-9.64039,Mouse,7.559758
-3T3,mNeo4,-9.03833,Mouse,7.972711
-3T3,mNeo4,-8.43627,Mouse,8.319351
-3T3,mNeo4,-7.83421,Mouse,6.516825
-3T3,mNeo4,-7.23215,Mouse,5.015724
-3T3,mNeo4,-6.63009,Mouse,6.335969
-3T3,mNeo4,-6.02803,Mouse,3.671366
-3T3,mNeo4,-5.42597,Mouse,14.62819
-3T3,mNeo4,-4.82391,Mouse,0
-3T3,mNeo4,-11.4466,Mouse,10.37507
-3T3,mNeo4,-10.8445,Mouse,9.910878
-3T3,mNeo4,-10.2424,Mouse,9.537111
-3T3,mNeo4,-9.64039,Mouse,6.90265
-3T3,mNeo4,-9.03833,Mouse,8.587619
-3T3,mNeo4,-8.43627,Mouse,8.250023
-3T3,mNeo4,-7.83421,Mouse,6.311855
-3T3,mNeo4,-7.23215,Mouse,5.657761
-3T3,mNeo4,-6.63009,Mouse,6.326926
-3T3,mNeo4,-6.02803,Mouse,4.605785
-3T3,mNeo4,-5.42597,Mouse,4.40383
-3T3,mNeo4,-4.82391,Mouse,0.171813
-3T3,mNeo4,-11.4466,Mouse,9.540125
-3T3,mNeo4,-10.8445,Mouse,10.16709
-3T3,mNeo4,-10.2424,Mouse,9.362284
-3T3,mNeo4,-9.64039,Mouse,8.421835
-3T3,mNeo4,-9.03833,Mouse,7.779798
-3T3,mNeo4,-8.43627,Mouse,8.717233
-3T3,mNeo4,-7.83421,Mouse,6.390226
-3T3,mNeo4,-7.23215,Mouse,5.473892
-3T3,mNeo4,-6.63009,Mouse,5.696947
-3T3,mNeo4,-6.02803,Mouse,4.825826
-3T3,mNeo4,-5.42597,Mouse,4.418901
-3T3,mNeo4,-4.82391,Mouse,2.073809
-Macrophage,hIL4,-13.00336125,Human,2.782013215
-Macrophage,hIL4,-12.22521,Human,3.341982541
-Macrophage,hIL4,-11.44705875,Human,5.695993723
-Macrophage,hIL4,-10.6689075,Human,36.62627397
-Macrophage,hIL4,-9.890756252,Human,81.79475519
-Macrophage,hIL4,-9.112605002,Human,99.44627237
-Macrophage,hIL4,-8.334453751,Human,102.9808558
-Macrophage,hIL4,-7.556302501,Human,105.2028997
-Macrophage,hIL4,-13.00336125,Human,2.582278932
-Macrophage,hIL4,-12.22521,Human,2.689279441
-Macrophage,hIL4,-11.44705875,Human,3.948318755
-Macrophage,hIL4,-10.6689075,Human,40.49255901
-Macrophage,hIL4,-9.890756252,Human,91.88133644
-Macrophage,hIL4,-9.112605002,Human,91.78503598
-Macrophage,hIL4,-8.334453751,Human,98.16226627
-Macrophage,hIL4,-7.556302501,Human,93.65397819
-Macrophage,hIL4,-13.00336125,Human,2.286244193
-Macrophage,hIL4,-12.22521,Human,2.38254465
-Macrophage,hIL4,-11.44705875,Human,4.633122007
-Macrophage,hIL4,-10.6689075,Human,39.84698927
-Macrophage,hIL4,-9.890756252,Human,93.07260876
-Macrophage,hIL4,-9.112605002,Human,77.35780078
-Macrophage,hIL4,-8.334453751,Human,96.07575636
-Macrophage,hIL4,-7.556302501,Human,96.64999242
-Macrophage,hNeo4,-11.44705875,Human,1.201972376
-Macrophage,hNeo4,-10.6689075,Human,1.094971868
-Macrophage,hNeo4,-9.890756252,Human,2.578712249
-Macrophage,hNeo4,-9.112605002,Human,3.748584472
-Macrophage,hNeo4,-8.334453751,Human,8.506540406
-Macrophage,hNeo4,-7.556302501,Human,16.8632801
-Macrophage,hNeo4,-6.77815125,Human,16.97384729
-Macrophage,hNeo4,-6,Human,19.04252379
-Macrophage,hNeo4,-11.44705875,Human,1.387439924
-Macrophage,hNeo4,-10.6689075,Human,1.38387324
-Macrophage,hNeo4,-9.890756252,Human,1.747674968
-Macrophage,hNeo4,-9.112605002,Human,2.660745972
-Macrophage,hNeo4,-8.334453751,Human,11.17441975
-Macrophage,hNeo4,-7.556302501,Human,15.26897253
-Macrophage,hNeo4,-6.77815125,Human,16.08930976
-Macrophage,hNeo4,-6,Human,17.23064851
-Macrophage,hNeo4,-11.44705875,Human,0.592069479
-Macrophage,hNeo4,-10.6689075,Human,0.920204371
-Macrophage,hNeo4,-9.890756252,Human,1.647807827
-Macrophage,hNeo4,-9.112605002,Human,2.910413824
-Macrophage,hNeo4,-8.334453751,Human,6.230996264
-Macrophage,hNeo4,-7.556302501,Human,13.26449634
-Macrophage,hNeo4,-6.77815125,Human,15.96804251
-Macrophage,hNeo4,-6,Human,16.34967766
-Fibroblast,hNeo4,-11.51544993,Human,0.903132812
-Fibroblast,hNeo4,-10.61235995,Human,-0.069818247
-Fibroblast,hNeo4,-9.709269961,Human,-0.400891872
-Fibroblast,hNeo4,-8.806179974,Human,0.200445936
-Fibroblast,hNeo4,-7.903089987,Human,0.490979933
-Fibroblast,hNeo4,-7,Human,-0.049548434
-Fibroblast,hNeo4,-6.096910013,Human,-0.630616428
-Fibroblast,hNeo4,-5.193820026,Human,-0.360352244
-Fibroblast,hNeo4,-11.51544993,Human,0.592329002
-Fibroblast,hNeo4,-10.61235995,Human,1.281502669
-Fibroblast,hNeo4,-9.709269961,Human,-0.164410711
-Fibroblast,hNeo4,-8.806179974,Human,0.085583658
-Fibroblast,hNeo4,-7.903089987,Human,-0.069818247
-Fibroblast,hNeo4,-7,Human,-0.387378663
-Fibroblast,hNeo4,-6.096910013,Human,-0.718452287
-Fibroblast,hNeo4,-5.193820026,Human,-0.407648476
-Fibroblast,hNeo4,-11.51544993,Human,1.112587554
-Fibroblast,hNeo4,-10.61235995,Human,0.213959145
-Fibroblast,hNeo4,-9.709269961,Human,-0.19143713
-Fibroblast,hNeo4,-8.806179974,Human,1.072047927
-Fibroblast,hNeo4,-7.903089987,Human,0.065313844
-Fibroblast,hNeo4,-7,Human,-0.02927862
-Fibroblast,hNeo4,-6.096910013,Human,-0.853584379
-Fibroblast,hNeo4,-5.193820026,Human,-1.056282516
-Fibroblast,hIL4,-13.32162991,Human,0.673408257
-Fibroblast,hIL4,-12.41853992,Human,-0.272516385
-Fibroblast,hIL4,-11.51544993,Human,3.794959573
-Fibroblast,hIL4,-10.61235995,Human,39.88874124
-Fibroblast,hIL4,-9.709269961,Human,96.47530461
-Fibroblast,hIL4,-8.806179974,Human,107.1642531
-Fibroblast,hIL4,-7.903089987,Human,100.9549334
-Fibroblast,hIL4,-7,Human,90.38084728
-Fibroblast,hIL4,-13.32162991,Human,-0.279272989
-Fibroblast,hIL4,-12.41853992,Human,-0.407648476
-Fibroblast,hIL4,-11.51544993,Human,2.349046193
-Fibroblast,hIL4,-10.61235995,Human,40.07116957
-Fibroblast,hIL4,-9.709269961,Human,98.19148217
-Fibroblast,hIL4,-8.806179974,Human,106.9210153
-Fibroblast,hIL4,-7.903089987,Human,99.88738992
-Fibroblast,hIL4,-7,Human,93.59023445
-Fibroblast,hIL4,-13.32162991,Human,-0.400891872
-Fibroblast,hIL4,-12.41853992,Human,-0.549537173
-Fibroblast,hIL4,-11.51544993,Human,2.15310466
-Fibroblast,hIL4,-10.61235995,Human,36.4361163
-Fibroblast,hIL4,-9.709269961,Human,94.38075719
-Fibroblast,hIL4,-8.806179974,Human,106.9615549
-Fibroblast,hIL4,-7.903089987,Human,102.7724601
-Fibroblast,hIL4,-7,Human,91.36731155
-Macrophage,hIL4,-13.00336125,Human,8.306106532
-Macrophage,hIL4,-12.22521,Human,5.89995995
-Macrophage,hIL4,-11.44705875,Human,7.597858393
-Macrophage,hIL4,-10.6689075,Human,31.56130773
-Macrophage,hIL4,-9.890756252,Human,87.29158323
-Macrophage,hIL4,-9.112605002,Human,106.8822327
-Macrophage,hIL4,-8.334453751,Human,97.76986151
-Macrophage,hIL4,-7.556302501,Human,99.89144411
-Macrophage,hIL4,-13.00336125,Human,7.885584199
-Macrophage,hIL4,-12.22521,Human,5.54583588
-Macrophage,hIL4,-11.44705875,Human,7.057186822
-Macrophage,hIL4,-10.6689075,Human,31.7288843
-Macrophage,hIL4,-9.890756252,Human,84.76844923
-Macrophage,hIL4,-9.112605002,Human,104.3907169
-Macrophage,hIL4,-8.334453751,Human,98.47178601
-Macrophage,hIL4,-7.556302501,Human,102.1268523
-Macrophage,hIL4,-13.00336125,Human,7.781244072
-Macrophage,hIL4,-12.22521,Human,4.458169094
-Macrophage,hIL4,-11.44705875,Human,6.782108303
-Macrophage,hIL4,-10.6689075,Human,28.94015725
-Macrophage,hIL4,-9.890756252,Human,83.56695685
-Macrophage,hIL4,-9.112605002,Human,90.33641787
-Macrophage,hIL4,-8.334453751,Human,100.4921903
-Macrophage,hIL4,-7.556302501,Human,101.2478658
-Macrophage,hNeo4,-11.44705875,Human,-2.388684824
-Macrophage,hNeo4,-10.6689075,Human,-2.54322702
-Macrophage,hNeo4,-9.890756252,Human,-4.233112345
-Macrophage,hNeo4,-9.112605002,Human,-3.870274144
-Macrophage,hNeo4,-8.334453751,Human,-0.409872783
-Macrophage,hNeo4,-7.556302501,Human,3.846756854
-Macrophage,hNeo4,-6.77815125,Human,7.565848414
-Macrophage,hNeo4,-6,Human,7.841336678
-Macrophage,hNeo4,-11.44705875,Human,-3.745968464
-Macrophage,hNeo4,-10.6689075,Human,-2.711207669
-Macrophage,hNeo4,-9.890756252,Human,-4.595950546
-Macrophage,hNeo4,-9.112605002,Human,-4.62282745
-Macrophage,hNeo4,-8.334453751,Human,-1.155706863
-Macrophage,hNeo4,-7.556302501,Human,3.483918653
-Macrophage,hNeo4,-6.77815125,Human,5.721420892
-Macrophage,hNeo4,-6,Human,6.195126321
-Macrophage,hNeo4,-11.44705875,Human,-3.477199427
-Macrophage,hNeo4,-10.6689075,Human,-5.697903602
-Macrophage,hNeo4,-9.890756252,Human,-5.002463716
-Macrophage,hNeo4,-9.112605002,Human,-6.255599355
-Macrophage,hNeo4,-8.334453751,Human,-2.267738756
-Macrophage,hNeo4,-7.556302501,Human,3.016932449
-Macrophage,hNeo4,-6.77815125,Human,3.81987995
-Macrophage,hNeo4,-6,Human,3.487278266
-Fibroblast,hNeo4,-11.51544993,Human,0.270162517
-Fibroblast,hNeo4,-10.61235995,Human,-0.324719608
-Fibroblast,hNeo4,-9.709269961,Human,-0.93848688
-Fibroblast,hNeo4,-8.806179974,Human,-1.155666069
-Fibroblast,hNeo4,-7.903089987,Human,-0.707143831
-Fibroblast,hNeo4,-7,Human,-1.335074964
-Fibroblast,hNeo4,-6.096910013,Human,-1.424779411
-Fibroblast,hNeo4,-5.193820026,Human,-1.313042292
-Fibroblast,hNeo4,-11.51544993,Human,-0.526161174
-Fibroblast,hNeo4,-10.61235995,Human,-0.604849286
-Fibroblast,hNeo4,-9.709269961,Human,-0.834618572
-Fibroblast,hNeo4,-8.806179974,Human,-1.136780922
-Fibroblast,hNeo4,-7.903089987,Human,-1.039207663
-Fibroblast,hNeo4,-7,Human,-1.103731915
-Fibroblast,hNeo4,-6.096910013,Human,-2.545298123
-Fibroblast,hNeo4,-5.193820026,Human,-1.500319998
-Fibroblast,hNeo4,-11.51544993,Human,0.588062489
-Fibroblast,hNeo4,-10.61235995,Human,-0.34045723
-Fibroblast,hNeo4,-9.709269961,Human,-0.831471048
-Fibroblast,hNeo4,-8.806179974,Human,-0.757504223
-Fibroblast,hNeo4,-7.903089987,Human,-1.429500698
-Fibroblast,hNeo4,-7,Human,-1.25481309
-Fibroblast,hNeo4,-6.096910013,Human,-1.844973928
-Fibroblast,hNeo4,-5.193820026,Human,-2.20536548
-Fibroblast,hIL4,-13.32162991,Human,0.846159496
-Fibroblast,hIL4,-12.41853992,Human,-0.246031496
-Fibroblast,hIL4,-11.51544993,Human,1.599991607
-Fibroblast,hIL4,-10.61235995,Human,27.99513183
-Fibroblast,hIL4,-9.709269961,Human,93.87596655
-Fibroblast,hIL4,-8.806179974,Human,98.74833443
-Fibroblast,hIL4,-7.903089987,Human,100.2796051
-Fibroblast,hIL4,-7,Human,100.2198021
-Fibroblast,hIL4,-13.32162991,Human,-0.126425566
-Fibroblast,hIL4,-12.41853992,Human,-0.595406713
-Fibroblast,hIL4,-11.51544993,Human,1.282091635
-Fibroblast,hIL4,-10.61235995,Human,27.53401949
-Fibroblast,hIL4,-9.709269961,Human,90.40109954
-Fibroblast,hIL4,-8.806179974,Human,93.22757651
-Fibroblast,hIL4,-7.903089987,Human,98.1078132
-Fibroblast,hIL4,-7,Human,100.333113
-Fibroblast,hIL4,-13.32162991,Human,-0.227146349
-Fibroblast,hIL4,-12.41853992,Human,-0.439604251
-Fibroblast,hIL4,-11.51544993,Human,1.516582208
-Fibroblast,hIL4,-10.61235995,Human,25.47396473
-Fibroblast,hIL4,-9.709269961,Human,86.29200634
-Fibroblast,hIL4,-8.806179974,Human,97.95043698
-Fibroblast,hIL4,-7.903089987,Human,95.01379665
-Fibroblast,hIL4,-7,Human,106.0458699
-Macrophage,mIL4,-13.75133342,Mouse,-1.717762475
-Macrophage,mIL4,-12.90623538,Mouse,-1.468729365
-Macrophage,mIL4,-12.06113734,Mouse,0.942363928
-Macrophage,mIL4,-11.2160393,Mouse,28.75483445
-Macrophage,mIL4,-10.37094126,Mouse,93.73549665
-Macrophage,mIL4,-9.525843224,Mouse,104.132629
-Macrophage,mIL4,-8.680745184,Mouse,99.71795114
-Macrophage,mIL4,-7.835647144,Mouse,88.60201868
-Macrophage,mIL4,-13.75133342,Mouse,-2.04037355
-Macrophage,mIL4,-12.90623538,Mouse,-1.378171871
-Macrophage,mIL4,-12.06113734,Mouse,-0.087727573
-Macrophage,mIL4,-11.2160393,Mouse,29.60381096
-Macrophage,mIL4,-10.37094126,Mouse,95.5013678
-Macrophage,mIL4,-9.525843224,Mouse,102.28752
-Macrophage,mIL4,-8.680745184,Mouse,117.144609
-Macrophage,mIL4,-7.835647144,Mouse,88.11527214
-Macrophage,mNeo4,-11.21671628,Mouse,-0.925384398
-Macrophage,mNeo4,-10.37161824,Mouse,-1.400811244
-Macrophage,mNeo4,-9.526520196,Mouse,-0.432978021
-Macrophage,mNeo4,-8.681422156,Mouse,12.86765399
-Macrophage,mNeo4,-7.836324116,Mouse,70.75087256
-Macrophage,mNeo4,-6.991226076,Mouse,130.4678804
-Macrophage,mNeo4,-6.146128036,Mouse,112.7299311
-Macrophage,mNeo4,-5.301029996,Mouse,126.7097444
-Macrophage,mNeo4,-11.21671628,Mouse,-2.334685407
-Macrophage,mNeo4,-10.37161824,Mouse,-1.287614376
-Macrophage,mNeo4,-9.526520196,Mouse,-0.438637864
-Macrophage,mNeo4,-8.681422156,Mouse,11.98471842
-Macrophage,mNeo4,-7.836324116,Mouse,70.47354023
-Macrophage,mNeo4,-6.991226076,Mouse,105.6268277
-Macrophage,mNeo4,-6.146128036,Mouse,120.9593435
-Macrophage,mNeo4,-5.301029996,Mouse,123.7666258
-Monocyte,hIL4,-13.82677989,Human,-9.453008099
-Monocyte,hIL4,-13.2247199,Human,-3.123292877
-Monocyte,hIL4,-12.6226599,Human,-9.79740161
-Monocyte,hIL4,-12.02059991,Human,-7.184761181
-Monocyte,hIL4,-11.41853992,Human,8.793910173
-Monocyte,hIL4,-10.81647993,Human,82.84445289
-Monocyte,hIL4,-10.21441994,Human,119.451108
-Monocyte,hIL4,-9.612359948,Human,90.98520295
-Monocyte,hIL4,-9.010299957,Human,89.73232311
-Monocyte,hIL4,-8.408239965,Human,84.71486592
-Monocyte,hIL4,-7.806179974,Human,92.08963732
-Monocyte,hIL4,-7.204119983,Human,110.4850011
-Monocyte,hIL4,-13.82677989,Human,-8.829537088
-Monocyte,hIL4,-13.2247199,Human,-9.476759376
-Monocyte,hIL4,-12.6226599,Human,-9.58957794
-Monocyte,hIL4,-12.02059991,Human,13.20570981
-Monocyte,hIL4,-11.41853992,Human,24.42818802
-Monocyte,hIL4,-10.81647993,Human,59.97197349
-Monocyte,hIL4,-10.21441994,Human,122.3547016
-Monocyte,hIL4,-9.612359948,Human,129.8304159
-Monocyte,hIL4,-9.010299957,Human,102.3858157
-Monocyte,hIL4,-8.408239965,Human,92.13120205
-Monocyte,hIL4,-7.806179974,Human,87.08405577
-Monocyte,hIL4,-7.204119983,Human,120.5614802
-Monocyte,hNeo4,-12.6226599,Human,0.765978671
-Monocyte,hNeo4,-12.02059991,Human,-7.481652139
-Monocyte,hNeo4,-11.41853992,Human,1.425076598
-Monocyte,hNeo4,-10.81647993,Human,-9.078925492
-Monocyte,hNeo4,-10.21441994,Human,-7.410398309
-Monocyte,hNeo4,-9.612359948,Human,7.297579745
-Monocyte,hNeo4,-9.010299957,Human,50.28739045
-Monocyte,hNeo4,-8.408239965,Human,76.39598128
-Monocyte,hNeo4,-7.806179974,Human,72.72047123
-Monocyte,hNeo4,-7.204119983,Human,77.5479182
-Monocyte,hNeo4,-6.602059991,Human,78.67610384
-Monocyte,hNeo4,-6,Human,68.71244329
-Monocyte,hNeo4,-12.6226599,Human,-0.765978671
-Monocyte,hNeo4,-12.02059991,Human,-2.74921027
-Monocyte,hNeo4,-11.41853992,Human,6.264399211
-Monocyte,hNeo4,-10.81647993,Human,-9.720209961
-Monocyte,hNeo4,-10.21441994,Human,-9.352065174
-Monocyte,hNeo4,-9.612359948,Human,2.072298886
-Monocyte,hNeo4,-9.010299957,Human,44.45051422
-Monocyte,hNeo4,-8.408239965,Human,56.91399663
-Monocyte,hNeo4,-7.806179974,Human,67.1032943
-Monocyte,hNeo4,-7.204119983,Human,89.63138019
-Monocyte,hNeo4,-6.602059991,Human,85.25520747
-Monocyte,hNeo4,-6,Human,82.23285752
-Monocyte,hNeo4,-12.6226599,Human,0.692947756
-Monocyte,hNeo4,-12.02059991,Human,0.45969172
-Monocyte,hNeo4,-11.41853992,Human,0.512890465
-Monocyte,hNeo4,-10.81647993,Human,0.435138453
-Monocyte,hNeo4,-10.21441994,Human,1.462283454
-Monocyte,hNeo4,-9.612359948,Human,6.061928796
-Monocyte,hNeo4,-9.010299957,Human,18.76824444
-Monocyte,hNeo4,-8.408239965,Human,45.80957577
-Monocyte,hNeo4,-7.806179974,Human,51.31769199
-Monocyte,hNeo4,-7.204119983,Human,43.2887737
-Monocyte,hNeo4,-6.602059991,Human,67.90751603
-Monocyte,hNeo4,-6,Human,63.275133
-Monocyte,hNeo4,-12.6226599,Human,0.639749011
-Monocyte,hNeo4,-12.02059991,Human,0.488337198
-Monocyte,hNeo4,-11.41853992,Human,0.500613832
-Monocyte,hNeo4,-10.81647993,Human,0.062747238
-Monocyte,hNeo4,-10.21441994,Human,0.684763334
-Monocyte,hNeo4,-9.612359948,Human,4.515072978
-Monocyte,hNeo4,-9.010299957,Human,17.69608512
-Monocyte,hNeo4,-8.408239965,Human,38.81189469
-Monocyte,hNeo4,-7.806179974,Human,52.70904379
-Monocyte,hNeo4,-7.204119983,Human,51.37498295
-Monocyte,hNeo4,-6.602059991,Human,49.21838767
-Monocyte,hNeo4,-6,Human,70.77615605
-Monocyte,hNeo4,-12.6226599,Human,0.823898513
-Monocyte,hNeo4,-12.02059991,Human,0.398308553
-Monocyte,hNeo4,-11.41853992,Human,0.234620106
-Monocyte,hNeo4,-10.81647993,Human,0.766607557
-Monocyte,hNeo4,-10.21441994,Human,0.115945983
-Monocyte,hNeo4,-9.612359948,Human,6.356567999
-Monocyte,hNeo4,-9.010299957,Human,21.31769199
-Monocyte,hNeo4,-8.408239965,Human,34.39639885
-Monocyte,hNeo4,-7.806179974,Human,28.42995499
-Monocyte,hNeo4,-7.204119983,Human,33.80712045
-Monocyte,hNeo4,-6.602059991,Human,46.3702087
-Monocyte,hNeo4,-6,Human,40.83753922
-Monocyte,hIL4,-13.2247199,Human,-0.46105579
-Monocyte,hIL4,-12.6226599,Human,-0.190969854
-Monocyte,hIL4,-12.02059991,Human,6.156049652
-Monocyte,hIL4,-11.41853992,Human,28.62638112
-Monocyte,hIL4,-10.81647993,Human,66.97858409
-Monocyte,hIL4,-10.21441994,Human,64.09766744
-Monocyte,hIL4,-9.612359948,Human,71.87696085
-Monocyte,hIL4,-9.010299957,Human,97.46964943
-Monocyte,hIL4,-8.408239965,Human,67.22411676
-Monocyte,hIL4,-7.806179974,Human,73.90260537
-Monocyte,hIL4,-7.204119983,Human,98.34538262
-Monocyte,hIL4,-6.602059991,Human,96.59800846
-Monocyte,hIL4,-13.2247199,Human,-0.199154276
-Monocyte,hIL4,-12.6226599,Human,1.245396262
-Monocyte,hIL4,-12.02059991,Human,4.748329014
-Monocyte,hIL4,-11.41853992,Human,16.23516573
-Monocyte,hIL4,-10.81647993,Human,53.64616014
-Monocyte,hIL4,-10.21441994,Human,55.51220843
-Monocyte,hIL4,-9.612359948,Human,82.10748875
-Monocyte,hIL4,-9.010299957,Human,90.39012413
-Monocyte,hIL4,-8.408239965,Human,88.53635248
-Monocyte,hIL4,-7.806179974,Human,57.05497204
-Monocyte,hIL4,-7.204119983,Human,86.16696222
-Monocyte,hIL4,-6.602059991,Human,98.84054017
-Monocyte,hIL4,-13.2247199,Human,0.381939708
-Monocyte,hIL4,-12.6226599,Human,1.548219888
-Monocyte,hIL4,-12.02059991,Human,5.783658437
-Monocyte,hIL4,-11.41853992,Human,23.68708225
-Monocyte,hIL4,-10.81647993,Human,64.33092348
-Monocyte,hIL4,-10.21441994,Human,58.3972173
-Monocyte,hIL4,-9.612359948,Human,73.27649707
-Monocyte,hIL4,-9.010299957,Human,69.63033693
-Monocyte,hIL4,-8.408239965,Human,51.59187014
-Monocyte,hIL4,-7.806179974,Human,96.67985268
-Monocyte,hIL4,-7.204119983,Human,50.96576183
-Monocyte,hIL4,-6.602059991,Human,104.5614514
-Monocyte,hIL4,-13.82677989,Human,-0.003462019
-Monocyte,hIL4,-13.2247199,Human,0.027696156
-Monocyte,hIL4,-12.6226599,Human,0.80318852
-Monocyte,hIL4,-12.02059991,Human,11.10269648
-Monocyte,hIL4,-11.41853992,Human,50.15081422
-Monocyte,hIL4,-10.81647993,Human,90.61143592
-Monocyte,hIL4,-10.21441994,Human,103.3135854
-Monocyte,hIL4,-9.612359948,Human,103.7601859
-Monocyte,hIL4,-9.010299957,Human,99.30802886
-Monocyte,hIL4,-8.408239965,Human,109.9087325
-Monocyte,hIL4,-7.806179974,Human,102.4169224
-Monocyte,hIL4,-7.204119983,Human,106.0070366
-Monocyte,hIL4,-13.82677989,Human,-0.33581589
-Monocyte,hIL4,-13.2247199,Human,-0.145404818
-Monocyte,hIL4,-12.6226599,Human,0.702789955
-Monocyte,hIL4,-12.02059991,Human,10.97806378
-Monocyte,hIL4,-11.41853992,Human,49.32685359
-Monocyte,hIL4,-10.81647993,Human,74.99080401
-Monocyte,hIL4,-10.21441994,Human,50.9816989
-Monocyte,hIL4,-9.612359948,Human,77.39344553
-Monocyte,hIL4,-9.010299957,Human,84.7086927
-Monocyte,hIL4,-8.408239965,Human,94.04229722
-Monocyte,hIL4,-7.806179974,Human,93.04177359
-Monocyte,hIL4,-7.204119983,Human,65.08250425
-Monocyte,hIL4,-13.82677989,Human,-0.723562072
-Monocyte,hIL4,-13.2247199,Human,-0.581619273
-Monocyte,hIL4,-12.6226599,Human,0.609315429
-Monocyte,hIL4,-12.02059991,Human,10.5903176
-Monocyte,hIL4,-11.41853992,Human,46.23527019
-Monocyte,hIL4,-10.81647993,Human,82.14333626
-Monocyte,hIL4,-10.21441994,Human,94.85933382
-Monocyte,hIL4,-9.612359948,Human,96.39993249
-Monocyte,hIL4,-9.010299957,Human,103.0158517
-Monocyte,hIL4,-8.408239965,Human,105.2107721
-Monocyte,hIL4,-7.806179974,Human,91.14458692
-Monocyte,hIL4,-7.204119983,Human,98.22787878
-Monocyte,hNeo4,-12.6226599,Human,0.823960637
-Monocyte,hNeo4,-12.02059991,Human,1.024757767
-Monocyte,hNeo4,-11.41853992,Human,-0.231955305
-Monocyte,hNeo4,-10.81647993,Human,-0.377360124
-Monocyte,hNeo4,-10.21441994,Human,4.123265204
-Monocyte,hNeo4,-9.612359948,Human,21.9457415
-Monocyte,hNeo4,-9.010299957,Human,52.10685523
-Monocyte,hNeo4,-8.408239965,Human,77.67733113
-Monocyte,hNeo4,-7.806179974,Human,87.20134673
-Monocyte,hNeo4,-7.204119983,Human,96.79460271
-Monocyte,hNeo4,-6.602059991,Human,96.15759113
-Monocyte,hNeo4,-6,Human,72.98283271
-Monocyte,hNeo4,-12.6226599,Human,0.851656793
-Monocyte,hNeo4,-12.02059991,Human,0.685479858
-Monocyte,hNeo4,-11.41853992,Human,-0.366974065
-Monocyte,hNeo4,-10.81647993,Human,-0.827422656
-Monocyte,hNeo4,-10.21441994,Human,3.960550288
-Monocyte,hNeo4,-9.612359948,Human,20.35321254
-Monocyte,hNeo4,-9.010299957,Human,54.14598471
-Monocyte,hNeo4,-8.408239965,Human,74.74846265
-Monocyte,hNeo4,-7.806179974,Human,89.93980414
-Monocyte,hNeo4,-7.204119983,Human,95.22630789
-Monocyte,hNeo4,-6.602059991,Human,95.54135166
-Monocyte,hNeo4,-6,Human,88.38189537
-Monocyte,hNeo4,-12.6226599,Human,0.017310097
-Monocyte,hNeo4,-12.02059991,Human,0.211183188
-Monocyte,hNeo4,-11.41853992,Human,-0.463910611
-Monocyte,hNeo4,-10.81647993,Human,-0.519302922
-Monocyte,hNeo4,-10.21441994,Human,3.115817534
-Monocyte,hNeo4,-9.612359948,Human,23.1539863
-Monocyte,hNeo4,-9.010299957,Human,56.10202571
-Monocyte,hNeo4,-8.408239965,Human,79.86532744
-Monocyte,hNeo4,-7.806179974,Human,85.16914129
-Monocyte,hNeo4,-7.204119983,Human,93.56453853
-Monocyte,hNeo4,-6.602059991,Human,96.57649548
-Monocyte,hNeo4,-6,Human,93.70648133
-A549,hIL4,-13.3216,Human,9.737391
-A549,hIL4,-12.4185,Human,5.448987
-A549,hIL4,-11.5154,Human,5.625564
-A549,hIL4,-10.6124,Human,23.79041
-A549,hIL4,-9.70927,Human,79.82358
-A549,hIL4,-8.80618,Human,92.5301
-A549,hIL4,-7.90309,Human,89.75622
-A549,hIL4,-7,Human,94.45378
-A549,hIL4,-13.3216,Human,8.113974
-A549,hIL4,-12.4185,Human,4.457979
-A549,hIL4,-11.5154,Human,5.557111
-A549,hIL4,-10.6124,Human,23.46604
-A549,hIL4,-9.70927,Human,84.06375
-A549,hIL4,-8.80618,Human,98.49404
-A549,hIL4,-7.90309,Human,94.47867
-A549,hIL4,-7,Human,103.9998
-A549,hIL4,-13.3216,Human,10.56038
-A549,hIL4,-12.4185,Human,6.35054
-A549,hIL4,-11.5154,Human,8.188649
-A549,hIL4,-10.6124,Human,27.69999
-A549,hIL4,-9.70927,Human,95.52646
-A549,hIL4,-8.80618,Human,111.2449
-A549,hIL4,-7.90309,Human,101.4531
-A549,hIL4,-7,Human,115.8585
-A549,hIL13,-13.3216,Human,10.44759
-A549,hIL13,-12.4185,Human,5.446654
-A549,hIL13,-11.5154,Human,9.43791
-A549,hIL13,-10.6124,Human,7.12141
-A549,hIL13,-9.70927,Human,21.73994
-A549,hIL13,-8.80618,Human,77.44485
-A549,hIL13,-7.90309,Human,96.07797
-A549,hIL13,-7,Human,94.97495
-A549,hIL13,-13.3216,Human,9.122095
-A549,hIL13,-12.4185,Human,5.584337
-A549,hIL13,-11.5154,Human,9.230997
-A549,hIL13,-10.6124,Human,6.809484
-A549,hIL13,-9.70927,Human,20.51013
-A549,hIL13,-8.80618,Human,74.25169
-A549,hIL13,-7.90309,Human,97.49137
-A549,hIL13,-7,Human,98.13389
-A549,hIL13,-13.3216,Human,8.286661
-A549,hIL13,-12.4185,Human,7.550795
-A549,hIL13,-11.5154,Human,9.1641
-A549,hIL13,-10.6124,Human,7.155636
-A549,hIL13,-9.70927,Human,23.13778
-A549,hIL13,-8.80618,Human,78.31762
-A549,hIL13,-7.90309,Human,96.90641
-A549,hIL13,-7,Human,96.37979
-A549,hNeo4,-11.5154,Human,6.455552
-A549,hNeo4,-10.6124,Human,7.210865
-A549,hNeo4,-9.70927,Human,5.599894
-A549,hNeo4,-8.80618,Human,5.706463
-A549,hNeo4,-7.90309,Human,4.794798
-A549,hNeo4,-7,Human,0.889885
-A549,hNeo4,-6.09691,Human,4.079934
-A549,hNeo4,-11.5154,Human,6.062728
-A549,hNeo4,-10.6124,Human,6.17863
-A549,hNeo4,-9.70927,Human,11.7443
-A549,hNeo4,-8.80618,Human,4.510097
-A549,hNeo4,-7.90309,Human,3.689443
-A549,hNeo4,-7,Human,1.501291
-A549,hNeo4,-6.09691,Human,3.1496
-A549,hNeo4,-11.5154,Human,0.952892
-A549,hNeo4,-10.6124,Human,5.918043
-A549,hNeo4,-9.70927,Human,8.877843
-A549,hNeo4,-8.80618,Human,0
-A549,hNeo4,-7.90309,Human,1.464731
-A549,hNeo4,-7,Human,1.022123
-A549,hNeo4,-6.09691,Human,3.010361
-Ramos,hIL13,-13.6797,Human,2.406111
-Ramos,hIL13,-12.7255,Human,1.37492
-Ramos,hIL13,-11.7712,Human,1.814131
-Ramos,hIL13,-10.817,Human,0.401018
-Ramos,hIL13,-9.86273,Human,0.190961
-Ramos,hIL13,-8.90849,Human,0.24825
-Ramos,hIL13,-7.95424,Human,-1.10757
-Ramos,hIL13,-7,Human,-0.40102
-Ramos,hIL13,-13.6797,Human,2.499121
-Ramos,hIL13,-12.7255,Human,1.258863
-Ramos,hIL13,-11.7712,Human,0.4775
-Ramos,hIL13,-10.817,Human,-0.22945
-Ramos,hIL13,-9.86273,Human,-0.20464
-Ramos,hIL13,-8.90849,Human,0.948798
-Ramos,hIL13,-7.95424,Human,0.266656
-Ramos,hIL13,-7,Human,0.675941
-Ramos,hIL13,-13.6797,Human,0.130227
-Ramos,hIL13,-12.7255,Human,-1.09763
-Ramos,hIL13,-11.7712,Human,-1.89139
-Ramos,hIL13,-10.817,Human,-1.19685
-Ramos,hIL13,-9.86273,Human,-0.42789
-Ramos,hIL13,-8.90849,Human,-0.78756
-Ramos,hIL13,-7.95424,Human,-0.83717
-Ramos,hIL13,-7,Human,0.502305
-Ramos,hIL4,-13.6797,Human,3.150859
-Ramos,hIL4,-12.7255,Human,1.470401
-Ramos,hIL4,-11.7712,Human,3.723743
-Ramos,hIL4,-10.817,Human,46.28899
-Ramos,hIL4,-9.86273,Human,105.3151
-Ramos,hIL4,-8.90849,Human,108.1222
-Ramos,hIL4,-7.95424,Human,101.0376
-Ramos,hIL4,-7,Human,105.8307
-Ramos,hIL4,-13.6797,Human,2.598342
-Ramos,hIL4,-12.7255,Human,0.4775
-Ramos,hIL4,-11.7712,Human,3.181264
-Ramos,hIL4,-10.817,Human,45.10201
-Ramos,hIL4,-9.86273,Human,108.9381
-Ramos,hIL4,-8.90849,Human,112.8449
-Ramos,hIL4,-7.95424,Human,105.8623
-Ramos,hIL4,-7,Human,113.0186
-Ramos,hIL4,-13.6797,Human,1.494512
-Ramos,hIL4,-12.7255,Human,0.043409
-Ramos,hIL4,-11.7712,Human,2.337888
-Ramos,hIL4,-10.817,Human,44.48188
-Ramos,hIL4,-9.86273,Human,105.3414
-Ramos,hIL4,-8.90849,Human,107.5738
-Ramos,hIL4,-7.95424,Human,100.2687
-Ramos,hIL4,-7,Human,109.1366
-Monocyte,hIL4,-13.8268,Human,-9.45301
-Monocyte,hIL4,-13.2247,Human,-3.12329
-Monocyte,hIL4,-12.6227,Human,-9.7974
-Monocyte,hIL4,-12.0206,Human,-7.18476
-Monocyte,hIL4,-11.4185,Human,8.79391
-Monocyte,hIL4,-10.8165,Human,82.84445
-Monocyte,hIL4,-10.2144,Human,119.4511
-Monocyte,hIL4,-9.61236,Human,90.9852
-Monocyte,hIL4,-9.0103,Human,89.73232
-Monocyte,hIL4,-8.40824,Human,84.71487
-Monocyte,hIL4,-7.80618,Human,92.08964
-Monocyte,hIL4,-7.20412,Human,110.485
-Monocyte,hIL4,-13.8268,Human,-8.82954
-Monocyte,hIL4,-13.2247,Human,-9.47676
-Monocyte,hIL4,-12.6227,Human,-9.58958
-Monocyte,hIL4,-12.0206,Human,13.20571
-Monocyte,hIL4,-11.4185,Human,24.42819
-Monocyte,hIL4,-10.8165,Human,59.97197
-Monocyte,hIL4,-10.2144,Human,122.3547
-Monocyte,hIL4,-9.61236,Human,129.8304
-Monocyte,hIL4,-9.0103,Human,102.3858
-Monocyte,hIL4,-8.40824,Human,92.1312
-Monocyte,hIL4,-7.80618,Human,87.08406
-Monocyte,hIL4,-7.20412,Human,120.5615
-Monocyte,hIL13,-13.8268,Human,10.98497
-Monocyte,hIL13,-13.2247,Human,1.270693
-Monocyte,hIL13,-12.6227,Human,10.83058
-Monocyte,hIL13,-12.0206,Human,27.62867
-Monocyte,hIL13,-11.4185,Human,-10.8603
-Monocyte,hIL13,-10.8165,Human,16.70902
-Monocyte,hIL13,-10.2144,Human,50.63178
-Monocyte,hIL13,-9.61236,Human,92.21433
-Monocyte,hIL13,-9.0103,Human,103.5793
-Monocyte,hIL13,-8.40824,Human,61.02891
-Monocyte,hIL13,-7.80618,Human,99.51191
-Monocyte,hIL13,-7.20412,Human,147.4895
-Monocyte,hIL13,-13.8268,Human,-9.26894
-Monocyte,hIL13,-13.2247,Human,-7.92105
-Monocyte,hIL13,-12.6227,Human,-11.0978
-Monocyte,hIL13,-12.0206,Human,54.91889
-Monocyte,hIL13,-11.4185,Human,-2.5117
-Monocyte,hIL13,-10.8165,Human,16.26962
-Monocyte,hIL13,-10.2144,Human,78.65235
-Monocyte,hIL13,-9.61236,Human,68.54618
-Monocyte,hIL13,-9.0103,Human,78.6761
-Monocyte,hIL13,-8.40824,Human,92.76655
-Monocyte,hIL13,-7.80618,Human,139.99
-Monocyte,hIL13,-7.20412,Human,108.4899
-Monocyte,hNeo4,-12.6227,Human,0.765979
-Monocyte,hNeo4,-12.0206,Human,-7.48165
-Monocyte,hNeo4,-11.4185,Human,1.425077
-Monocyte,hNeo4,-10.8165,Human,-9.07893
-Monocyte,hNeo4,-10.2144,Human,-7.4104
-Monocyte,hNeo4,-9.61236,Human,7.29758
-Monocyte,hNeo4,-9.0103,Human,50.28739
-Monocyte,hNeo4,-8.40824,Human,76.39598
-Monocyte,hNeo4,-7.80618,Human,72.72047
-Monocyte,hNeo4,-7.20412,Human,77.54792
-Monocyte,hNeo4,-6.60206,Human,78.6761
-Monocyte,hNeo4,-6,Human,68.71244
-Monocyte,hNeo4,-12.6227,Human,-0.76598
-Monocyte,hNeo4,-12.0206,Human,-2.74921
-Monocyte,hNeo4,-11.4185,Human,6.264399
-Monocyte,hNeo4,-10.8165,Human,-9.72021
-Monocyte,hNeo4,-10.2144,Human,-9.35207
-Monocyte,hNeo4,-9.61236,Human,2.072299
-Monocyte,hNeo4,-9.0103,Human,44.45051
-Monocyte,hNeo4,-8.40824,Human,56.914
-Monocyte,hNeo4,-7.80618,Human,67.10329
-Monocyte,hNeo4,-7.20412,Human,89.63138
-Monocyte,hNeo4,-6.60206,Human,85.25521
-Monocyte,hNeo4,-6,Human,82.23286
+Cell,Ligand,Concentration,Animal,Signal,Antibody,Donor,AB Norm
+Ramos,hIL4,-14.2247,Human,-0.41719,FALSE,Cell Line,FALSE
+Ramos,hIL4,-13.3216,Human,-0.40918,FALSE,Cell Line,FALSE
+Ramos,hIL4,-12.4185,Human,0.421297,FALSE,Cell Line,FALSE
+Ramos,hIL4,-11.5154,Human,14.41065,FALSE,Cell Line,FALSE
+Ramos,hIL4,-10.6124,Human,74.50629,FALSE,Cell Line,FALSE
+Ramos,hIL4,-9.70927,Human,103.26,FALSE,Cell Line,FALSE
+Ramos,hIL4,-8.80618,Human,104.6745,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7.90309,Human,92.2063,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7,Human,99.74775,FALSE,Cell Line,FALSE
+Ramos,hIL4,-14.2247,Human,-0.586,FALSE,Cell Line,FALSE
+Ramos,hIL4,-13.3216,Human,-0.31184,FALSE,Cell Line,FALSE
+Ramos,hIL4,-12.4185,Human,0.523566,FALSE,Cell Line,FALSE
+Ramos,hIL4,-11.5154,Human,14.65092,FALSE,Cell Line,FALSE
+Ramos,hIL4,-10.6124,Human,75.22217,FALSE,Cell Line,FALSE
+Ramos,hIL4,-9.70927,Human,104.3813,FALSE,Cell Line,FALSE
+Ramos,hIL4,-8.80618,Human,110.1762,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7.90309,Human,98.44412,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7,Human,101.9096,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-14.2247,Human,-0.37345,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-13.3216,Human,-0.25701,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-12.4185,Human,-0.14057,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-11.5154,Human,0.232776,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-10.6124,Human,7.662714,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-9.70927,Human,61.23836,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-8.80618,Human,104.8193,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-7.90309,Human,104.2433,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-7,Human,105.7231,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-14.2247,Human,-0.37961,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-13.3216,Human,-0.57244,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-12.4185,Human,-0.87186,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-11.5154,Human,-0.00195,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-10.6124,Human,7.988621,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-9.70927,Human,62.27892,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-8.80618,Human,98.92589,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-7.90309,Human,103.9882,FALSE,Cell Line,FALSE
+Ramos,hNeo4,-7,Human,98.72505,FALSE,Cell Line,FALSE
+Macrophage,hIL4,-13.2247,Human,0.902542,FALSE,210129,FALSE
+Macrophage,hIL4,-12.6227,Human,0.071806,FALSE,210129,FALSE
+Macrophage,hIL4,-12.0206,Human,0.668345,FALSE,210129,FALSE
+Macrophage,hIL4,-11.4185,Human,7.263419,FALSE,210129,FALSE
+Macrophage,hIL4,-10.8165,Human,38.3387,FALSE,210129,FALSE
+Macrophage,hIL4,-10.2144,Human,81.07301,FALSE,210129,FALSE
+Macrophage,hIL4,-9.61236,Human,95.74788,FALSE,210129,FALSE
+Macrophage,hIL4,-9.0103,Human,92.12224,FALSE,210129,FALSE
+Macrophage,hIL4,-8.40824,Human,93.2623,FALSE,210129,FALSE
+Macrophage,hIL4,-7.80618,Human,92.97066,FALSE,210129,FALSE
+Macrophage,hIL4,-7.20412,Human,96.61175,FALSE,210129,FALSE
+Macrophage,hIL4,-6.60206,Human,103.8299,FALSE,210129,FALSE
+Macrophage,hIL4,-13.2247,Human,1.644902,FALSE,210129,FALSE
+Macrophage,hIL4,-12.6227,Human,0.237511,FALSE,210129,FALSE
+Macrophage,hIL4,-12.0206,Human,0.745674,FALSE,210129,FALSE
+Macrophage,hIL4,-11.4185,Human,7.935078,FALSE,210129,FALSE
+Macrophage,hIL4,-10.8165,Human,37.64936,FALSE,210129,FALSE
+Macrophage,hIL4,-10.2144,Human,82.91344,FALSE,210129,FALSE
+Macrophage,hIL4,-9.61236,Human,95.8716,FALSE,210129,FALSE
+Macrophage,hIL4,-9.0103,Human,100.1954,FALSE,210129,FALSE
+Macrophage,hIL4,-8.40824,Human,96.49466,FALSE,210129,FALSE
+Macrophage,hIL4,-7.80618,Human,99.64085,FALSE,210129,FALSE
+Macrophage,hIL4,-7.20412,Human,105.7167,FALSE,210129,FALSE
+Macrophage,hIL4,-6.60206,Human,101.89,FALSE,210129,FALSE
+Macrophage,hIL4,-13.2247,Human,1.644902,FALSE,210129,FALSE
+Macrophage,hIL4,-12.6227,Human,0.237511,FALSE,210129,FALSE
+Macrophage,hIL4,-12.0206,Human,0.745674,FALSE,210129,FALSE
+Macrophage,hIL4,-11.4185,Human,7.935078,FALSE,210129,FALSE
+Macrophage,hIL4,-10.8165,Human,37.64936,FALSE,210129,FALSE
+Macrophage,hIL4,-10.2144,Human,82.91344,FALSE,210129,FALSE
+Macrophage,hIL4,-9.61236,Human,95.8716,FALSE,210129,FALSE
+Macrophage,hIL4,-9.0103,Human,100.1954,FALSE,210129,FALSE
+Macrophage,hIL4,-8.40824,Human,96.49466,FALSE,210129,FALSE
+Macrophage,hIL4,-7.80618,Human,99.64085,FALSE,210129,FALSE
+Macrophage,hIL4,-7.20412,Human,105.7167,FALSE,210129,FALSE
+Macrophage,hIL4,-6.60206,Human,101.89,FALSE,210129,FALSE
+Macrophage,hNeo4,-12.6227,Human,1.004175,FALSE,210129,FALSE
+Macrophage,hNeo4,-12.0206,Human,-0.306,FALSE,210129,FALSE
+Macrophage,hNeo4,-11.4185,Human,-0.78323,FALSE,210129,FALSE
+Macrophage,hNeo4,-10.8165,Human,-0.73021,FALSE,210129,FALSE
+Macrophage,hNeo4,-10.2144,Human,0.257396,FALSE,210129,FALSE
+Macrophage,hNeo4,-9.61236,Human,2.073527,FALSE,210129,FALSE
+Macrophage,hNeo4,-9.0103,Human,7.946125,FALSE,210129,FALSE
+Macrophage,hNeo4,-8.40824,Human,15.63264,FALSE,210129,FALSE
+Macrophage,hNeo4,-7.80618,Human,17.75588,FALSE,210129,FALSE
+Macrophage,hNeo4,-7.20412,Human,24.32002,FALSE,210129,FALSE
+Macrophage,hNeo4,-6.60206,Human,24.92098,FALSE,210129,FALSE
+Macrophage,hNeo4,-6,Human,27.88821,FALSE,210129,FALSE
+Macrophage,hNeo4,-12.6227,Human,0.677183,FALSE,210129,FALSE
+Macrophage,hNeo4,-12.0206,Human,-0.34577,FALSE,210129,FALSE
+Macrophage,hNeo4,-11.4185,Human,-0.94231,FALSE,210129,FALSE
+Macrophage,hNeo4,-10.8165,Human,-0.93347,FALSE,210129,FALSE
+Macrophage,hNeo4,-10.2144,Human,-0.25298,FALSE,210129,FALSE
+Macrophage,hNeo4,-9.61236,Human,0.904751,FALSE,210129,FALSE
+Macrophage,hNeo4,-9.0103,Human,5.738929,FALSE,210129,FALSE
+Macrophage,hNeo4,-8.40824,Human,13.70162,FALSE,210129,FALSE
+Macrophage,hNeo4,-7.80618,Human,19.00641,FALSE,210129,FALSE
+Macrophage,hNeo4,-7.20412,Human,22.65192,FALSE,210129,FALSE
+Macrophage,hNeo4,-6.60206,Human,25.59706,FALSE,210129,FALSE
+Macrophage,hNeo4,-6,Human,25.02041,FALSE,210129,FALSE
+Macrophage,hNeo4,-12.6227,Human,0.451823,FALSE,210129,FALSE
+Macrophage,hNeo4,-12.0206,Human,-0.51148,FALSE,210129,FALSE
+Macrophage,hNeo4,-11.4185,Human,-0.76998,FALSE,210129,FALSE
+Macrophage,hNeo4,-10.8165,Human,-1.27372,FALSE,210129,FALSE
+Macrophage,hNeo4,-10.2144,Human,-0.28833,FALSE,210129,FALSE
+Macrophage,hNeo4,-9.61236,Human,1.010803,FALSE,210129,FALSE
+Macrophage,hNeo4,-9.0103,Human,6.430473,FALSE,210129,FALSE
+Macrophage,hNeo4,-8.40824,Human,12.76263,FALSE,210129,FALSE
+Macrophage,hNeo4,-7.80618,Human,17.47087,FALSE,210129,FALSE
+Macrophage,hNeo4,-7.20412,Human,22.1526,FALSE,210129,FALSE
+Macrophage,hNeo4,-6.60206,Human,23.77651,FALSE,210129,FALSE
+Macrophage,hNeo4,-6,Human,26.52501,FALSE,210129,FALSE
+A549,hIL4,-13.0206,Human,-7.00802,FALSE,Cell Line,FALSE
+A549,hIL4,-12.4185,Human,-5.50144,FALSE,Cell Line,FALSE
+A549,hIL4,-11.8165,Human,0.155518,FALSE,Cell Line,FALSE
+A549,hIL4,-11.2144,Human,13.19957,FALSE,Cell Line,FALSE
+A549,hIL4,-10.6124,Human,48.92977,FALSE,Cell Line,FALSE
+A549,hIL4,-10.0103,Human,95.98362,FALSE,Cell Line,FALSE
+A549,hIL4,-9.40824,Human,113.7807,FALSE,Cell Line,FALSE
+A549,hIL4,-8.80618,Human,102.7972,FALSE,Cell Line,FALSE
+A549,hIL4,-8.20412,Human,102.6612,FALSE,Cell Line,FALSE
+A549,hIL4,-7.60206,Human,98.2289,FALSE,Cell Line,FALSE
+A549,hIL4,-7,Human,90.21002,FALSE,Cell Line,FALSE
+A549,hIL4,-13.0206,Human,-5.35564,FALSE,Cell Line,FALSE
+A549,hIL4,-12.4185,Human,-5.03489,FALSE,Cell Line,FALSE
+A549,hIL4,-11.8165,Human,1.526018,FALSE,Cell Line,FALSE
+A549,hIL4,-11.2144,Human,15.21158,FALSE,Cell Line,FALSE
+A549,hIL4,-10.6124,Human,53.82858,FALSE,Cell Line,FALSE
+A549,hIL4,-10.0103,Human,91.49304,FALSE,Cell Line,FALSE
+A549,hIL4,-9.40824,Human,111.0591,FALSE,Cell Line,FALSE
+A549,hIL4,-8.80618,Human,97.25692,FALSE,Cell Line,FALSE
+A549,hIL4,-8.20412,Human,95.47818,FALSE,Cell Line,FALSE
+A549,hIL4,-7.60206,Human,80.57764,FALSE,Cell Line,FALSE
+A549,hIL4,-7,Human,38.45177,FALSE,Cell Line,FALSE
+A549,hIL4,-13.0206,Human,-5.46256,FALSE,Cell Line,FALSE
+A549,hIL4,-12.4185,Human,-4.97657,FALSE,Cell Line,FALSE
+A549,hIL4,-11.8165,Human,4.267018,FALSE,Cell Line,FALSE
+A549,hIL4,-11.2144,Human,15.94057,FALSE,Cell Line,FALSE
+A549,hIL4,-10.6124,Human,50.58215,FALSE,Cell Line,FALSE
+A549,hIL4,-10.0103,Human,80.25688,FALSE,Cell Line,FALSE
+A549,hIL4,-9.40824,Human,113.2364,FALSE,Cell Line,FALSE
+A549,hIL4,-8.80618,Human,102.1266,FALSE,Cell Line,FALSE
+A549,hIL4,-8.20412,Human,105.2661,FALSE,Cell Line,FALSE
+A549,hIL4,-7.60206,Human,93.24261,FALSE,Cell Line,FALSE
+A549,hIL4,-7,Human,94.07852,FALSE,Cell Line,FALSE
+A549,hNeo4,-13.0206,Human,-10.5169,FALSE,Cell Line,FALSE
+A549,hNeo4,-12.4185,Human,-8.95199,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.8165,Human,-10.5849,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.2144,Human,-10.0989,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.6124,Human,-10.1087,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.0103,Human,-9.02975,FALSE,Cell Line,FALSE
+A549,hNeo4,-9.40824,Human,-9.9823,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.80618,Human,-1.73985,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.20412,Human,-5.96799,FALSE,Cell Line,FALSE
+A549,hNeo4,-7.60206,Human,-0.20412,FALSE,Cell Line,FALSE
+A549,hNeo4,-7,Human,-3.98514,FALSE,Cell Line,FALSE
+A549,hNeo4,-13.0206,Human,-9.03947,FALSE,Cell Line,FALSE
+A549,hNeo4,-12.4185,Human,-5.47228,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.8165,Human,-7.06634,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.2144,Human,-6.93026,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.6124,Human,-5.239,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.0103,Human,-8.04804,FALSE,Cell Line,FALSE
+A549,hNeo4,-9.40824,Human,-6.8039,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.80618,Human,-0.22356,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.20412,Human,-5.52088,FALSE,Cell Line,FALSE
+A549,hNeo4,-7.60206,Human,-7.11494,FALSE,Cell Line,FALSE
+A549,hNeo4,-7,Human,-6.31791,FALSE,Cell Line,FALSE
+A549,hNeo4,-13.0206,Human,-0.51515,FALSE,Cell Line,FALSE
+A549,hNeo4,-12.4185,Human,-7.98972,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.8165,Human,-5.73472,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.2144,Human,-5.50144,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.6124,Human,-3.19783,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.0103,Human,-3.44083,FALSE,Cell Line,FALSE
+A549,hNeo4,-9.40824,Human,-4.61693,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.80618,Human,2.05089,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.20412,Human,-5.50144,FALSE,Cell Line,FALSE
+A549,hNeo4,-7.60206,Human,-9.24359,FALSE,Cell Line,FALSE
+A549,hNeo4,-7,Human,-2.39109,FALSE,Cell Line,FALSE
+Macrophage,mIL4,-13.2483,Mouse,0.943415,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.7712,Mouse,1.170402,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.2941,Mouse,3.058413,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.817,Mouse,6.566071,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.3398,Mouse,24.48031,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.8627,Mouse,58.19378,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.3856,Mouse,96.08996,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.90849,Mouse,101.3367,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.43136,Mouse,87.3356,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.95424,Mouse,102.5165,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.47712,Mouse,95.38891,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8,Mouse,106.4321,FALSE,Mouse,FALSE
+Macrophage,mIL4,-13.2483,Mouse,2.224945,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.7712,Mouse,2.350261,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.2941,Mouse,2.579612,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.817,Mouse,7.823957,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.3398,Mouse,28.69139,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.8627,Mouse,67.11484,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.3856,Mouse,85.41094,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.90849,Mouse,94.12747,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.43136,Mouse,99.10463,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.95424,Mouse,109.3344,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.47712,Mouse,109.1228,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8,Mouse,108.5742,FALSE,Mouse,FALSE
+Macrophage,mIL4,-13.2483,Mouse,0.497105,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.7712,Mouse,0.811658,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.2941,Mouse,2.711143,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.817,Mouse,6.493261,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.3398,Mouse,31.84188,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.8627,Mouse,67.58852,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.3856,Mouse,97.10496,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.90849,Mouse,100.7438,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.43136,Mouse,96.85781,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.95424,Mouse,110.9771,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.47712,Mouse,97.28283,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8,Mouse,107.9196,FALSE,Mouse,FALSE
+Macrophage,mIL4,-13.2483,Mouse,0.233106,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.7712,Mouse,16.47375,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.2941,Mouse,1.033529,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.817,Mouse,4.516074,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.3398,Mouse,27.68155,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.8627,Mouse,67.47244,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.3856,Mouse,94.21969,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.90849,Mouse,90.83451,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.43136,Mouse,111.3731,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.95424,Mouse,104.2114,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.47712,Mouse,100.61,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8,Mouse,108.8773,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-10.0722,Mouse,1.519157514,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.59512,Mouse,0.889032257,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.118,Mouse,1.403299586,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.64088,Mouse,1.642108783,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.16376,Mouse,3.694449206,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.68664,Mouse,14.10038262,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.20952,Mouse,39.89650476,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.73239,Mouse,56.89806445,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.25527,Mouse,69.27003595,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.77815,Mouse,71.74797692,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.30103,Mouse,87.02467217,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-4.82391,Mouse,74.4753671,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-10.0722,Mouse,2.895265954,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.59512,Mouse,1.57472203,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.118,Mouse,1.780428961,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.64088,Mouse,1.759148934,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.16376,Mouse,2.85625257,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.68664,Mouse,11.37535688,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.20952,Mouse,34.82358266,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.73239,Mouse,66.34403218,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.25527,Mouse,78.95363065,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.77815,Mouse,78.18163855,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.30103,Mouse,88.98834581,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-4.82391,Mouse,94.58617524,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-10.0722,Mouse,1.132763275,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.59512,Mouse,0,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.118,Mouse,1.006380595,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.64088,Mouse,1.627059977,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.16376,Mouse,4.319479132,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.68664,Mouse,17.44174593,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.20952,Mouse,47.0976757,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.73239,Mouse,65.65346154,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.25527,Mouse,85.58260584,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.77815,Mouse,89.98259542,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.30103,Mouse,95.5144121,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-4.82391,Mouse,90.866338,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-10.0722,Mouse,50.87417739,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.59512,Mouse,0.639402741,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.118,Mouse,0.275233391,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.64088,Mouse,0.982040228,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.16376,Mouse,2.418121933,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.68664,Mouse,10.97469741,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.20952,Mouse,33.77319661,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.73239,Mouse,68.70630538,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.25527,Mouse,80.59563892,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.77815,Mouse,84.37494912,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-4.82391,Mouse,92.89688639,FALSE,Mouse,FALSE
+3T3,mIL4,-12.0206,Mouse,10.64033,FALSE,Cell Line,FALSE
+3T3,mIL4,-11.4185,Mouse,10.99903,FALSE,Cell Line,FALSE
+3T3,mIL4,-10.8165,Mouse,9.844565,FALSE,Cell Line,FALSE
+3T3,mIL4,-10.2144,Mouse,15.71332,FALSE,Cell Line,FALSE
+3T3,mIL4,-9.61236,Mouse,45.60572,FALSE,Cell Line,FALSE
+3T3,mIL4,-9.0103,Mouse,85.27937,FALSE,Cell Line,FALSE
+3T3,mIL4,-8.40824,Mouse,99.04247,FALSE,Cell Line,FALSE
+3T3,mIL4,-7.80618,Mouse,110.352,FALSE,Cell Line,FALSE
+3T3,mIL4,-7.20412,Mouse,100.2542,FALSE,Cell Line,FALSE
+3T3,mIL4,-6.60206,Mouse,101.487,FALSE,Cell Line,FALSE
+3T3,mIL4,-6,Mouse,91.2687,FALSE,Cell Line,FALSE
+3T3,mIL4,-12.0206,Mouse,10.37206,FALSE,Cell Line,FALSE
+3T3,mIL4,-11.4185,Mouse,8.572548,FALSE,Cell Line,FALSE
+3T3,mIL4,-10.8165,Mouse,8.400735,FALSE,Cell Line,FALSE
+3T3,mIL4,-10.2144,Mouse,15.57165,FALSE,Cell Line,FALSE
+3T3,mIL4,-9.61236,Mouse,46.98022,FALSE,Cell Line,FALSE
+3T3,mIL4,-9.0103,Mouse,82.2621,FALSE,Cell Line,FALSE
+3T3,mIL4,-8.40824,Mouse,98.18944,FALSE,Cell Line,FALSE
+3T3,mIL4,-7.80618,Mouse,107.1177,FALSE,Cell Line,FALSE
+3T3,mIL4,-7.20412,Mouse,102.1532,FALSE,Cell Line,FALSE
+3T3,mIL4,-6.60206,Mouse,102.2768,FALSE,Cell Line,FALSE
+3T3,mIL4,-6,Mouse,90.70503,FALSE,Cell Line,FALSE
+3T3,mIL4,-12.0206,Mouse,9.136214,FALSE,Cell Line,FALSE
+3T3,mIL4,-11.4185,Mouse,9.760166,FALSE,Cell Line,FALSE
+3T3,mIL4,-10.8165,Mouse,8.608719,FALSE,Cell Line,FALSE
+3T3,mIL4,-10.2144,Mouse,15.18884,FALSE,Cell Line,FALSE
+3T3,mIL4,-9.61236,Mouse,44.59292,FALSE,Cell Line,FALSE
+3T3,mIL4,-9.0103,Mouse,84.28165,FALSE,Cell Line,FALSE
+3T3,mIL4,-8.40824,Mouse,93.11343,FALSE,Cell Line,FALSE
+3T3,mIL4,-7.80618,Mouse,103.3137,FALSE,Cell Line,FALSE
+3T3,mIL4,-7.20412,Mouse,100.6792,FALSE,Cell Line,FALSE
+3T3,mIL4,-6.60206,Mouse,102.7922,FALSE,Cell Line,FALSE
+3T3,mIL4,-6,Mouse,87.60035,FALSE,Cell Line,FALSE
+3T3,mNeo4,-11.4466,Mouse,12.38558,FALSE,Cell Line,FALSE
+3T3,mNeo4,-10.8445,Mouse,9.467783,FALSE,Cell Line,FALSE
+3T3,mNeo4,-10.2424,Mouse,8.768475,FALSE,Cell Line,FALSE
+3T3,mNeo4,-9.64039,Mouse,7.559758,FALSE,Cell Line,FALSE
+3T3,mNeo4,-9.03833,Mouse,7.972711,FALSE,Cell Line,FALSE
+3T3,mNeo4,-8.43627,Mouse,8.319351,FALSE,Cell Line,FALSE
+3T3,mNeo4,-7.83421,Mouse,6.516825,FALSE,Cell Line,FALSE
+3T3,mNeo4,-7.23215,Mouse,5.015724,FALSE,Cell Line,FALSE
+3T3,mNeo4,-6.63009,Mouse,6.335969,FALSE,Cell Line,FALSE
+3T3,mNeo4,-6.02803,Mouse,3.671366,FALSE,Cell Line,FALSE
+3T3,mNeo4,-5.42597,Mouse,14.62819,FALSE,Cell Line,FALSE
+3T3,mNeo4,-4.82391,Mouse,0,FALSE,Cell Line,FALSE
+3T3,mNeo4,-11.4466,Mouse,10.37507,FALSE,Cell Line,FALSE
+3T3,mNeo4,-10.8445,Mouse,9.910878,FALSE,Cell Line,FALSE
+3T3,mNeo4,-10.2424,Mouse,9.537111,FALSE,Cell Line,FALSE
+3T3,mNeo4,-9.64039,Mouse,6.90265,FALSE,Cell Line,FALSE
+3T3,mNeo4,-9.03833,Mouse,8.587619,FALSE,Cell Line,FALSE
+3T3,mNeo4,-8.43627,Mouse,8.250023,FALSE,Cell Line,FALSE
+3T3,mNeo4,-7.83421,Mouse,6.311855,FALSE,Cell Line,FALSE
+3T3,mNeo4,-7.23215,Mouse,5.657761,FALSE,Cell Line,FALSE
+3T3,mNeo4,-6.63009,Mouse,6.326926,FALSE,Cell Line,FALSE
+3T3,mNeo4,-6.02803,Mouse,4.605785,FALSE,Cell Line,FALSE
+3T3,mNeo4,-5.42597,Mouse,4.40383,FALSE,Cell Line,FALSE
+3T3,mNeo4,-4.82391,Mouse,0.171813,FALSE,Cell Line,FALSE
+3T3,mNeo4,-11.4466,Mouse,9.540125,FALSE,Cell Line,FALSE
+3T3,mNeo4,-10.8445,Mouse,10.16709,FALSE,Cell Line,FALSE
+3T3,mNeo4,-10.2424,Mouse,9.362284,FALSE,Cell Line,FALSE
+3T3,mNeo4,-9.64039,Mouse,8.421835,FALSE,Cell Line,FALSE
+3T3,mNeo4,-9.03833,Mouse,7.779798,FALSE,Cell Line,FALSE
+3T3,mNeo4,-8.43627,Mouse,8.717233,FALSE,Cell Line,FALSE
+3T3,mNeo4,-7.83421,Mouse,6.390226,FALSE,Cell Line,FALSE
+3T3,mNeo4,-7.23215,Mouse,5.473892,FALSE,Cell Line,FALSE
+3T3,mNeo4,-6.63009,Mouse,5.696947,FALSE,Cell Line,FALSE
+3T3,mNeo4,-6.02803,Mouse,4.825826,FALSE,Cell Line,FALSE
+3T3,mNeo4,-5.42597,Mouse,4.418901,FALSE,Cell Line,FALSE
+3T3,mNeo4,-4.82391,Mouse,2.073809,FALSE,Cell Line,FALSE
+Macrophage,hIL4,-13.00336125,Human,2.782013215,FALSE,210504,FALSE
+Macrophage,hIL4,-12.22521,Human,3.341982541,FALSE,210504,FALSE
+Macrophage,hIL4,-11.44705875,Human,5.695993723,FALSE,210504,FALSE
+Macrophage,hIL4,-10.6689075,Human,36.62627397,FALSE,210504,FALSE
+Macrophage,hIL4,-9.890756252,Human,81.79475519,FALSE,210504,FALSE
+Macrophage,hIL4,-9.112605002,Human,99.44627237,FALSE,210504,FALSE
+Macrophage,hIL4,-8.334453751,Human,102.9808558,FALSE,210504,FALSE
+Macrophage,hIL4,-7.556302501,Human,105.2028997,FALSE,210504,FALSE
+Macrophage,hIL4,-13.00336125,Human,2.582278932,FALSE,210504,FALSE
+Macrophage,hIL4,-12.22521,Human,2.689279441,FALSE,210504,FALSE
+Macrophage,hIL4,-11.44705875,Human,3.948318755,FALSE,210504,FALSE
+Macrophage,hIL4,-10.6689075,Human,40.49255901,FALSE,210504,FALSE
+Macrophage,hIL4,-9.890756252,Human,91.88133644,FALSE,210504,FALSE
+Macrophage,hIL4,-9.112605002,Human,91.78503598,FALSE,210504,FALSE
+Macrophage,hIL4,-8.334453751,Human,98.16226627,FALSE,210504,FALSE
+Macrophage,hIL4,-7.556302501,Human,93.65397819,FALSE,210504,FALSE
+Macrophage,hIL4,-13.00336125,Human,2.286244193,FALSE,210504,FALSE
+Macrophage,hIL4,-12.22521,Human,2.38254465,FALSE,210504,FALSE
+Macrophage,hIL4,-11.44705875,Human,4.633122007,FALSE,210504,FALSE
+Macrophage,hIL4,-10.6689075,Human,39.84698927,FALSE,210504,FALSE
+Macrophage,hIL4,-9.890756252,Human,93.07260876,FALSE,210504,FALSE
+Macrophage,hIL4,-9.112605002,Human,77.35780078,FALSE,210504,FALSE
+Macrophage,hIL4,-8.334453751,Human,96.07575636,FALSE,210504,FALSE
+Macrophage,hIL4,-7.556302501,Human,96.64999242,FALSE,210504,FALSE
+Macrophage,hNeo4,-11.44705875,Human,1.201972376,FALSE,210504,FALSE
+Macrophage,hNeo4,-10.6689075,Human,1.094971868,FALSE,210504,FALSE
+Macrophage,hNeo4,-9.890756252,Human,2.578712249,FALSE,210504,FALSE
+Macrophage,hNeo4,-9.112605002,Human,3.748584472,FALSE,210504,FALSE
+Macrophage,hNeo4,-8.334453751,Human,8.506540406,FALSE,210504,FALSE
+Macrophage,hNeo4,-7.556302501,Human,16.8632801,FALSE,210504,FALSE
+Macrophage,hNeo4,-6.77815125,Human,16.97384729,FALSE,210504,FALSE
+Macrophage,hNeo4,-6,Human,19.04252379,FALSE,210504,FALSE
+Macrophage,hNeo4,-11.44705875,Human,1.387439924,FALSE,210504,FALSE
+Macrophage,hNeo4,-10.6689075,Human,1.38387324,FALSE,210504,FALSE
+Macrophage,hNeo4,-9.890756252,Human,1.747674968,FALSE,210504,FALSE
+Macrophage,hNeo4,-9.112605002,Human,2.660745972,FALSE,210504,FALSE
+Macrophage,hNeo4,-8.334453751,Human,11.17441975,FALSE,210504,FALSE
+Macrophage,hNeo4,-7.556302501,Human,15.26897253,FALSE,210504,FALSE
+Macrophage,hNeo4,-6.77815125,Human,16.08930976,FALSE,210504,FALSE
+Macrophage,hNeo4,-6,Human,17.23064851,FALSE,210504,FALSE
+Macrophage,hNeo4,-11.44705875,Human,0.592069479,FALSE,210504,FALSE
+Macrophage,hNeo4,-10.6689075,Human,0.920204371,FALSE,210504,FALSE
+Macrophage,hNeo4,-9.890756252,Human,1.647807827,FALSE,210504,FALSE
+Macrophage,hNeo4,-9.112605002,Human,2.910413824,FALSE,210504,FALSE
+Macrophage,hNeo4,-8.334453751,Human,6.230996264,FALSE,210504,FALSE
+Macrophage,hNeo4,-7.556302501,Human,13.26449634,FALSE,210504,FALSE
+Macrophage,hNeo4,-6.77815125,Human,15.96804251,FALSE,210504,FALSE
+Macrophage,hNeo4,-6,Human,16.34967766,FALSE,210504,FALSE
+Fibroblast,hNeo4,-11.51544993,Human,0.903132812,FALSE,210517,FALSE
+Fibroblast,hNeo4,-10.61235995,Human,-0.069818247,FALSE,210517,FALSE
+Fibroblast,hNeo4,-9.709269961,Human,-0.400891872,FALSE,210517,FALSE
+Fibroblast,hNeo4,-8.806179974,Human,0.200445936,FALSE,210517,FALSE
+Fibroblast,hNeo4,-7.903089987,Human,0.490979933,FALSE,210517,FALSE
+Fibroblast,hNeo4,-7,Human,-0.049548434,FALSE,210517,FALSE
+Fibroblast,hNeo4,-6.096910013,Human,-0.630616428,FALSE,210517,FALSE
+Fibroblast,hNeo4,-5.193820026,Human,-0.360352244,FALSE,210517,FALSE
+Fibroblast,hNeo4,-11.51544993,Human,0.592329002,FALSE,210517,FALSE
+Fibroblast,hNeo4,-10.61235995,Human,1.281502669,FALSE,210517,FALSE
+Fibroblast,hNeo4,-9.709269961,Human,-0.164410711,FALSE,210517,FALSE
+Fibroblast,hNeo4,-8.806179974,Human,0.085583658,FALSE,210517,FALSE
+Fibroblast,hNeo4,-7.903089987,Human,-0.069818247,FALSE,210517,FALSE
+Fibroblast,hNeo4,-7,Human,-0.387378663,FALSE,210517,FALSE
+Fibroblast,hNeo4,-6.096910013,Human,-0.718452287,FALSE,210517,FALSE
+Fibroblast,hNeo4,-5.193820026,Human,-0.407648476,FALSE,210517,FALSE
+Fibroblast,hNeo4,-11.51544993,Human,1.112587554,FALSE,210517,FALSE
+Fibroblast,hNeo4,-10.61235995,Human,0.213959145,FALSE,210517,FALSE
+Fibroblast,hNeo4,-9.709269961,Human,-0.19143713,FALSE,210517,FALSE
+Fibroblast,hNeo4,-8.806179974,Human,1.072047927,FALSE,210517,FALSE
+Fibroblast,hNeo4,-7.903089987,Human,0.065313844,FALSE,210517,FALSE
+Fibroblast,hNeo4,-7,Human,-0.02927862,FALSE,210517,FALSE
+Fibroblast,hNeo4,-6.096910013,Human,-0.853584379,FALSE,210517,FALSE
+Fibroblast,hNeo4,-5.193820026,Human,-1.056282516,FALSE,210517,FALSE
+Fibroblast,hIL4,-13.32162991,Human,0.673408257,FALSE,210517,FALSE
+Fibroblast,hIL4,-12.41853992,Human,-0.272516385,FALSE,210517,FALSE
+Fibroblast,hIL4,-11.51544993,Human,3.794959573,FALSE,210517,FALSE
+Fibroblast,hIL4,-10.61235995,Human,39.88874124,FALSE,210517,FALSE
+Fibroblast,hIL4,-9.709269961,Human,96.47530461,FALSE,210517,FALSE
+Fibroblast,hIL4,-8.806179974,Human,107.1642531,FALSE,210517,FALSE
+Fibroblast,hIL4,-7.903089987,Human,100.9549334,FALSE,210517,FALSE
+Fibroblast,hIL4,-7,Human,90.38084728,FALSE,210517,FALSE
+Fibroblast,hIL4,-13.32162991,Human,-0.279272989,FALSE,210517,FALSE
+Fibroblast,hIL4,-12.41853992,Human,-0.407648476,FALSE,210517,FALSE
+Fibroblast,hIL4,-11.51544993,Human,2.349046193,FALSE,210517,FALSE
+Fibroblast,hIL4,-10.61235995,Human,40.07116957,FALSE,210517,FALSE
+Fibroblast,hIL4,-9.709269961,Human,98.19148217,FALSE,210517,FALSE
+Fibroblast,hIL4,-8.806179974,Human,106.9210153,FALSE,210517,FALSE
+Fibroblast,hIL4,-7.903089987,Human,99.88738992,FALSE,210517,FALSE
+Fibroblast,hIL4,-7,Human,93.59023445,FALSE,210517,FALSE
+Fibroblast,hIL4,-13.32162991,Human,-0.400891872,FALSE,210517,FALSE
+Fibroblast,hIL4,-12.41853992,Human,-0.549537173,FALSE,210517,FALSE
+Fibroblast,hIL4,-11.51544993,Human,2.15310466,FALSE,210517,FALSE
+Fibroblast,hIL4,-10.61235995,Human,36.4361163,FALSE,210517,FALSE
+Fibroblast,hIL4,-9.709269961,Human,94.38075719,FALSE,210517,FALSE
+Fibroblast,hIL4,-8.806179974,Human,106.9615549,FALSE,210517,FALSE
+Fibroblast,hIL4,-7.903089987,Human,102.7724601,FALSE,210517,FALSE
+Fibroblast,hIL4,-7,Human,91.36731155,FALSE,210517,FALSE
+Macrophage,hIL4,-13.00336125,Human,8.306106532,FALSE,210522,FALSE
+Macrophage,hIL4,-12.22521,Human,5.89995995,FALSE,210522,FALSE
+Macrophage,hIL4,-11.44705875,Human,7.597858393,FALSE,210522,FALSE
+Macrophage,hIL4,-10.6689075,Human,31.56130773,FALSE,210522,FALSE
+Macrophage,hIL4,-9.890756252,Human,87.29158323,FALSE,210522,FALSE
+Macrophage,hIL4,-9.112605002,Human,106.8822327,FALSE,210522,FALSE
+Macrophage,hIL4,-8.334453751,Human,97.76986151,FALSE,210522,FALSE
+Macrophage,hIL4,-7.556302501,Human,99.89144411,FALSE,210522,FALSE
+Macrophage,hIL4,-13.00336125,Human,7.885584199,FALSE,210522,FALSE
+Macrophage,hIL4,-12.22521,Human,5.54583588,FALSE,210522,FALSE
+Macrophage,hIL4,-11.44705875,Human,7.057186822,FALSE,210522,FALSE
+Macrophage,hIL4,-10.6689075,Human,31.7288843,FALSE,210522,FALSE
+Macrophage,hIL4,-9.890756252,Human,84.76844923,FALSE,210522,FALSE
+Macrophage,hIL4,-9.112605002,Human,104.3907169,FALSE,210522,FALSE
+Macrophage,hIL4,-8.334453751,Human,98.47178601,FALSE,210522,FALSE
+Macrophage,hIL4,-7.556302501,Human,102.1268523,FALSE,210522,FALSE
+Macrophage,hIL4,-13.00336125,Human,7.781244072,FALSE,210522,FALSE
+Macrophage,hIL4,-12.22521,Human,4.458169094,FALSE,210522,FALSE
+Macrophage,hIL4,-11.44705875,Human,6.782108303,FALSE,210522,FALSE
+Macrophage,hIL4,-10.6689075,Human,28.94015725,FALSE,210522,FALSE
+Macrophage,hIL4,-9.890756252,Human,83.56695685,FALSE,210522,FALSE
+Macrophage,hIL4,-9.112605002,Human,90.33641787,FALSE,210522,FALSE
+Macrophage,hIL4,-8.334453751,Human,100.4921903,FALSE,210522,FALSE
+Macrophage,hIL4,-7.556302501,Human,101.2478658,FALSE,210522,FALSE
+Macrophage,hNeo4,-11.44705875,Human,-2.388684824,FALSE,210522,FALSE
+Macrophage,hNeo4,-10.6689075,Human,-2.54322702,FALSE,210522,FALSE
+Macrophage,hNeo4,-9.890756252,Human,-4.233112345,FALSE,210522,FALSE
+Macrophage,hNeo4,-9.112605002,Human,-3.870274144,FALSE,210522,FALSE
+Macrophage,hNeo4,-8.334453751,Human,-0.409872783,FALSE,210522,FALSE
+Macrophage,hNeo4,-7.556302501,Human,3.846756854,FALSE,210522,FALSE
+Macrophage,hNeo4,-6.77815125,Human,7.565848414,FALSE,210522,FALSE
+Macrophage,hNeo4,-6,Human,7.841336678,FALSE,210522,FALSE
+Macrophage,hNeo4,-11.44705875,Human,-3.745968464,FALSE,210522,FALSE
+Macrophage,hNeo4,-10.6689075,Human,-2.711207669,FALSE,210522,FALSE
+Macrophage,hNeo4,-9.890756252,Human,-4.595950546,FALSE,210522,FALSE
+Macrophage,hNeo4,-9.112605002,Human,-4.62282745,FALSE,210522,FALSE
+Macrophage,hNeo4,-8.334453751,Human,-1.155706863,FALSE,210522,FALSE
+Macrophage,hNeo4,-7.556302501,Human,3.483918653,FALSE,210522,FALSE
+Macrophage,hNeo4,-6.77815125,Human,5.721420892,FALSE,210522,FALSE
+Macrophage,hNeo4,-6,Human,6.195126321,FALSE,210522,FALSE
+Macrophage,hNeo4,-11.44705875,Human,-3.477199427,FALSE,210522,FALSE
+Macrophage,hNeo4,-10.6689075,Human,-5.697903602,FALSE,210522,FALSE
+Macrophage,hNeo4,-9.890756252,Human,-5.002463716,FALSE,210522,FALSE
+Macrophage,hNeo4,-9.112605002,Human,-6.255599355,FALSE,210522,FALSE
+Macrophage,hNeo4,-8.334453751,Human,-2.267738756,FALSE,210522,FALSE
+Macrophage,hNeo4,-7.556302501,Human,3.016932449,FALSE,210522,FALSE
+Macrophage,hNeo4,-6.77815125,Human,3.81987995,FALSE,210522,FALSE
+Macrophage,hNeo4,-6,Human,3.487278266,FALSE,210522,FALSE
+Fibroblast,hNeo4,-11.51544993,Human,0.270162517,FALSE,210526,FALSE
+Fibroblast,hNeo4,-10.61235995,Human,-0.324719608,FALSE,210526,FALSE
+Fibroblast,hNeo4,-9.709269961,Human,-0.93848688,FALSE,210526,FALSE
+Fibroblast,hNeo4,-8.806179974,Human,-1.155666069,FALSE,210526,FALSE
+Fibroblast,hNeo4,-7.903089987,Human,-0.707143831,FALSE,210526,FALSE
+Fibroblast,hNeo4,-7,Human,-1.335074964,FALSE,210526,FALSE
+Fibroblast,hNeo4,-6.096910013,Human,-1.424779411,FALSE,210526,FALSE
+Fibroblast,hNeo4,-5.193820026,Human,-1.313042292,FALSE,210526,FALSE
+Fibroblast,hNeo4,-11.51544993,Human,-0.526161174,FALSE,210526,FALSE
+Fibroblast,hNeo4,-10.61235995,Human,-0.604849286,FALSE,210526,FALSE
+Fibroblast,hNeo4,-9.709269961,Human,-0.834618572,FALSE,210526,FALSE
+Fibroblast,hNeo4,-8.806179974,Human,-1.136780922,FALSE,210526,FALSE
+Fibroblast,hNeo4,-7.903089987,Human,-1.039207663,FALSE,210526,FALSE
+Fibroblast,hNeo4,-7,Human,-1.103731915,FALSE,210526,FALSE
+Fibroblast,hNeo4,-6.096910013,Human,-2.545298123,FALSE,210526,FALSE
+Fibroblast,hNeo4,-5.193820026,Human,-1.500319998,FALSE,210526,FALSE
+Fibroblast,hNeo4,-11.51544993,Human,0.588062489,FALSE,210526,FALSE
+Fibroblast,hNeo4,-10.61235995,Human,-0.34045723,FALSE,210526,FALSE
+Fibroblast,hNeo4,-9.709269961,Human,-0.831471048,FALSE,210526,FALSE
+Fibroblast,hNeo4,-8.806179974,Human,-0.757504223,FALSE,210526,FALSE
+Fibroblast,hNeo4,-7.903089987,Human,-1.429500698,FALSE,210526,FALSE
+Fibroblast,hNeo4,-7,Human,-1.25481309,FALSE,210526,FALSE
+Fibroblast,hNeo4,-6.096910013,Human,-1.844973928,FALSE,210526,FALSE
+Fibroblast,hNeo4,-5.193820026,Human,-2.20536548,FALSE,210526,FALSE
+Fibroblast,hIL4,-13.32162991,Human,0.846159496,FALSE,210526,FALSE
+Fibroblast,hIL4,-12.41853992,Human,-0.246031496,FALSE,210526,FALSE
+Fibroblast,hIL4,-11.51544993,Human,1.599991607,FALSE,210526,FALSE
+Fibroblast,hIL4,-10.61235995,Human,27.99513183,FALSE,210526,FALSE
+Fibroblast,hIL4,-9.709269961,Human,93.87596655,FALSE,210526,FALSE
+Fibroblast,hIL4,-8.806179974,Human,98.74833443,FALSE,210526,FALSE
+Fibroblast,hIL4,-7.903089987,Human,100.2796051,FALSE,210526,FALSE
+Fibroblast,hIL4,-7,Human,100.2198021,FALSE,210526,FALSE
+Fibroblast,hIL4,-13.32162991,Human,-0.126425566,FALSE,210526,FALSE
+Fibroblast,hIL4,-12.41853992,Human,-0.595406713,FALSE,210526,FALSE
+Fibroblast,hIL4,-11.51544993,Human,1.282091635,FALSE,210526,FALSE
+Fibroblast,hIL4,-10.61235995,Human,27.53401949,FALSE,210526,FALSE
+Fibroblast,hIL4,-9.709269961,Human,90.40109954,FALSE,210526,FALSE
+Fibroblast,hIL4,-8.806179974,Human,93.22757651,FALSE,210526,FALSE
+Fibroblast,hIL4,-7.903089987,Human,98.1078132,FALSE,210526,FALSE
+Fibroblast,hIL4,-7,Human,100.333113,FALSE,210526,FALSE
+Fibroblast,hIL4,-13.32162991,Human,-0.227146349,FALSE,210526,FALSE
+Fibroblast,hIL4,-12.41853992,Human,-0.439604251,FALSE,210526,FALSE
+Fibroblast,hIL4,-11.51544993,Human,1.516582208,FALSE,210526,FALSE
+Fibroblast,hIL4,-10.61235995,Human,25.47396473,FALSE,210526,FALSE
+Fibroblast,hIL4,-9.709269961,Human,86.29200634,FALSE,210526,FALSE
+Fibroblast,hIL4,-8.806179974,Human,97.95043698,FALSE,210526,FALSE
+Fibroblast,hIL4,-7.903089987,Human,95.01379665,FALSE,210526,FALSE
+Fibroblast,hIL4,-7,Human,106.0458699,FALSE,210526,FALSE
+Macrophage,mIL4,-13.75133342,Mouse,-1.717762475,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.90623538,Mouse,-1.468729365,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.06113734,Mouse,0.942363928,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.2160393,Mouse,28.75483445,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.37094126,Mouse,93.73549665,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.525843224,Mouse,104.132629,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.680745184,Mouse,99.71795114,FALSE,Mouse,FALSE
+Macrophage,mIL4,-7.835647144,Mouse,88.60201868,FALSE,Mouse,FALSE
+Macrophage,mIL4,-13.75133342,Mouse,-2.04037355,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.90623538,Mouse,-1.378171871,FALSE,Mouse,FALSE
+Macrophage,mIL4,-12.06113734,Mouse,-0.087727573,FALSE,Mouse,FALSE
+Macrophage,mIL4,-11.2160393,Mouse,29.60381096,FALSE,Mouse,FALSE
+Macrophage,mIL4,-10.37094126,Mouse,95.5013678,FALSE,Mouse,FALSE
+Macrophage,mIL4,-9.525843224,Mouse,102.28752,FALSE,Mouse,FALSE
+Macrophage,mIL4,-8.680745184,Mouse,117.144609,FALSE,Mouse,FALSE
+Macrophage,mIL4,-7.835647144,Mouse,88.11527214,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-11.21671628,Mouse,-0.925384398,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-10.37161824,Mouse,-1.400811244,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.526520196,Mouse,-0.432978021,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.681422156,Mouse,12.86765399,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.836324116,Mouse,70.75087256,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.991226076,Mouse,130.4678804,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.146128036,Mouse,112.7299311,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.301029996,Mouse,126.7097444,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-11.21671628,Mouse,-2.334685407,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-10.37161824,Mouse,-1.287614376,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-9.526520196,Mouse,-0.438637864,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-8.681422156,Mouse,11.98471842,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-7.836324116,Mouse,70.47354023,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.991226076,Mouse,105.6268277,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-6.146128036,Mouse,120.9593435,FALSE,Mouse,FALSE
+Macrophage,mNeo4,-5.301029996,Mouse,123.7666258,FALSE,Mouse,FALSE
+Monocyte,hIL4,-13.82677989,Human,-9.453008099,FALSE,210426,FALSE
+Monocyte,hIL4,-13.2247199,Human,-3.123292877,FALSE,210426,FALSE
+Monocyte,hIL4,-12.6226599,Human,-9.79740161,FALSE,210426,FALSE
+Monocyte,hIL4,-12.02059991,Human,-7.184761181,FALSE,210426,FALSE
+Monocyte,hIL4,-11.41853992,Human,8.793910173,FALSE,210426,FALSE
+Monocyte,hIL4,-10.81647993,Human,82.84445289,FALSE,210426,FALSE
+Monocyte,hIL4,-10.21441994,Human,119.451108,FALSE,210426,FALSE
+Monocyte,hIL4,-9.612359948,Human,90.98520295,FALSE,210426,FALSE
+Monocyte,hIL4,-9.010299957,Human,89.73232311,FALSE,210426,FALSE
+Monocyte,hIL4,-8.408239965,Human,84.71486592,FALSE,210426,FALSE
+Monocyte,hIL4,-7.806179974,Human,92.08963732,FALSE,210426,FALSE
+Monocyte,hIL4,-7.204119983,Human,110.4850011,FALSE,210426,FALSE
+Monocyte,hIL4,-13.82677989,Human,-8.829537088,FALSE,210426,FALSE
+Monocyte,hIL4,-13.2247199,Human,-9.476759376,FALSE,210426,FALSE
+Monocyte,hIL4,-12.6226599,Human,-9.58957794,FALSE,210426,FALSE
+Monocyte,hIL4,-12.02059991,Human,13.20570981,FALSE,210426,FALSE
+Monocyte,hIL4,-11.41853992,Human,24.42818802,FALSE,210426,FALSE
+Monocyte,hIL4,-10.81647993,Human,59.97197349,FALSE,210426,FALSE
+Monocyte,hIL4,-10.21441994,Human,122.3547016,FALSE,210426,FALSE
+Monocyte,hIL4,-9.612359948,Human,129.8304159,FALSE,210426,FALSE
+Monocyte,hIL4,-9.010299957,Human,102.3858157,FALSE,210426,FALSE
+Monocyte,hIL4,-8.408239965,Human,92.13120205,FALSE,210426,FALSE
+Monocyte,hIL4,-7.806179974,Human,87.08405577,FALSE,210426,FALSE
+Monocyte,hIL4,-7.204119983,Human,120.5614802,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.6226599,Human,0.765978671,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.02059991,Human,-7.481652139,FALSE,210426,FALSE
+Monocyte,hNeo4,-11.41853992,Human,1.425076598,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.81647993,Human,-9.078925492,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.21441994,Human,-7.410398309,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.612359948,Human,7.297579745,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.010299957,Human,50.28739045,FALSE,210426,FALSE
+Monocyte,hNeo4,-8.408239965,Human,76.39598128,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.806179974,Human,72.72047123,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.204119983,Human,77.5479182,FALSE,210426,FALSE
+Monocyte,hNeo4,-6.602059991,Human,78.67610384,FALSE,210426,FALSE
+Monocyte,hNeo4,-6,Human,68.71244329,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.6226599,Human,-0.765978671,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.02059991,Human,-2.74921027,FALSE,210426,FALSE
+Monocyte,hNeo4,-11.41853992,Human,6.264399211,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.81647993,Human,-9.720209961,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.21441994,Human,-9.352065174,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.612359948,Human,2.072298886,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.010299957,Human,44.45051422,FALSE,210426,FALSE
+Monocyte,hNeo4,-8.408239965,Human,56.91399663,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.806179974,Human,67.1032943,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.204119983,Human,89.63138019,FALSE,210426,FALSE
+Monocyte,hNeo4,-6.602059991,Human,85.25520747,FALSE,210426,FALSE
+Monocyte,hNeo4,-6,Human,82.23285752,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.6226599,Human,0.776443796,FALSE,210312,FALSE
+Monocyte,hNeo4,-12.02059991,Human,0.515081809,FALSE,210312,FALSE
+Monocyte,hNeo4,-11.41853992,Human,0.574690683,FALSE,210312,FALSE
+Monocyte,hNeo4,-10.81647993,Human,0.487570021,FALSE,210312,FALSE
+Monocyte,hNeo4,-10.21441994,Human,1.638479821,FALSE,210312,FALSE
+Monocyte,hNeo4,-9.612359948,Human,6.79235478,FALSE,210312,FALSE
+Monocyte,hNeo4,-9.010299957,Human,21.02970509,FALSE,210312,FALSE
+Monocyte,hNeo4,-8.408239965,Human,51.32935431,FALSE,210312,FALSE
+Monocyte,hNeo4,-7.806179974,Human,57.50116543,FALSE,210312,FALSE
+Monocyte,hNeo4,-7.204119983,Human,48.50481074,FALSE,210312,FALSE
+Monocyte,hNeo4,-6.602059991,Human,76.08996355,FALSE,210312,FALSE
+Monocyte,hNeo4,-6,Human,70.8994062,FALSE,210312,FALSE
+Monocyte,hNeo4,-12.6226599,Human,0.716834922,FALSE,210312,FALSE
+Monocyte,hNeo4,-12.02059991,Human,0.547178895,FALSE,210312,FALSE
+Monocyte,hNeo4,-11.41853992,Human,0.560934789,FALSE,210312,FALSE
+Monocyte,hNeo4,-10.81647993,Human,0.070307903,FALSE,210312,FALSE
+Monocyte,hNeo4,-10.21441994,Human,0.7672732,FALSE,210312,FALSE
+Monocyte,hNeo4,-9.612359948,Human,5.059112133,FALSE,210312,FALSE
+Monocyte,hNeo4,-9.010299957,Human,19.82835701,FALSE,210312,FALSE
+Monocyte,hNeo4,-8.408239965,Human,43.48849472,FALSE,210312,FALSE
+Monocyte,hNeo4,-7.806179974,Human,59.06016675,FALSE,210312,FALSE
+Monocyte,hNeo4,-7.204119983,Human,57.5653596,FALSE,210312,FALSE
+Monocyte,hNeo4,-6.602059991,Human,55.14890755,FALSE,210312,FALSE
+Monocyte,hNeo4,-6,Human,79.30425745,FALSE,210312,FALSE
+Monocyte,hNeo4,-12.6226599,Human,0.923173332,FALSE,210312,FALSE
+Monocyte,hNeo4,-12.02059991,Human,0.446302339,FALSE,210312,FALSE
+Monocyte,hNeo4,-11.41853992,Human,0.262890419,FALSE,210312,FALSE
+Monocyte,hNeo4,-10.81647993,Human,0.85897916,FALSE,210312,FALSE
+Monocyte,hNeo4,-10.21441994,Human,0.129916777,FALSE,210312,FALSE
+Monocyte,hNeo4,-9.612359948,Human,7.122496236,FALSE,210312,FALSE
+Monocyte,hNeo4,-9.010299957,Human,23.88634575,FALSE,210312,FALSE
+Monocyte,hNeo4,-8.408239965,Human,38.54095817,FALSE,210312,FALSE
+Monocyte,hNeo4,-7.806179974,Human,31.85559368,FALSE,210312,FALSE
+Monocyte,hNeo4,-7.204119983,Human,37.88067526,FALSE,210312,FALSE
+Monocyte,hNeo4,-6.602059991,Human,51.95754014,FALSE,210312,FALSE
+Monocyte,hNeo4,-6,Human,45.75821724,FALSE,210312,FALSE
+Monocyte,hIL4,-13.2247199,Human,-0.516610242,FALSE,210312,FALSE
+Monocyte,hIL4,-12.6226599,Human,-0.213980574,FALSE,210312,FALSE
+Monocyte,hIL4,-12.02059991,Human,6.897816634,FALSE,210312,FALSE
+Monocyte,hIL4,-11.41853992,Human,32.07568799,FALSE,210312,FALSE
+Monocyte,hIL4,-10.81647993,Human,75.0491009,FALSE,210312,FALSE
+Monocyte,hIL4,-10.21441994,Human,71.8210511,FALSE,210312,FALSE
+Monocyte,hIL4,-9.612359948,Human,80.53770261,FALSE,210312,FALSE
+Monocyte,hIL4,-9.010299957,Human,109.2141563,FALSE,210312,FALSE
+Monocyte,hIL4,-8.408239965,Human,75.32421878,FALSE,210312,FALSE
+Monocyte,hIL4,-7.806179974,Human,82.80742513,FALSE,210312,FALSE
+Monocyte,hIL4,-7.204119983,Human,110.1954101,FALSE,210312,FALSE
+Monocyte,hIL4,-6.602059991,Human,108.2374879,FALSE,210312,FALSE
+Monocyte,hIL4,-13.2247199,Human,-0.22315117,FALSE,210312,FALSE
+Monocyte,hIL4,-12.6226599,Human,1.395459027,FALSE,210312,FALSE
+Monocyte,hIL4,-12.02059991,Human,5.32047412,FALSE,210312,FALSE
+Monocyte,hIL4,-11.41853992,Human,18.19140562,FALSE,210312,FALSE
+Monocyte,hIL4,-10.81647993,Human,60.1102,FALSE,210312,FALSE
+Monocyte,hIL4,-10.21441994,Human,62.20109589,FALSE,210312,FALSE
+Monocyte,hIL4,-9.612359948,Human,92.00094763,FALSE,210312,FALSE
+Monocyte,hIL4,-9.010299957,Human,101.2815908,FALSE,210312,FALSE
+Monocyte,hIL4,-8.408239965,Human,99.2044508,FALSE,210312,FALSE
+Monocyte,hIL4,-7.806179974,Human,63.92975323,FALSE,210312,FALSE
+Monocyte,hIL4,-7.204119983,Human,96.54956325,FALSE,210312,FALSE
+Monocyte,hIL4,-6.602059991,Human,110.7502312,FALSE,210312,FALSE
+Monocyte,hIL4,-13.2247199,Human,0.427961147,FALSE,210312,FALSE
+Monocyte,hIL4,-12.6226599,Human,1.734771079,FALSE,210312,FALSE
+Monocyte,hIL4,-12.02059991,Human,6.480554515,FALSE,210312,FALSE
+Monocyte,hIL4,-11.41853992,Human,26.54123329,FALSE,210312,FALSE
+Monocyte,hIL4,-10.81647993,Human,72.08241309,FALSE,210312,FALSE
+Monocyte,hIL4,-10.21441994,Human,65.43373098,FALSE,210312,FALSE
+Monocyte,hIL4,-9.612359948,Human,82.10587453,FALSE,210312,FALSE
+Monocyte,hIL4,-9.010299957,Human,78.02037401,FALSE,210312,FALSE
+Monocyte,hIL4,-8.408239965,Human,57.8083804,FALSE,210312,FALSE
+Monocyte,hIL4,-7.806179974,Human,108.3291938,FALSE,210312,FALSE
+Monocyte,hIL4,-7.204119983,Human,57.1068298,FALSE,210312,FALSE
+Monocyte,hIL4,-6.602059991,Human,117.1604778,FALSE,210312,FALSE
+Monocyte,hIL4,-13.82677989,Human,-0.003601758,FALSE,210319,FALSE
+Monocyte,hIL4,-13.2247199,Human,0.028814061,FALSE,210319,FALSE
+Monocyte,hIL4,-12.6226599,Human,0.835607777,FALSE,210319,FALSE
+Monocyte,hIL4,-12.02059991,Human,11.55083681,FALSE,210319,FALSE
+Monocyte,hIL4,-11.41853992,Human,52.17506143,FALSE,210319,FALSE
+Monocyte,hIL4,-10.81647993,Human,94.26880318,FALSE,210319,FALSE
+Monocyte,hIL4,-10.21441994,Human,107.483652,FALSE,210319,FALSE
+Monocyte,hIL4,-9.612359948,Human,107.9482788,FALSE,210319,FALSE
+Monocyte,hIL4,-9.010299957,Human,103.3164184,FALSE,210319,FALSE
+Monocyte,hIL4,-8.408239965,Human,114.3450004,FALSE,210319,FALSE
+Monocyte,hIL4,-7.806179974,Human,106.5507968,FALSE,210319,FALSE
+Monocyte,hIL4,-7.204119983,Human,110.2858195,FALSE,210319,FALSE
+Monocyte,hIL4,-13.82677989,Human,-0.349370493,FALSE,210319,FALSE
+Monocyte,hIL4,-13.2247199,Human,-0.151273822,FALSE,210319,FALSE
+Monocyte,hIL4,-12.6226599,Human,0.731156805,FALSE,210319,FALSE
+Monocyte,hIL4,-12.02059991,Human,11.42117353,FALSE,210319,FALSE
+Monocyte,hIL4,-11.41853992,Human,51.31784311,FALSE,210319,FALSE
+Monocyte,hIL4,-10.81647993,Human,78.01767262,FALSE,210319,FALSE
+Monocyte,hIL4,-10.21441994,Human,53.03948327,FALSE,210319,FALSE
+Monocyte,hIL4,-9.612359948,Human,80.51729244,FALSE,210319,FALSE
+Monocyte,hIL4,-9.010299957,Human,88.12780637,FALSE,210319,FALSE
+Monocyte,hIL4,-8.408239965,Human,97.83814501,FALSE,210319,FALSE
+Monocyte,hIL4,-7.806179974,Human,96.79723705,FALSE,210319,FALSE
+Monocyte,hIL4,-7.204119983,Human,67.70944221,FALSE,210319,FALSE
+Monocyte,hIL4,-13.82677989,Human,-0.75276735,FALSE,210319,FALSE
+Monocyte,hIL4,-13.2247199,Human,-0.605095286,FALSE,210319,FALSE
+Monocyte,hIL4,-12.6226599,Human,0.633909348,FALSE,210319,FALSE
+Monocyte,hIL4,-12.02059991,Human,11.01777668,FALSE,210319,FALSE
+Monocyte,hIL4,-11.41853992,Human,48.10147352,FALSE,210319,FALSE
+Monocyte,hIL4,-10.81647993,Human,85.45890395,FALSE,210319,FALSE
+Monocyte,hIL4,-10.21441994,Human,98.68815982,FALSE,210319,FALSE
+Monocyte,hIL4,-9.612359948,Human,100.290942,FALSE,210319,FALSE
+Monocyte,hIL4,-9.010299957,Human,107.1739009,FALSE,210319,FALSE
+Monocyte,hIL4,-8.408239965,Human,109.4574152,FALSE,210319,FALSE
+Monocyte,hIL4,-7.806179974,Human,94.82347386,FALSE,210319,FALSE
+Monocyte,hIL4,-7.204119983,Human,102.19267,FALSE,210319,FALSE
+Monocyte,hNeo4,-12.6226599,Human,0.857218323,FALSE,210319,FALSE
+Monocyte,hNeo4,-12.02059991,Human,1.066120267,FALSE,210319,FALSE
+Monocyte,hNeo4,-11.41853992,Human,-0.241317763,FALSE,210319,FALSE
+Monocyte,hNeo4,-10.81647993,Human,-0.392591585,FALSE,210319,FALSE
+Monocyte,hNeo4,-10.21441994,Human,4.28969337,FALSE,210319,FALSE
+Monocyte,hNeo4,-9.612359948,Human,22.83154179,FALSE,210319,FALSE
+Monocyte,hNeo4,-9.010299957,Human,54.21005451,FALSE,210319,FALSE
+Monocyte,hNeo4,-8.408239965,Human,80.81263657,FALSE,210319,FALSE
+Monocyte,hNeo4,-7.806179974,Human,90.72107188,FALSE,210319,FALSE
+Monocyte,hNeo4,-7.204119983,Human,100.7015424,FALSE,210319,FALSE
+Monocyte,hNeo4,-6.602059991,Human,100.0388189,FALSE,210319,FALSE
+Monocyte,hNeo4,-6,Human,75.92865318,FALSE,210319,FALSE
+Monocyte,hNeo4,-12.6226599,Human,0.886032384,FALSE,210319,FALSE
+Monocyte,hNeo4,-12.02059991,Human,0.713148016,FALSE,210319,FALSE
+Monocyte,hNeo4,-11.41853992,Human,-0.381786312,FALSE,210319,FALSE
+Monocyte,hNeo4,-10.81647993,Human,-0.86082008,FALSE,210319,FALSE
+Monocyte,hNeo4,-10.21441994,Human,4.12041076,FALSE,210319,FALSE
+Monocyte,hNeo4,-9.612359948,Human,21.17473327,FALSE,210319,FALSE
+Monocyte,hNeo4,-9.010299957,Human,56.33148977,FALSE,210319,FALSE
+Monocyte,hNeo4,-8.408239965,Human,77.76554959,FALSE,210319,FALSE
+Monocyte,hNeo4,-7.806179974,Human,93.57006219,FALSE,210319,FALSE
+Monocyte,hNeo4,-7.204119983,Human,99.06994613,FALSE,210319,FALSE
+Monocyte,hNeo4,-6.602059991,Human,99.39770608,FALSE,210319,FALSE
+Monocyte,hNeo4,-6,Human,91.94927124,FALSE,210319,FALSE
+Monocyte,hNeo4,-12.6226599,Human,0.018008788,FALSE,210319,FALSE
+Monocyte,hNeo4,-12.02059991,Human,0.219707217,FALSE,210319,FALSE
+Monocyte,hNeo4,-11.41853992,Human,-0.482635526,FALSE,210319,FALSE
+Monocyte,hNeo4,-10.81647993,Human,-0.540263649,FALSE,210319,FALSE
+Monocyte,hNeo4,-10.21441994,Human,3.241581892,FALSE,210319,FALSE
+Monocyte,hNeo4,-9.612359948,Human,24.08855521,FALSE,210319,FALSE
+Monocyte,hNeo4,-9.010299957,Human,58.36648284,FALSE,210319,FALSE
+Monocyte,hNeo4,-8.408239965,Human,83.08894741,FALSE,210319,FALSE
+Monocyte,hNeo4,-7.806179974,Human,88.60684014,FALSE,210319,FALSE
+Monocyte,hNeo4,-7.204119983,Human,97.34110246,FALSE,210319,FALSE
+Monocyte,hNeo4,-6.602059991,Human,100.4746316,FALSE,210319,FALSE
+Monocyte,hNeo4,-6,Human,97.48877452,FALSE,210319,FALSE
+A549,hIL4,-13.3216,Human,9.737391,FALSE,Cell Line,FALSE
+A549,hIL4,-12.4185,Human,5.448987,FALSE,Cell Line,FALSE
+A549,hIL4,-11.5154,Human,5.625564,FALSE,Cell Line,FALSE
+A549,hIL4,-10.6124,Human,23.79041,FALSE,Cell Line,FALSE
+A549,hIL4,-9.70927,Human,79.82358,FALSE,Cell Line,FALSE
+A549,hIL4,-8.80618,Human,92.5301,FALSE,Cell Line,FALSE
+A549,hIL4,-7.90309,Human,89.75622,FALSE,Cell Line,FALSE
+A549,hIL4,-7,Human,94.45378,FALSE,Cell Line,FALSE
+A549,hIL4,-13.3216,Human,8.113974,FALSE,Cell Line,FALSE
+A549,hIL4,-12.4185,Human,4.457979,FALSE,Cell Line,FALSE
+A549,hIL4,-11.5154,Human,5.557111,FALSE,Cell Line,FALSE
+A549,hIL4,-10.6124,Human,23.46604,FALSE,Cell Line,FALSE
+A549,hIL4,-9.70927,Human,84.06375,FALSE,Cell Line,FALSE
+A549,hIL4,-8.80618,Human,98.49404,FALSE,Cell Line,FALSE
+A549,hIL4,-7.90309,Human,94.47867,FALSE,Cell Line,FALSE
+A549,hIL4,-7,Human,103.9998,FALSE,Cell Line,FALSE
+A549,hIL4,-13.3216,Human,10.56038,FALSE,Cell Line,FALSE
+A549,hIL4,-12.4185,Human,6.35054,FALSE,Cell Line,FALSE
+A549,hIL4,-11.5154,Human,8.188649,FALSE,Cell Line,FALSE
+A549,hIL4,-10.6124,Human,27.69999,FALSE,Cell Line,FALSE
+A549,hIL4,-9.70927,Human,95.52646,FALSE,Cell Line,FALSE
+A549,hIL4,-8.80618,Human,111.2449,FALSE,Cell Line,FALSE
+A549,hIL4,-7.90309,Human,101.4531,FALSE,Cell Line,FALSE
+A549,hIL4,-7,Human,115.8585,FALSE,Cell Line,FALSE
+A549,hIL13,-13.3216,Human,10.44759,FALSE,Cell Line,FALSE
+A549,hIL13,-12.4185,Human,5.446654,FALSE,Cell Line,FALSE
+A549,hIL13,-11.5154,Human,9.43791,FALSE,Cell Line,FALSE
+A549,hIL13,-10.6124,Human,7.12141,FALSE,Cell Line,FALSE
+A549,hIL13,-9.70927,Human,21.73994,FALSE,Cell Line,FALSE
+A549,hIL13,-8.80618,Human,77.44485,FALSE,Cell Line,FALSE
+A549,hIL13,-7.90309,Human,96.07797,FALSE,Cell Line,FALSE
+A549,hIL13,-7,Human,94.97495,FALSE,Cell Line,FALSE
+A549,hIL13,-13.3216,Human,9.122095,FALSE,Cell Line,FALSE
+A549,hIL13,-12.4185,Human,5.584337,FALSE,Cell Line,FALSE
+A549,hIL13,-11.5154,Human,9.230997,FALSE,Cell Line,FALSE
+A549,hIL13,-10.6124,Human,6.809484,FALSE,Cell Line,FALSE
+A549,hIL13,-9.70927,Human,20.51013,FALSE,Cell Line,FALSE
+A549,hIL13,-8.80618,Human,74.25169,FALSE,Cell Line,FALSE
+A549,hIL13,-7.90309,Human,97.49137,FALSE,Cell Line,FALSE
+A549,hIL13,-7,Human,98.13389,FALSE,Cell Line,FALSE
+A549,hIL13,-13.3216,Human,8.286661,FALSE,Cell Line,FALSE
+A549,hIL13,-12.4185,Human,7.550795,FALSE,Cell Line,FALSE
+A549,hIL13,-11.5154,Human,9.1641,FALSE,Cell Line,FALSE
+A549,hIL13,-10.6124,Human,7.155636,FALSE,Cell Line,FALSE
+A549,hIL13,-9.70927,Human,23.13778,FALSE,Cell Line,FALSE
+A549,hIL13,-8.80618,Human,78.31762,FALSE,Cell Line,FALSE
+A549,hIL13,-7.90309,Human,96.90641,FALSE,Cell Line,FALSE
+A549,hIL13,-7,Human,96.37979,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.5154,Human,6.455552,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.6124,Human,7.210865,FALSE,Cell Line,FALSE
+A549,hNeo4,-9.70927,Human,5.599894,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.80618,Human,5.706463,FALSE,Cell Line,FALSE
+A549,hNeo4,-7.90309,Human,4.794798,FALSE,Cell Line,FALSE
+A549,hNeo4,-7,Human,0.889885,FALSE,Cell Line,FALSE
+A549,hNeo4,-6.09691,Human,4.079934,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.5154,Human,6.062728,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.6124,Human,6.17863,FALSE,Cell Line,FALSE
+A549,hNeo4,-9.70927,Human,11.7443,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.80618,Human,4.510097,FALSE,Cell Line,FALSE
+A549,hNeo4,-7.90309,Human,3.689443,FALSE,Cell Line,FALSE
+A549,hNeo4,-7,Human,1.501291,FALSE,Cell Line,FALSE
+A549,hNeo4,-6.09691,Human,3.1496,FALSE,Cell Line,FALSE
+A549,hNeo4,-11.5154,Human,0.952892,FALSE,Cell Line,FALSE
+A549,hNeo4,-10.6124,Human,5.918043,FALSE,Cell Line,FALSE
+A549,hNeo4,-9.70927,Human,8.877843,FALSE,Cell Line,FALSE
+A549,hNeo4,-8.80618,Human,0,FALSE,Cell Line,FALSE
+A549,hNeo4,-7.90309,Human,1.464731,FALSE,Cell Line,FALSE
+A549,hNeo4,-7,Human,1.022123,FALSE,Cell Line,FALSE
+A549,hNeo4,-6.09691,Human,3.010361,FALSE,Cell Line,FALSE
+Ramos,hIL13,-13.6797,Human,2.406111,FALSE,Cell Line,FALSE
+Ramos,hIL13,-12.7255,Human,1.37492,FALSE,Cell Line,FALSE
+Ramos,hIL13,-11.7712,Human,1.814131,FALSE,Cell Line,FALSE
+Ramos,hIL13,-10.817,Human,0.401018,FALSE,Cell Line,FALSE
+Ramos,hIL13,-9.86273,Human,0.190961,FALSE,Cell Line,FALSE
+Ramos,hIL13,-8.90849,Human,0.24825,FALSE,Cell Line,FALSE
+Ramos,hIL13,-7.95424,Human,-1.10757,FALSE,Cell Line,FALSE
+Ramos,hIL13,-7,Human,-0.40102,FALSE,Cell Line,FALSE
+Ramos,hIL13,-13.6797,Human,2.499121,FALSE,Cell Line,FALSE
+Ramos,hIL13,-12.7255,Human,1.258863,FALSE,Cell Line,FALSE
+Ramos,hIL13,-11.7712,Human,0.4775,FALSE,Cell Line,FALSE
+Ramos,hIL13,-10.817,Human,-0.22945,FALSE,Cell Line,FALSE
+Ramos,hIL13,-9.86273,Human,-0.20464,FALSE,Cell Line,FALSE
+Ramos,hIL13,-8.90849,Human,0.948798,FALSE,Cell Line,FALSE
+Ramos,hIL13,-7.95424,Human,0.266656,FALSE,Cell Line,FALSE
+Ramos,hIL13,-7,Human,0.675941,FALSE,Cell Line,FALSE
+Ramos,hIL13,-13.6797,Human,0.130227,FALSE,Cell Line,FALSE
+Ramos,hIL13,-12.7255,Human,-1.09763,FALSE,Cell Line,FALSE
+Ramos,hIL13,-11.7712,Human,-1.89139,FALSE,Cell Line,FALSE
+Ramos,hIL13,-10.817,Human,-1.19685,FALSE,Cell Line,FALSE
+Ramos,hIL13,-9.86273,Human,-0.42789,FALSE,Cell Line,FALSE
+Ramos,hIL13,-8.90849,Human,-0.78756,FALSE,Cell Line,FALSE
+Ramos,hIL13,-7.95424,Human,-0.83717,FALSE,Cell Line,FALSE
+Ramos,hIL13,-7,Human,0.502305,FALSE,Cell Line,FALSE
+Ramos,hIL4,-13.6797,Human,3.150859,FALSE,Cell Line,FALSE
+Ramos,hIL4,-12.7255,Human,1.470401,FALSE,Cell Line,FALSE
+Ramos,hIL4,-11.7712,Human,3.723743,FALSE,Cell Line,FALSE
+Ramos,hIL4,-10.817,Human,46.28899,FALSE,Cell Line,FALSE
+Ramos,hIL4,-9.86273,Human,105.3151,FALSE,Cell Line,FALSE
+Ramos,hIL4,-8.90849,Human,108.1222,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7.95424,Human,101.0376,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7,Human,105.8307,FALSE,Cell Line,FALSE
+Ramos,hIL4,-13.6797,Human,2.598342,FALSE,Cell Line,FALSE
+Ramos,hIL4,-12.7255,Human,0.4775,FALSE,Cell Line,FALSE
+Ramos,hIL4,-11.7712,Human,3.181264,FALSE,Cell Line,FALSE
+Ramos,hIL4,-10.817,Human,45.10201,FALSE,Cell Line,FALSE
+Ramos,hIL4,-9.86273,Human,108.9381,FALSE,Cell Line,FALSE
+Ramos,hIL4,-8.90849,Human,112.8449,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7.95424,Human,105.8623,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7,Human,113.0186,FALSE,Cell Line,FALSE
+Ramos,hIL4,-13.6797,Human,1.494512,FALSE,Cell Line,FALSE
+Ramos,hIL4,-12.7255,Human,0.043409,FALSE,Cell Line,FALSE
+Ramos,hIL4,-11.7712,Human,2.337888,FALSE,Cell Line,FALSE
+Ramos,hIL4,-10.817,Human,44.48188,FALSE,Cell Line,FALSE
+Ramos,hIL4,-9.86273,Human,105.3414,FALSE,Cell Line,FALSE
+Ramos,hIL4,-8.90849,Human,107.5738,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7.95424,Human,100.2687,FALSE,Cell Line,FALSE
+Ramos,hIL4,-7,Human,109.1366,FALSE,Cell Line,FALSE
+Monocyte,hIL13,-13.8268,Human,10.98497,FALSE,210426,FALSE
+Monocyte,hIL13,-13.2247,Human,1.270693,FALSE,210426,FALSE
+Monocyte,hIL13,-12.6227,Human,10.83058,FALSE,210426,FALSE
+Monocyte,hIL13,-12.0206,Human,27.62867,FALSE,210426,FALSE
+Monocyte,hIL13,-11.4185,Human,-10.8603,FALSE,210426,FALSE
+Monocyte,hIL13,-10.8165,Human,16.70902,FALSE,210426,FALSE
+Monocyte,hIL13,-10.2144,Human,50.63178,FALSE,210426,FALSE
+Monocyte,hIL13,-9.61236,Human,92.21433,FALSE,210426,FALSE
+Monocyte,hIL13,-9.0103,Human,103.5793,FALSE,210426,FALSE
+Monocyte,hIL13,-8.40824,Human,61.02891,FALSE,210426,FALSE
+Monocyte,hIL13,-7.80618,Human,99.51191,FALSE,210426,FALSE
+Monocyte,hIL13,-7.20412,Human,147.4895,FALSE,210426,FALSE
+Monocyte,hIL13,-13.8268,Human,-9.26894,FALSE,210426,FALSE
+Monocyte,hIL13,-13.2247,Human,-7.92105,FALSE,210426,FALSE
+Monocyte,hIL13,-12.6227,Human,-11.0978,FALSE,210426,FALSE
+Monocyte,hIL13,-12.0206,Human,54.91889,FALSE,210426,FALSE
+Monocyte,hIL13,-11.4185,Human,-2.5117,FALSE,210426,FALSE
+Monocyte,hIL13,-10.8165,Human,16.26962,FALSE,210426,FALSE
+Monocyte,hIL13,-10.2144,Human,78.65235,FALSE,210426,FALSE
+Monocyte,hIL13,-9.61236,Human,68.54618,FALSE,210426,FALSE
+Monocyte,hIL13,-9.0103,Human,78.6761,FALSE,210426,FALSE
+Monocyte,hIL13,-8.40824,Human,92.76655,FALSE,210426,FALSE
+Monocyte,hIL13,-7.80618,Human,139.99,FALSE,210426,FALSE
+Monocyte,hIL13,-7.20412,Human,108.4899,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.6227,Human,0.765979,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.0206,Human,-7.48165,FALSE,210426,FALSE
+Monocyte,hNeo4,-11.4185,Human,1.425077,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.8165,Human,-9.07893,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.2144,Human,-7.4104,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.61236,Human,7.29758,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.0103,Human,50.28739,FALSE,210426,FALSE
+Monocyte,hNeo4,-8.40824,Human,76.39598,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.80618,Human,72.72047,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.20412,Human,77.54792,FALSE,210426,FALSE
+Monocyte,hNeo4,-6.60206,Human,78.6761,FALSE,210426,FALSE
+Monocyte,hNeo4,-6,Human,68.71244,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.6227,Human,-0.76598,FALSE,210426,FALSE
+Monocyte,hNeo4,-12.0206,Human,-2.74921,FALSE,210426,FALSE
+Monocyte,hNeo4,-11.4185,Human,6.264399,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.8165,Human,-9.72021,FALSE,210426,FALSE
+Monocyte,hNeo4,-10.2144,Human,-9.35207,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.61236,Human,2.072299,FALSE,210426,FALSE
+Monocyte,hNeo4,-9.0103,Human,44.45051,FALSE,210426,FALSE
+Monocyte,hNeo4,-8.40824,Human,56.914,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.80618,Human,67.10329,FALSE,210426,FALSE
+Monocyte,hNeo4,-7.20412,Human,89.63138,FALSE,210426,FALSE
+Monocyte,hNeo4,-6.60206,Human,85.25521,FALSE,210426,FALSE
+Monocyte,hNeo4,-6,Human,82.23286,FALSE,210426,FALSE
+A549,IL4,-12,Human,3.200822896,FALSE,210703,TRUE
+A549,IL4,-11,Human,4.513825861,FALSE,210703,TRUE
+A549,IL4,-10,Human,19.3622557,FALSE,210703,TRUE
+A549,IL4,-9,Human,79.6575301,FALSE,210703,TRUE
+A549,IL4,-8,Human,103.5094088,FALSE,210703,TRUE
+A549,IL4,-7,Human,96.29091789,FALSE,210703,TRUE
+A549,IL4,-12,Human,8.864282689,TRUE,210703,TRUE
+A549,IL4,-11,Human,3.116113027,TRUE,210703,TRUE
+A549,IL4,-10,Human,6.861499365,TRUE,210703,TRUE
+A549,IL4,-9,Human,31.04011617,TRUE,210703,TRUE
+A549,IL4,-8,Human,76.68058329,TRUE,210703,TRUE
+A549,IL4,-7,Human,87.23301265,TRUE,210703,TRUE
+A549,IL13,-12,Human,9.42094754,FALSE,210703,TRUE
+A549,IL13,-11,Human,8.11399528,FALSE,210703,TRUE
+A549,IL13,-10,Human,11.31481818,FALSE,210703,TRUE
+A549,IL13,-9,Human,60.76117868,FALSE,210703,TRUE
+A549,IL13,-8,Human,94.03400496,FALSE,210703,TRUE
+A549,IL13,-7,Human,89.6411932,FALSE,210703,TRUE
+A549,IL13,-12,Human,12.47655352,TRUE,210703,TRUE
+A549,IL13,-11,Human,3.606220125,TRUE,210703,TRUE
+A549,IL13,-10,Human,5.397228777,TRUE,210703,TRUE
+A549,IL13,-9,Human,12.12561263,TRUE,210703,TRUE
+A549,IL13,-8,Human,67.21123011,TRUE,210703,TRUE
+A549,IL13,-7,Human,93.4652387,TRUE,210703,TRUE
+A549,IL4,-12,Human,5.439583712,FALSE,210703,TRUE
+A549,IL4,-11,Human,4.598535729,FALSE,210703,TRUE
+A549,IL4,-10,Human,17.3836752,FALSE,210703,TRUE
+A549,IL4,-9,Human,76.52326496,FALSE,210703,TRUE
+A549,IL4,-8,Human,101.1798875,FALSE,210703,TRUE
+A549,IL4,-7,Human,94.65722757,FALSE,210703,TRUE
+A549,IL4,-12,Human,8.79167423,TRUE,210703,TRUE
+A549,IL4,-11,Human,2.855932716,TRUE,210703,TRUE
+A549,IL4,-10,Human,6.183820415,TRUE,210703,TRUE
+A549,IL4,-9,Human,33.18811642,TRUE,210703,TRUE
+A549,IL4,-8,Human,81.04919223,TRUE,210703,TRUE
+A549,IL4,-7,Human,88.49760997,TRUE,210703,TRUE
+A549,IL13,-12,Human,9.783989835,FALSE,210703,TRUE
+A549,IL13,-11,Human,7.938524838,FALSE,210703,TRUE
+A549,IL13,-10,Human,11.68996188,FALSE,210703,TRUE
+A549,IL13,-9,Human,61.31179282,FALSE,210703,TRUE
+A549,IL13,-8,Human,94.59066981,FALSE,210703,TRUE
+A549,IL13,-7,Human,90.0102862,FALSE,210703,TRUE
+A549,IL13,-12,Human,10.78840685,TRUE,210703,TRUE
+A549,IL13,-11,Human,0,TRUE,210703,TRUE
+A549,IL13,-10,Human,4.041870878,TRUE,210703,TRUE
+A549,IL13,-9,Human,11.78072245,TRUE,210703,TRUE
+A549,IL13,-8,Human,64.30689175,TRUE,210703,TRUE
+A549,IL13,-7,Human,63.29037333,TRUE,210703,TRUE
+A549,IL4,-12,Human,5.143099171,FALSE,210703,TRUE
+A549,IL4,-11,Human,3.817994796,FALSE,210703,TRUE
+A549,IL4,-10,Human,18.17026684,FALSE,210703,TRUE
+A549,IL4,-9,Human,79.50021177,FALSE,210703,TRUE
+A549,IL4,-8,Human,103.7816906,FALSE,210703,TRUE
+A549,IL4,-7,Human,100.5808677,FALSE,210703,TRUE
+A549,IL4,-12,Human,7.000665578,TRUE,210703,TRUE
+A549,IL4,-11,Human,1.954377685,TRUE,210703,TRUE
+A549,IL4,-10,Human,5.542445695,TRUE,210703,TRUE
+A549,IL4,-9,Human,31.10062322,TRUE,210703,TRUE
+A549,IL4,-8,Human,76.79554668,TRUE,210703,TRUE
+A549,IL4,-7,Human,84.87928844,TRUE,210703,TRUE
+A549,IL13,-12,Human,8.132147395,FALSE,210703,TRUE
+A549,IL13,-11,Human,7.266896593,FALSE,210703,TRUE
+A549,IL13,-10,Human,10.42536455,FALSE,210703,TRUE
+A549,IL13,-9,Human,58.92781509,FALSE,210703,TRUE
+A549,IL13,-8,Human,86.70055061,FALSE,210703,TRUE
+A549,IL13,-7,Human,83.90512495,FALSE,210703,TRUE
+A549,IL13,-12,Human,11.2180069,TRUE,210703,TRUE
+A549,IL13,-11,Human,1.367459309,TRUE,210703,TRUE
+A549,IL13,-10,Human,5.064440007,TRUE,210703,TRUE
+A549,IL13,-9,Human,12.89405216,TRUE,210703,TRUE
+A549,IL13,-8,Human,65.06928057,TRUE,210703,TRUE
+A549,IL13,-7,Human,92.95092878,TRUE,210703,TRUE
+Monocyte,IL4,-13.91568628,Human,-6.559843725,FALSE,210722,TRUE
+Monocyte,IL4,-13.07058824,Human,14.86457948,FALSE,210722,TRUE
+Monocyte,IL4,-12.2254902,Human,-1.417559791,FALSE,210722,TRUE
+Monocyte,IL4,-11.38039216,Human,34.9268782,FALSE,210722,TRUE
+Monocyte,IL4,-10.53529412,Human,43.71733277,FALSE,210722,TRUE
+Monocyte,IL4,-9.69019608,Human,90.49944565,FALSE,210722,TRUE
+Monocyte,IL4,-8.84509804,Human,95.43582704,FALSE,210722,TRUE
+Monocyte,IL4,-8,Human,104.564173,FALSE,210722,TRUE
+Monocyte,IL13,-13.91568628,Human,2.309804129,FALSE,210722,TRUE
+Monocyte,IL13,-13.07058824,Human,11.01050631,FALSE,210722,TRUE
+Monocyte,IL13,-12.2254902,Human,17.73137638,FALSE,210722,TRUE
+Monocyte,IL13,-11.38039216,Human,6.807982683,FALSE,210722,TRUE
+Monocyte,IL13,-10.53529412,Human,25.88300512,FALSE,210722,TRUE
+Monocyte,IL13,-9.69019608,Human,101.7396125,FALSE,210722,TRUE
+Monocyte,IL13,-8.84509804,Human,104.2368407,FALSE,210722,TRUE
+Monocyte,IL13,-8,Human,109.6061454,FALSE,210722,TRUE
+Monocyte,IL4,-13.91568628,Human,0.409165303,TRUE,210722,TRUE
+Monocyte,IL4,-13.07058824,Human,40.42289214,TRUE,210722,TRUE
+Monocyte,IL4,-12.2254902,Human,-1.718494272,TRUE,210722,TRUE
+Monocyte,IL4,-11.38039216,Human,2.827200253,TRUE,210722,TRUE
+Monocyte,IL4,-10.53529412,Human,34.56258909,TRUE,210722,TRUE
+Monocyte,IL4,-9.69019608,Human,106.4700913,TRUE,210722,TRUE
+Monocyte,IL4,-8.84509804,Human,86.06462172,TRUE,210722,TRUE
+Monocyte,IL4,-8,Human,107.4362494,TRUE,210722,TRUE
+Monocyte,IL13,-13.91568628,Human,-2.309804129,TRUE,210722,TRUE
+Monocyte,IL13,-13.07058824,Human,3.291800855,TRUE,210722,TRUE
+Monocyte,IL13,-12.2254902,Human,44.91051159,TRUE,210722,TRUE
+Monocyte,IL13,-11.38039216,Human,14.75898844,TRUE,210722,TRUE
+Monocyte,IL13,-10.53529412,Human,7.436249406,TRUE,210722,TRUE
+Monocyte,IL13,-9.69019608,Human,14.21519455,TRUE,210722,TRUE
+Monocyte,IL13,-8.84509804,Human,54.81495169,TRUE,210722,TRUE
+Monocyte,IL13,-8,Human,91.92492477,TRUE,210722,TRUE
+Monocyte,Neo4,-11.91568628,Human,7.193390001,FALSE,210722,TRUE
+Monocyte,Neo4,-11.07058824,Human,1.818805765,FALSE,210722,TRUE
+Monocyte,Neo4,-10.2254902,Human,9.183781215,FALSE,210722,TRUE
+Monocyte,Neo4,-9.38039216,Human,19.60561744,FALSE,210722,TRUE
+Monocyte,Neo4,-8.53529412,Human,59.36064622,FALSE,210722,TRUE
+Monocyte,Neo4,-7.69019608,Human,100.7681749,FALSE,210722,TRUE
+Monocyte,Neo4,-6.84509804,Human,83.51987751,FALSE,210722,TRUE
+Monocyte,Neo4,-6,Human,80.87482182,FALSE,210722,TRUE
+Monocyte,Neo4,-11.91568628,Human,6.918853281,TRUE,210722,TRUE
+Monocyte,Neo4,-11.07058824,Human,4.358270419,TRUE,210722,TRUE
+Monocyte,Neo4,-10.2254902,Human,13.31767066,TRUE,210722,TRUE
+Monocyte,Neo4,-9.38039216,Human,16.48540204,TRUE,210722,TRUE
+Monocyte,Neo4,-8.53529412,Human,53.86463228,TRUE,210722,TRUE
+Monocyte,Neo4,-7.69019608,Human,71.47721873,TRUE,210722,TRUE
+Monocyte,Neo4,-6.84509804,Human,87.7382398,TRUE,210722,TRUE
+Monocyte,Neo4,-6,Human,76.31328863,TRUE,210722,TRUE
+Macrophage,IL4,-13.00336125,Human,4.520969751,FALSE,210820,TRUE
+Macrophage,IL4,-12.22521,Human,0.621184453,FALSE,210820,TRUE
+Macrophage,IL4,-11.44705875,Human,5.893229624,FALSE,210820,TRUE
+Macrophage,IL4,-10.6689075,Human,40.7437404,FALSE,210820,TRUE
+Macrophage,IL4,-9.890756252,Human,85.11449507,FALSE,210820,TRUE
+Macrophage,IL4,-9.112605002,Human,94.12740012,FALSE,210820,TRUE
+Macrophage,IL4,-8.334453751,Human,97.79796606,FALSE,210820,TRUE
+Macrophage,IL4,-7.556302501,Human,103.2442179,FALSE,210820,TRUE
+Macrophage,IL4,-13.00336125,Human,3.069247167,FALSE,210820,TRUE
+Macrophage,IL4,-12.22521,Human,0.706759679,FALSE,210820,TRUE
+Macrophage,IL4,-11.44705875,Human,5.835160721,FALSE,210820,TRUE
+Macrophage,IL4,-10.6689075,Human,42.46746995,FALSE,210820,TRUE
+Macrophage,IL4,-9.890756252,Human,87.42808243,FALSE,210820,TRUE
+Macrophage,IL4,-9.112605002,Human,98.23195471,FALSE,210820,TRUE
+Macrophage,IL4,-8.334453751,Human,103.7087692,FALSE,210820,TRUE
+Macrophage,IL4,-7.556302501,Human,95.24904683,FALSE,210820,TRUE
+Macrophage,IL13,-13.00336125,Human,2.14625723,FALSE,210820,TRUE
+Macrophage,IL13,-12.22521,Human,-1.185064067,FALSE,210820,TRUE
+Macrophage,IL13,-11.44705875,Human,-2.230304327,FALSE,210820,TRUE
+Macrophage,IL13,-10.6689075,Human,-0.393493227,FALSE,210820,TRUE
+Macrophage,IL13,-9.890756252,Human,27.36344257,FALSE,210820,TRUE
+Macrophage,IL13,-9.112605002,Human,78.41212112,FALSE,210820,TRUE
+Macrophage,IL13,-8.334453751,Human,93.03631599,FALSE,210820,TRUE
+Macrophage,IL13,-7.556302501,Human,87.83762101,FALSE,210820,TRUE
+Macrophage,IL13,-13.00336125,Human,0.994047937,FALSE,210820,TRUE
+Macrophage,IL13,-12.22521,Human,-1.542646261,FALSE,210820,TRUE
+Macrophage,IL13,-11.44705875,Human,-2.349498392,FALSE,210820,TRUE
+Macrophage,IL13,-10.6689075,Human,-0.723569098,FALSE,210820,TRUE
+Macrophage,IL13,-9.890756252,Human,26.99363534,FALSE,210820,TRUE
+Macrophage,IL13,-9.112605002,Human,75.38031311,FALSE,210820,TRUE
+Macrophage,IL13,-8.334453751,Human,92.78264657,FALSE,210820,TRUE
+Macrophage,IL13,-7.556302501,Human,83.03623958,FALSE,210820,TRUE
+Macrophage,IL4,-13.00336125,Human,-0.161217613,TRUE,210820,TRUE
+Macrophage,IL4,-12.22521,Human,-1.102545099,TRUE,210820,TRUE
+Macrophage,IL4,-11.44705875,Human,-1.600715164,TRUE,210820,TRUE
+Macrophage,IL4,-10.6689075,Human,5.667066527,TRUE,210820,TRUE
+Macrophage,IL4,-9.890756252,Human,33.68989677,TRUE,210820,TRUE
+Macrophage,IL4,-9.112605002,Human,57.62345372,TRUE,210820,TRUE
+Macrophage,IL4,-8.334453751,Human,66.4957709,TRUE,210820,TRUE
+Macrophage,IL4,-7.556302501,Human,72.77332498,TRUE,210820,TRUE
+Macrophage,IL4,-13.00336125,Human,-1.304258132,TRUE,210820,TRUE
+Macrophage,IL4,-12.22521,Human,-1.408170906,TRUE,210820,TRUE
+Macrophage,IL4,-11.44705875,Human,-1.06892626,TRUE,210820,TRUE
+Macrophage,IL4,-10.6689075,Human,5.064983687,TRUE,210820,TRUE
+Macrophage,IL4,-9.890756252,Human,35.52976413,TRUE,210820,TRUE
+Macrophage,IL4,-9.112605002,Human,56.19923746,TRUE,210820,TRUE
+Macrophage,IL4,-8.334453751,Human,65.93036316,TRUE,210820,TRUE
+Macrophage,IL4,-7.556302501,Human,64.77509761,TRUE,210820,TRUE
+Macrophage,IL13,-13.00336125,Human,0.147464452,TRUE,210820,TRUE
+Macrophage,IL13,-12.22521,Human,-1.539590003,TRUE,210820,TRUE
+Macrophage,IL13,-11.44705875,Human,-2.887399812,TRUE,210820,TRUE
+Macrophage,IL13,-10.6689075,Human,-3.770658394,TRUE,210820,TRUE
+Macrophage,IL13,-9.890756252,Human,-2.652067941,TRUE,210820,TRUE
+Macrophage,IL13,-9.112605002,Human,3.497123297,TRUE,210820,TRUE
+Macrophage,IL13,-8.334453751,Human,44.93387022,TRUE,210820,TRUE
+Macrophage,IL13,-7.556302501,Human,81.36752267,TRUE,210820,TRUE
+Macrophage,IL13,-13.00336125,Human,0.456146517,TRUE,210820,TRUE
+Macrophage,IL13,-12.22521,Human,-1.875778391,TRUE,210820,TRUE
+Macrophage,IL13,-11.44705875,Human,-2.759036973,TRUE,210820,TRUE
+Macrophage,IL13,-10.6689075,Human,-3.471145103,TRUE,210820,TRUE
+Macrophage,IL13,-9.890756252,Human,-3.232756974,TRUE,210820,TRUE
+Macrophage,IL13,-9.112605002,Human,4.588207428,TRUE,210820,TRUE
+Macrophage,IL13,-8.334453751,Human,44.69548209,TRUE,210820,TRUE
+Macrophage,IL13,-7.556302501,Human,81.12607829,TRUE,210820,TRUE
+Macrophage,Neo4,-10.6689075,Human,-1.362327035,FALSE,210820,TRUE
+Macrophage,Neo4,-9.890756252,Human,-1.279808067,FALSE,210820,TRUE
+Macrophage,Neo4,-9.112605002,Human,2.564964586,FALSE,210820,TRUE
+Macrophage,Neo4,-8.334453751,Human,15.28511067,FALSE,210820,TRUE
+Macrophage,Neo4,-7.556302501,Human,22.8860245,FALSE,210820,TRUE
+Macrophage,Neo4,-6.77815125,Human,27.13116696,FALSE,210820,TRUE
+Macrophage,Neo4,-6,Human,24.54862889,FALSE,210820,TRUE
+Macrophage,Neo4,-10.6689075,Human,-1.732134261,FALSE,210820,TRUE
+Macrophage,Neo4,-9.890756252,Human,-2.11416652,FALSE,210820,TRUE
+Macrophage,Neo4,-9.112605002,Human,3.558248458,FALSE,210820,TRUE
+Macrophage,Neo4,-8.334453751,Human,15.881081,FALSE,210820,TRUE
+Macrophage,Neo4,-7.556302501,Human,25.81391973,FALSE,210820,TRUE
+Macrophage,Neo4,-6.77815125,Human,27.23202347,FALSE,210820,TRUE
+Macrophage,Neo4,-6,Human,29.19719741,FALSE,210820,TRUE
+Macrophage,Neo4,-10.6689075,Human,-2.328104585,TRUE,210820,TRUE
+Macrophage,Neo4,-9.890756252,Human,-6.466278013,TRUE,210820,TRUE
+Macrophage,Neo4,-9.112605002,Human,2.274620069,TRUE,210820,TRUE
+Macrophage,Neo4,-8.334453751,Human,18.61643197,TRUE,210820,TRUE
+Macrophage,Neo4,-7.556302501,Human,27.6385058,TRUE,210820,TRUE
+Macrophage,Neo4,-6.77815125,Human,26.96918528,TRUE,210820,TRUE
+Macrophage,Neo4,-6,Human,26.05842037,TRUE,210820,TRUE
+Macrophage,Neo4,-10.6689075,Human,-0.399605743,TRUE,210820,TRUE
+Macrophage,Neo4,-9.890756252,Human,0.431696452,TRUE,210820,TRUE
+Macrophage,Neo4,-9.112605002,Human,3.347366652,TRUE,210820,TRUE
+Macrophage,Neo4,-8.334453751,Human,19.47218423,TRUE,210820,TRUE
+Macrophage,Neo4,-7.556302501,Human,27.54070554,TRUE,210820,TRUE
+Macrophage,Neo4,-6.77815125,Human,27.43679276,TRUE,210820,TRUE
+Macrophage,Neo4,-6,Human,26.4282276,TRUE,210820,TRUE
+Monocyte,IL4,-13.91568628,Human,1.061234447,FALSE,210831,TRUE
+Monocyte,IL4,-13.07058824,Human,-4.995120761,FALSE,210831,TRUE
+Monocyte,IL4,-12.2254902,Human,-5.868809466,FALSE,210831,TRUE
+Monocyte,IL4,-11.38039216,Human,16.61838253,FALSE,210831,TRUE
+Monocyte,IL4,-10.53529412,Human,82.88606977,FALSE,210831,TRUE
+Monocyte,IL4,-9.69019608,Human,110.3546597,FALSE,210831,TRUE
+Monocyte,IL4,-8.84509804,Human,94.12966577,FALSE,210831,TRUE
+Monocyte,IL4,-8,Human,98.2282264,FALSE,210831,TRUE
+Monocyte,IL4,-13.91568628,Human,-1.61929739,FALSE,210831,TRUE
+Monocyte,IL4,-13.07058824,Human,-4.437057819,FALSE,210831,TRUE
+Monocyte,IL4,-12.2254902,Human,-3.718894852,FALSE,210831,TRUE
+Monocyte,IL4,-11.38039216,Human,16.53604538,FALSE,210831,TRUE
+Monocyte,IL4,-10.53529412,Human,82.62533545,FALSE,210831,TRUE
+Monocyte,IL4,-9.69019608,Human,117.6826665,FALSE,210831,TRUE
+Monocyte,IL4,-8.84509804,Human,93.44352281,FALSE,210831,TRUE
+Monocyte,IL4,-8,Human,86.16125884,FALSE,210831,TRUE
+Monocyte,IL13,-13.91568628,Human,0.059465723,FALSE,210831,TRUE
+Monocyte,IL13,-13.07058824,Human,-8.023298365,FALSE,210831,TRUE
+Monocyte,IL13,-12.2254902,Human,-7.030678214,FALSE,210831,TRUE
+Monocyte,IL13,-11.38039216,Human,-6.189009515,FALSE,210831,TRUE
+Monocyte,IL13,-10.53529412,Human,4.263234935,FALSE,210831,TRUE
+Monocyte,IL13,-9.69019608,Human,53.83935106,FALSE,210831,TRUE
+Monocyte,IL13,-8.84509804,Human,73.22517687,FALSE,210831,TRUE
+Monocyte,IL13,-8,Human,72.90040254,FALSE,210831,TRUE
+Monocyte,IL13,-13.91568628,Human,0.182971456,FALSE,210831,TRUE
+Monocyte,IL13,-13.07058824,Human,-7.52012686,FALSE,210831,TRUE
+Monocyte,IL13,-12.2254902,Human,-2.91839473,FALSE,210831,TRUE
+Monocyte,IL13,-11.38039216,Human,-1.994388875,FALSE,210831,TRUE
+Monocyte,IL13,-10.53529412,Human,2.598194682,FALSE,210831,TRUE
+Monocyte,IL13,-9.69019608,Human,50.2256648,FALSE,210831,TRUE
+Monocyte,IL13,-8.84509804,Human,68.8064162,FALSE,210831,TRUE
+Monocyte,IL13,-8,Human,65.52207856,FALSE,210831,TRUE
+Monocyte,IL4,-13.91568628,Human,-2.181934618,TRUE,210831,TRUE
+Monocyte,IL4,-13.07058824,Human,-7.254818248,TRUE,210831,TRUE
+Monocyte,IL4,-12.2254902,Human,-7.373749695,TRUE,210831,TRUE
+Monocyte,IL4,-11.38039216,Human,1.207611613,TRUE,210831,TRUE
+Monocyte,IL4,-10.53529412,Human,39.00951452,TRUE,210831,TRUE
+Monocyte,IL4,-9.69019608,Human,80.85508661,TRUE,210831,TRUE
+Monocyte,IL4,-8.84509804,Human,70.50805074,TRUE,210831,TRUE
+Monocyte,IL4,-8,Human,73.31208831,TRUE,210831,TRUE
+Monocyte,IL4,-13.91568628,Human,-4.876189314,TRUE,210831,TRUE
+Monocyte,IL4,-13.07058824,Human,-6.115820932,TRUE,210831,TRUE
+Monocyte,IL4,-12.2254902,Human,-4.949377897,TRUE,210831,TRUE
+Monocyte,IL4,-11.38039216,Human,0.265308612,TRUE,210831,TRUE
+Monocyte,IL4,-10.53529412,Human,37.28043425,TRUE,210831,TRUE
+Monocyte,IL4,-9.69019608,Human,76.73822884,TRUE,210831,TRUE
+Monocyte,IL4,-8.84509804,Human,67.95102464,TRUE,210831,TRUE
+Monocyte,IL4,-8,Human,66.35459868,TRUE,210831,TRUE
+Monocyte,IL13,-13.91568628,Human,0.667845816,TRUE,210831,TRUE
+Monocyte,IL13,-13.07058824,Human,-6.559526714,TRUE,210831,TRUE
+Monocyte,IL13,-12.2254902,Human,-7.062698219,TRUE,210831,TRUE
+Monocyte,IL13,-11.38039216,Human,-3.348377653,TRUE,210831,TRUE
+Monocyte,IL13,-10.53529412,Human,-0.878262991,TRUE,210831,TRUE
+Monocyte,IL13,-9.69019608,Human,14.62856794,TRUE,210831,TRUE
+Monocyte,IL13,-8.84509804,Human,48.03000732,TRUE,210831,TRUE
+Monocyte,IL13,-8,Human,61.93126372,TRUE,210831,TRUE
+Monocyte,IL13,-13.91568628,Human,-0.910282996,TRUE,210831,TRUE
+Monocyte,IL13,-13.07058824,Human,-7.492681142,TRUE,210831,TRUE
+Monocyte,IL13,-12.2254902,Human,-6.609843864,TRUE,210831,TRUE
+Monocyte,IL13,-11.38039216,Human,-9.31782142,TRUE,210831,TRUE
+Monocyte,IL13,-10.53529412,Human,-4.793852159,TRUE,210831,TRUE
+Monocyte,IL13,-9.69019608,Human,6.733349597,TRUE,210831,TRUE
+Monocyte,IL13,-8.84509804,Human,47.98883874,TRUE,210831,TRUE
+Monocyte,IL13,-8,Human,48.32733594,TRUE,210831,TRUE
+Monocyte,Neo4,-11.91568628,Human,0.8416687,FALSE,210831,TRUE
+Monocyte,Neo4,-11.07058824,Human,-5.791046597,FALSE,210831,TRUE
+Monocyte,Neo4,-10.2254902,Human,-7.854049768,FALSE,210831,TRUE
+Monocyte,Neo4,-9.38039216,Human,2.794888997,FALSE,210831,TRUE
+Monocyte,Neo4,-8.53529412,Human,24.59136375,FALSE,210831,TRUE
+Monocyte,Neo4,-7.69019608,Human,48.03915589,FALSE,210831,TRUE
+Monocyte,Neo4,-6.84509804,Human,53.06629666,FALSE,210831,TRUE
+Monocyte,Neo4,-6,Human,49.79110759,FALSE,210831,TRUE
+Monocyte,Neo4,-11.91568628,Human,-1.701634545,FALSE,210831,TRUE
+Monocyte,Neo4,-11.07058824,Human,-4.06654062,FALSE,210831,TRUE
+Monocyte,Neo4,-10.2254902,Human,-3.897292022,FALSE,210831,TRUE
+Monocyte,Neo4,-9.38039216,Human,3.105940473,FALSE,210831,TRUE
+Monocyte,Neo4,-8.53529412,Human,27.3999756,FALSE,210831,TRUE
+Monocyte,Neo4,-7.69019608,Human,50.06099049,FALSE,210831,TRUE
+Monocyte,Neo4,-6.84509804,Human,50.41778483,FALSE,210831,TRUE
+Monocyte,Neo4,-6,Human,42.76500366,FALSE,210831,TRUE
+Monocyte,Neo4,-11.91568628,Human,-2.177360332,TRUE,210831,TRUE
+Monocyte,Neo4,-11.07058824,Human,-4.542266406,TRUE,210831,TRUE
+Monocyte,Neo4,-10.2254902,Human,-1.422603074,TRUE,210831,TRUE
+Monocyte,Neo4,-9.38039216,Human,3.252317638,TRUE,210831,TRUE
+Monocyte,Neo4,-8.53529412,Human,25.46047817,TRUE,210831,TRUE
+Monocyte,Neo4,-7.69019608,Human,54.38369114,TRUE,210831,TRUE
+Monocyte,Neo4,-6.84509804,Human,42.50884362,TRUE,210831,TRUE
+Monocyte,Neo4,-6,Human,58.10716028,TRUE,210831,TRUE
+Monocyte,Neo4,-11.91568628,Human,-0.054891437,TRUE,210831,TRUE
+Monocyte,Neo4,-11.07058824,Human,-8.380092706,TRUE,210831,TRUE
+Monocyte,Neo4,-10.2254902,Human,-4.05281776,TRUE,210831,TRUE
+Monocyte,Neo4,-9.38039216,Human,1.454623079,TRUE,210831,TRUE
+Monocyte,Neo4,-8.53529412,Human,24.22999512,TRUE,210831,TRUE
+Monocyte,Neo4,-7.69019608,Human,45.46840693,TRUE,210831,TRUE
+Monocyte,Neo4,-6.84509804,Human,53.44138814,TRUE,210831,TRUE
+Monocyte,Neo4,-6,Human,48.98145889,TRUE,210831,TRUE
+Monocyte,IL4,-13.91568628,Human,2.090010977,FALSE,210903,TRUE
+Monocyte,IL4,-13.07058824,Human,4.241492865,FALSE,210903,TRUE
+Monocyte,IL4,-12.2254902,Human,0.526893524,FALSE,210903,TRUE
+Monocyte,IL4,-11.38039216,Human,11.19648738,FALSE,210903,TRUE
+Monocyte,IL4,-10.53529412,Human,78.03293085,FALSE,210903,TRUE
+Monocyte,IL4,-9.69019608,Human,70.42810099,FALSE,210903,TRUE
+Monocyte,IL4,-8.84509804,Human,88.8079034,FALSE,210903,TRUE
+Monocyte,IL4,-8,Human,111.1920966,FALSE,210903,TRUE
+Monocyte,IL4,-13.91568628,Human,0.923558001,FALSE,210903,TRUE
+Monocyte,IL4,-13.07058824,Human,4.130558619,FALSE,210903,TRUE
+Monocyte,IL4,-12.2254902,Human,1.941653435,FALSE,210903,TRUE
+Monocyte,IL4,-11.38039216,Human,14.07880543,FALSE,210903,TRUE
+Monocyte,IL4,-10.53529412,Human,82.58935605,FALSE,210903,TRUE
+Monocyte,IL4,-9.69019608,Human,120.1061728,FALSE,210903,TRUE
+Monocyte,IL4,-8.84509804,Human,114.7248112,FALSE,210903,TRUE
+Monocyte,IL4,-8,Human,75.28088526,FALSE,210903,TRUE
+Monocyte,IL4,-13.91568628,Human,0.770843686,FALSE,210903,TRUE
+Monocyte,IL4,-13.07058824,Human,2.712497121,FALSE,210903,TRUE
+Monocyte,IL4,-12.2254902,Human,2.66886446,FALSE,210903,TRUE
+Monocyte,IL4,-11.38039216,Human,13.11888688,FALSE,210903,TRUE
+Monocyte,IL4,-10.53529412,Human,78.00065449,FALSE,210903,TRUE
+Monocyte,IL4,-9.69019608,Human,108.3980753,FALSE,210903,TRUE
+Monocyte,IL4,-8.84509804,Human,118.5644854,FALSE,210903,TRUE
+Monocyte,IL4,-8,Human,62.92556995,FALSE,210903,TRUE
+Monocyte,IL13,-13.91568628,Human,-1.30845225,FALSE,210903,TRUE
+Monocyte,IL13,-13.07058824,Human,-1.097694841,FALSE,210903,TRUE
+Monocyte,IL13,-12.2254902,Human,0.061470911,FALSE,210903,TRUE
+Monocyte,IL13,-11.38039216,Human,0.166849616,FALSE,210903,TRUE
+Monocyte,IL13,-10.53529412,Human,7.095499451,FALSE,210903,TRUE
+Monocyte,IL13,-9.69019608,Human,54.36663008,FALSE,210903,TRUE
+Monocyte,IL13,-8.84509804,Human,79.41163557,FALSE,210903,TRUE
+Monocyte,IL13,-8,Human,82.9154775,FALSE,210903,TRUE
+Monocyte,IL13,-13.91568628,Human,1.119904978,FALSE,210903,TRUE
+Monocyte,IL13,-13.07058824,Human,0.072721102,FALSE,210903,TRUE
+Monocyte,IL13,-12.2254902,Human,-1.447149939,FALSE,210903,TRUE
+Monocyte,IL13,-11.38039216,Human,0.829020568,FALSE,210903,TRUE
+Monocyte,IL13,-10.53529412,Human,8.370198892,FALSE,210903,TRUE
+Monocyte,IL13,-9.69019608,Human,67.76879537,FALSE,210903,TRUE
+Monocyte,IL13,-8.84509804,Human,107.4090683,FALSE,210903,TRUE
+Monocyte,IL13,-8,Human,93.09755536,FALSE,210903,TRUE
+Monocyte,IL13,-13.91568628,Human,-0.58904093,FALSE,210903,TRUE
+Monocyte,IL13,-13.07058824,Human,0.152714315,FALSE,210903,TRUE
+Monocyte,IL13,-12.2254902,Human,-0.821748458,FALSE,210903,TRUE
+Monocyte,IL13,-11.38039216,Human,-0.567224599,FALSE,210903,TRUE
+Monocyte,IL13,-10.53529412,Human,8.224756687,FALSE,210903,TRUE
+Monocyte,IL13,-9.69019608,Human,66.72888361,FALSE,210903,TRUE
+Monocyte,IL13,-8.84509804,Human,104.4420473,FALSE,210903,TRUE
+Monocyte,IL13,-8,Human,89.11243894,FALSE,210903,TRUE
+Monocyte,IL4,-13.91568628,Human,2.010976948,TRUE,210903,TRUE
+Monocyte,IL4,-13.07058824,Human,-2.291986828,TRUE,210903,TRUE
+Monocyte,IL4,-12.2254902,Human,2.019758507,TRUE,210903,TRUE
+Monocyte,IL4,-11.38039216,Human,5.110867179,TRUE,210903,TRUE
+Monocyte,IL4,-10.53529412,Human,41.39626784,TRUE,210903,TRUE
+Monocyte,IL4,-9.69019608,Human,80.31613611,TRUE,210903,TRUE
+Monocyte,IL4,-8.84509804,Human,92.10098793,TRUE,210903,TRUE
+Monocyte,IL4,-8,Human,112.5005488,TRUE,210903,TRUE
+Monocyte,IL4,-13.91568628,Human,0.858109009,TRUE,210903,TRUE
+Monocyte,IL4,-13.07058824,Human,-0.719938914,TRUE,210903,TRUE
+Monocyte,IL4,-12.2254902,Human,-0.807204237,TRUE,210903,TRUE
+Monocyte,IL4,-11.38039216,Human,4.123286509,TRUE,210903,TRUE
+Monocyte,IL4,-10.53529412,Human,43.63266147,TRUE,210903,TRUE
+Monocyte,IL4,-9.69019608,Human,104.6383943,TRUE,210903,TRUE
+Monocyte,IL4,-8.84509804,Human,118.5644854,TRUE,210903,TRUE
+Monocyte,IL4,-8,Human,113.8957907,TRUE,210903,TRUE
+Monocyte,IL4,-13.91568628,Human,0.479959276,TRUE,210903,TRUE
+Monocyte,IL4,-13.07058824,Human,-0.472687166,TRUE,210903,TRUE
+Monocyte,IL4,-12.2254902,Human,-0.690850473,TRUE,210903,TRUE
+Monocyte,IL4,-11.38039216,Human,1.541687372,TRUE,210903,TRUE
+Monocyte,IL4,-10.53529412,Human,41.58192638,TRUE,210903,TRUE
+Monocyte,IL4,-9.69019608,Human,99.3006654,TRUE,210903,TRUE
+Monocyte,IL4,-8.84509804,Human,112.6595319,TRUE,210903,TRUE
+Monocyte,IL4,-8,Human,111.5759875,TRUE,210903,TRUE
+Monocyte,IL13,-13.91568628,Human,1.30845225,TRUE,210903,TRUE
+Monocyte,IL13,-13.07058824,Human,0.272228321,TRUE,210903,TRUE
+Monocyte,IL13,-12.2254902,Human,-0.131723381,TRUE,210903,TRUE
+Monocyte,IL13,-11.38039216,Human,-1.809001098,TRUE,210903,TRUE
+Monocyte,IL13,-10.53529412,Human,-1.817782656,TRUE,210903,TRUE
+Monocyte,IL13,-9.69019608,Human,2.704720088,TRUE,210903,TRUE
+Monocyte,IL13,-8.84509804,Human,36.5751921,TRUE,210903,TRUE
+Monocyte,IL13,-8,Human,74.41492865,TRUE,210903,TRUE
+Monocyte,IL13,-13.91568628,Human,0.479959276,TRUE,210903,TRUE
+Monocyte,IL13,-13.07058824,Human,-0.90174167,TRUE,210903,TRUE
+Monocyte,IL13,-12.2254902,Human,-0.959918552,TRUE,210903,TRUE
+Monocyte,IL13,-11.38039216,Human,-0.487231386,TRUE,210903,TRUE
+Monocyte,IL13,-10.53529412,Human,-0.712666804,TRUE,210903,TRUE
+Monocyte,IL13,-9.69019608,Human,2.537966476,TRUE,210903,TRUE
+Monocyte,IL13,-8.84509804,Human,46.11245106,TRUE,210903,TRUE
+Monocyte,IL13,-8,Human,84.90188711,TRUE,210903,TRUE
+Monocyte,IL13,-13.91568628,Human,-1.010823324,TRUE,210903,TRUE
+Monocyte,IL13,-13.07058824,Human,-2.290714727,TRUE,210903,TRUE
+Monocyte,IL13,-12.2254902,Human,-1.78166701,TRUE,210903,TRUE
+Monocyte,IL13,-11.38039216,Human,-1.643496915,TRUE,210903,TRUE
+Monocyte,IL13,-10.53529412,Human,-1.956197656,TRUE,210903,TRUE
+Monocyte,IL13,-9.69019608,Human,1.752578569,TRUE,210903,TRUE
+Monocyte,IL13,-8.84509804,Human,44.97072976,TRUE,210903,TRUE
+Monocyte,IL13,-8,Human,99.45337971,TRUE,210903,TRUE
+Monocyte,Neo4,-11.91568628,Human,-1.958287596,FALSE,210903,TRUE
+Monocyte,Neo4,-11.07058824,Human,-1.326015368,FALSE,210903,TRUE
+Monocyte,Neo4,-10.2254902,Human,1.211855104,FALSE,210903,TRUE
+Monocyte,Neo4,-9.38039216,Human,10.24807903,FALSE,210903,TRUE
+Monocyte,Neo4,-8.53529412,Human,54.37541164,FALSE,210903,TRUE
+Monocyte,Neo4,-7.69019608,Human,80.1053787,FALSE,210903,TRUE
+Monocyte,Neo4,-6.84509804,Human,89.70362239,FALSE,210903,TRUE
+Monocyte,Neo4,-6,Human,71.02524698,FALSE,210903,TRUE
+Monocyte,Neo4,-11.91568628,Human,-0.669034143,FALSE,210903,TRUE
+Monocyte,Neo4,-11.07058824,Human,0.261795969,FALSE,210903,TRUE
+Monocyte,Neo4,-10.2254902,Human,1.18535397,FALSE,210903,TRUE
+Monocyte,Neo4,-9.38039216,Human,14.23151975,FALSE,210903,TRUE
+Monocyte,Neo4,-8.53529412,Human,57.31150084,FALSE,210903,TRUE
+Monocyte,Neo4,-7.69019608,Human,79.80413783,FALSE,210903,TRUE
+Monocyte,Neo4,-6.84509804,Human,89.98509217,FALSE,210903,TRUE
+Monocyte,Neo4,-6,Human,70.67763947,FALSE,210903,TRUE
+Monocyte,Neo4,-11.91568628,Human,-0.385421843,FALSE,210903,TRUE
+Monocyte,Neo4,-11.07058824,Human,-2.777946114,FALSE,210903,TRUE
+Monocyte,Neo4,-10.2254902,Human,0.407238174,FALSE,210903,TRUE
+Monocyte,Neo4,-9.38039216,Human,12.54439017,FALSE,210903,TRUE
+Monocyte,Neo4,-8.53529412,Human,49.83577151,FALSE,210903,TRUE
+Monocyte,Neo4,-7.69019608,Human,83.48382561,FALSE,210903,TRUE
+Monocyte,Neo4,-6.84509804,Human,89.09062261,FALSE,210903,TRUE
+Monocyte,Neo4,-6,Human,66.59798563,FALSE,210903,TRUE
+Monocyte,Neo4,-11.91568628,Human,-1.668496158,TRUE,210903,TRUE
+Monocyte,Neo4,-11.07058824,Human,1.492864984,TRUE,210903,TRUE
+Monocyte,Neo4,-10.2254902,Human,-0.518111965,TRUE,210903,TRUE
+Monocyte,Neo4,-9.38039216,Human,8.535675082,TRUE,210903,TRUE
+Monocyte,Neo4,-8.53529412,Human,35.8726674,TRUE,210903,TRUE
+Monocyte,Neo4,-7.69019608,Human,71.78924259,TRUE,210903,TRUE
+Monocyte,Neo4,-6.84509804,Human,47.42041712,TRUE,210903,TRUE
+Monocyte,Neo4,-6,Human,66.82766191,TRUE,210903,TRUE
+Monocyte,Neo4,-11.91568628,Human,-1.367156726,TRUE,210903,TRUE
+Monocyte,Neo4,-11.07058824,Human,-1.672585356,TRUE,210903,TRUE
+Monocyte,Neo4,-10.2254902,Human,-0.087265323,TRUE,210903,TRUE
+Monocyte,Neo4,-9.38039216,Human,11.213594,TRUE,210903,TRUE
+Monocyte,Neo4,-8.53529412,Human,56.08251421,TRUE,210903,TRUE
+Monocyte,Neo4,-7.69019608,Human,89.06880628,TRUE,210903,TRUE
+Monocyte,Neo4,-6.84509804,Human,95.12647412,TRUE,210903,TRUE
+Monocyte,Neo4,-6,Human,94.57379374,TRUE,210903,TRUE
+Monocyte,Neo4,-11.91568628,Human,1.083544427,TRUE,210903,TRUE
+Monocyte,Neo4,-11.07058824,Human,-1.519871041,TRUE,210903,TRUE
+Monocyte,Neo4,-10.2254902,Human,0.116353764,TRUE,210903,TRUE
+Monocyte,Neo4,-9.38039216,Human,9.213763681,TRUE,210903,TRUE
+Monocyte,Neo4,-8.53529412,Human,52.97732314,TRUE,210903,TRUE
+Monocyte,Neo4,-7.69019608,Human,84.44374417,TRUE,210903,TRUE
+Monocyte,Neo4,-6.84509804,Human,92.29762323,TRUE,210903,TRUE
+Monocyte,Neo4,-6,Human,101.6059243,TRUE,210903,TRUE
