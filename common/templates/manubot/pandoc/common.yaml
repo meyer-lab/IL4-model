@@ -1,0 +1,12 @@
+# Pandoc --defaults shared between Manubot output formats.
+from: markdown
+filters:
+- pandoc-fignos
+- pandoc-eqnos
+- pandoc-tablenos
+- pandoc-manubot-cite
+- citeproc
+wrap: preserve
+metadata:
+  csl: common/templates/nature.csl
+  link-citations: true

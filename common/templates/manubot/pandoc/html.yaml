@@ -1,0 +1,20 @@
+# Pandoc --defaults for HTML output.
+# Load on top of common defaults.
+to: html5
+output-file: output/manuscript.html
+include-after-body:
+- common/templates/manubot/default.html
+- common/templates/manubot/plugins/anchors.html
+- common/templates/manubot/plugins/accordion.html
+- common/templates/manubot/plugins/tooltips.html
+- common/templates/manubot/plugins/jump-to-first.html
+- common/templates/manubot/plugins/link-highlight.html
+- common/templates/manubot/plugins/table-of-contents.html
+- common/templates/manubot/plugins/lightbox.html
+- common/templates/manubot/plugins/attributes.html
+- common/templates/manubot/plugins/math.html
+- common/templates/manubot/plugins/hypothesis.html
+variables:
+  math: ''
+html-math-method:
+  method: mathjax
