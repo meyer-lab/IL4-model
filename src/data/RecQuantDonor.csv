@@ -44,9 +44,9 @@ A549,Human,Cell Line,IL13Ra,1510.38867
 Macrophage,Mouse,210518,IL4Ra,33534.2225
 Macrophage,Mouse,210518,Gamma,30255.95538
 Macrophage,Mouse,210518,IL13Ra,34139.83069
-Macrophage,Mouse,210415,IL4Ra,23599.9103
-Macrophage,Mouse,210415,Gamma,22763.76346
-Macrophage,Mouse,210415,IL13Ra,15708.14888
+Macrophage,Mouse,Mouse,IL4Ra,23599.9103
+Macrophage,Mouse,Mouse,Gamma,22763.76346
+Macrophage,Mouse,Mouse,IL13Ra,15708.14888
 3T3,Mouse,Cell Line,IL4Ra,7094.703679
 3T3,Mouse,Cell Line,Gamma,4642.316287
 3T3,Mouse,Cell Line,IL13Ra,16119.18275
