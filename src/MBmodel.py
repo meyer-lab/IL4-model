@@ -153,6 +153,7 @@ def resids(x, retDF=False):
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
 
     if retDF:
+        print(r2_score(masterSTAT.Experimental.values, masterSTAT.Predicted.values))
         return masterSTAT
     else:
         print(x)
@@ -223,6 +224,7 @@ def residsSeq(x, retDF=False):
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
 
     if retDF:
+        print(r2_score(masterSTAT.Experimental.values, masterSTAT.Predicted.values))
         return masterSTAT
     else:
         print(x)
@@ -285,7 +287,7 @@ def seqBindingModel(KdVec, doseVec, cellType, animal, lig, donor, macIL4=False, 
     return output
 
 
-def affFit(confInt=False):
+def affFit(ax, confInt=np.array([False])):
     """Displays fit affinities for the MB model."""
     fit = pd.read_csv("src/data/CurrentFit.csv").x.values
     fitDict = pd.DataFrame(columns=["Ligand", "Receptor", r"$K_D$"])
@@ -316,14 +318,13 @@ def affFit(confInt=False):
         ligs = fitDict.Ligand.values
         fitDict = fitDict.append(pd.DataFrame({"Ligand": ligs, "Receptor": rec, r"$K_D$": confIntLow[1:-1]}))
         fitDict = fitDict.append(pd.DataFrame({"Ligand": ligs, "Receptor": rec, r"$K_D$": confIntHigh[1:-1]}))
-        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict)
+        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax)
     else:
-        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict)
-    plt.ylabel(r"$log_{10}(K_D$ (nM))")
-    plt.ylim(((-2, 6)))
+        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax)
+    ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Receptor-ligand Affinities Multivalent")
 
 
-def affFitSeq(confInt=False):
+def affFitSeq(ax, confInt=np.array([False])):
     """Displays fit affinities for the MB model."""
     fit = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
     fitDict = pd.DataFrame(columns=["Ligand", "Receptor", r"$K_D$"])
@@ -353,36 +354,58 @@ def affFitSeq(confInt=False):
     fitDictKDSurf = fitDict.loc[(fitDict.Receptor != "IL4Rα") & (fitDict.Ligand != "hIL13")]
     fitDictKDSurf = fitDictKDSurf.append(fitDict.loc[(fitDict.Receptor == "IL4Rα") & (fitDict.Ligand == "hIL13")])
 
-    sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm)
-    plt.ylabel(r"IL4Rα $log_{10}(K_D)$ (nM))")
-    plt.ylim(((-1, 7)))
-    plt.savefig("KDNorm.svg")
+    sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0])
+    ax[0].set(ylabel=r"IL4Rα $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
 
-    plt.figure()
-    print(fitDictKDSurf)
-    sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf)
-    plt.ylabel(r"$log_{10}(K_D)$ (#/cell)")
-    plt.ylim(((-5, 5)))
-    plt.savefig("KDSurf.svg")
+    sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1])
+    ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
 
 
-def R2_Plot_Cells(df, ax=False):
-    """Plots all accuracies per cell"""
-    accDF = pd.DataFrame(columns={"Cell Type", "Accuracy"})
-    for cell in df.Cell.unique():
-        preds = df.loc[(df.Cell == cell)].Predicted.values
-        exps = df.loc[(df.Cell == cell)].Experimental.values
-        r2 = r2_score(exps, preds)
-        accDF = accDF.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
-    if not ax:
-        sns.barplot(x="Cell Type", y="Accuracy", data=accDF)
-        plt.ylabel(r"Accuracy ($R^2$)")
-        plt.ylim((0, 1))
-        plt.xticks(rotation=45)
+def Exp_Pred(modelDF, ax, seq=False):
+    """Overall plot of experimental vs. predicted for STAT6 signaling"""
+    sns.scatterplot(data=modelDF, x="Experimental", y="Predicted", hue="Ligand", style="Cell", ax=ax)
+    ax.set(xlim=(-.1, 1), ylim=(-.1, 1))
+    ax.legend(loc='upper right', bbox_to_anchor=(1.35, 1.0))
+    if seq:
+        ax.set(title="Sequential Binding Model Human")
     else:
-        sns.barplot(x="Cell Type", y="Accuracy", data=accDF, ax=ax)
-        ax.set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
-        ax.set_xticklabels(rotation=45)   
+        ax.set(title="Mulivalent Binding Model Human")
+
+
+def R2_Plot_Cells(df, ax, seq=False):
+    """Plots all accuracies per cell"""
+    accDFh = pd.DataFrame(columns={"Cell Type", "Accuracy"})
+    accDFm = pd.DataFrame(columns={"Cell Type", "Accuracy"})
+    dfh = df.loc[(df.Animal == "Human")]
+    dfm = df.loc[(df.Animal == "Mouse")]
+
+    for cell in dfh.Cell.unique():
+        preds = dfh.loc[(dfh.Cell == cell)].Predicted.values
+        exps = dfh.loc[(dfh.Cell == cell)].Experimental.values
+        r2 = r2_score(exps, preds)
+        accDFh = accDFh.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
+
+    for cell in dfm.Cell.unique():
+        preds = dfm.loc[(dfm.Cell == cell)].Predicted.values
+        exps = dfm.loc[(dfm.Cell == cell)].Experimental.values
+        r2 = r2_score(exps, preds)
+        accDFm = accDFm.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
+
+    sns.barplot(x="Cell Type", y="Accuracy", data=accDFh, ax=ax[0])
+    ax[0].set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
+    ax[0].set_xticklabels(ax[0].get_xticklabels(), rotation=45)
+
+    sns.barplot(x="Cell Type", y="Accuracy", data=accDFm, ax=ax[1])
+    ax[1].set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
+    ax[1].set_xticklabels(ax[1].get_xticklabels(), rotation=45)
+
+    if seq:
+        ax[0].set(title="Sequential Binding Model Human")
+        ax[1].set(title="Sequential Binding Model Mouse")
+    else:
+        ax[0].set(title="Mulivalent Binding Model Human")
+        ax[1].set(title="Multivalent Binding Model Mouse")
+
 
 
 def R2_Plot_Ligs(df, ax=False):
@@ -401,4 +424,4 @@ def R2_Plot_Ligs(df, ax=False):
     else:
         sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax)
         ax.set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
-        ax.set_xticklabels(rotation=45)    
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
