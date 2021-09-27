@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from .figureCommon import getSetup
 from src.MBmodel import cytBindingModel, resids, residsSeq, R2_Plot_Cells, Exp_Pred, affFit, affFitSeq
 
+
 def makeFigure():
     """Get a list of the axis objects and create a figure"""
 
