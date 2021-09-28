@@ -60,6 +60,7 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, donor, macIL4=False, ma
     """Runs binding model for a given mutein, valency, dose, and cell type."""
     doseVec = np.array(doseVec)
 
+    """
     if donor in recQuantDF.Donor.values:
         if not macIL4:
             recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal) & (recQuantDF["Donor"] == donor)].Amount.values,
@@ -69,15 +70,15 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, donor, macIL4=False, ma
             recCount = np.ravel([np.power(10, macIL4),
                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal) & (recQuantDF["Donor"] == donor)].Amount.values,
                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal) & (recQuantDF["Donor"] == donor)].Amount.values])
+    """
+    if not macIL4:
+        recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                             recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
     else:
-        if not macIL4:
-            recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
-        else:
-            recCount = np.ravel([np.power(10, macIL4),
-                                recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+        recCount = np.ravel([np.power(10, macIL4),
+                            np.power(10, macGC),
+                            recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
     output = np.zeros([doseVec.size, 2])
 
     for i, dose in enumerate(doseVec):
@@ -89,8 +90,8 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, donor, macIL4=False, ma
 def fitFunc():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
-    x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2])
-    bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2.], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7])
+    x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, 5])
+    bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., 4], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, 7])
     parampredicts = least_squares(resids, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
@@ -140,7 +141,7 @@ def resids(x, retDF=False):
                     ligCplx = CplxDict[ligand]
                     if animal == "Human":
                         if cell == "Macrophage":
-                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, donor, macIL4=x[13])
+                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, donor, macIL4=x[13], macGC=x[14])
                         else:
                             results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, donor)
                     else:
@@ -167,8 +168,8 @@ def resids(x, retDF=False):
 def fitFuncSeq():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
-    x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 1, -5, 2])
-    bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -4, -11, -1], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 4, -3, 2.7])
+    x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 1, -5, 2, 5])
+    bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -4, -11, -1, 4], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 4, -3, 2.7, 7])
     parampredicts = least_squares(residsSeq, x0, bounds=bnds)
     #assert parampredicts.success
     return parampredicts.x
@@ -214,7 +215,7 @@ def residsSeq(x, retDF=False):
                     ligKDs = KdDict[ligand]
                     if animal == "Human":
                         if cell == "Macrophage":
-                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, donor, macIL4=x[12])
+                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, donor, macIL4=x[12], macGC=x[13])
                         else:
                             results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, donor)
                     else:
@@ -260,6 +261,7 @@ def SignalingFunc13(IL13Ra, KDs, recs, conc):
 
 def seqBindingModel(KdVec, doseVec, cellType, animal, lig, donor, macIL4=False, macGC=False):
     """Runs binding model for a given mutein, valency, dose, and cell type."""
+    """
     if donor in recQuantDF.Donor.values:
         if not macIL4:
             recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal) & (recQuantDF["Donor"] == donor)].Amount.values,
@@ -270,14 +272,15 @@ def seqBindingModel(KdVec, doseVec, cellType, animal, lig, donor, macIL4=False, 
                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal) & (recQuantDF["Donor"] == donor)].Amount.values,
                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal) & (recQuantDF["Donor"] == donor)].Amount.values])
     else:
-        if not macIL4:
-            recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
-        else:
-            recCount = np.ravel([np.power(10, macIL4),
-                                recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+        """
+    if not macIL4:
+        recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                             recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+    else:
+        recCount = np.ravel([np.power(10, macIL4),
+                            np.power(10, macGC),
+                            recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
     output = np.zeros([doseVec.size, 1])
     if lig != "hIL13":
         for i, dose in enumerate(doseVec):
