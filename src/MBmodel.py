@@ -92,7 +92,7 @@ def fitFunc():
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, 5])
     bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., 4], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, 7])
-    parampredicts = least_squares(resids, x0, bounds=bnds)
+    parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5)
     #assert parampredicts.success
     return parampredicts.x
 
@@ -133,8 +133,8 @@ def resids(x, retDF=False):
 
     for cell in SigData.Cell.unique():
         for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
-            for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Ligand.unique():
-                for donor in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)].Donor.unique():
+            for donor in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Donor.unique():
+                for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Donor == donor)].Ligand.unique():
                     isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
                     Concs = isoData.Concentration.values
                     normSigs = isoData.Signal.values
@@ -170,7 +170,7 @@ def fitFuncSeq():
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 1, -5, 2, 5])
     bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -4, -11, -1, 4], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 4, -3, 2.7, 7])
-    parampredicts = least_squares(residsSeq, x0, bounds=bnds)
+    parampredicts = least_squares(residsSeq, x0, bounds=bnds, ftol=1e-5)
     #assert parampredicts.success
     return parampredicts.x
 
@@ -194,7 +194,7 @@ def getConfIntervalSeq():
 def residsSeq(x, retDF=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
-    SigData = SigData.loc[SigData.Antibody == False]
+    SigData = SigData.loc[SigData["AB Norm"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted", "Donor"})
     xPow = np.power(10, x)
@@ -207,8 +207,8 @@ def residsSeq(x, retDF=False):
 
     for cell in SigData.Cell.unique():
         for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
-            for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Ligand.unique():
-                for donor in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)].Donor.unique():
+            for donor in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Donor.unique():
+                for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Donor == donor)].Ligand.unique():
                     isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
                     Concs = isoData.Concentration.values
                     normSigs = isoData.Signal.values
