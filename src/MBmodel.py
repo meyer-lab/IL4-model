@@ -282,9 +282,12 @@ def SignalingFunc13(IL13Ra, KDs, recs, conc):
     return recs[1] / (KDs[2] * KDs[1] / (IL13Ra * conc) + 1) + recs[0] / ((KDs[0] * KDs[2]) / (IL13Ra * conc) + 1)
 
 
-def affFit(ax, confInt=np.array([False])):
+def affFit(ax, gcFit=True, confInt=np.array([False])):
     """Displays fit affinities for the MB model."""
-    fit = pd.read_csv("src/data/CurrentFit.csv").x.values
+    if gcFit:
+        fit = pd.read_csv("src/data/CurrentFit.csv").x.values
+    else:
+        fit = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values
     fitDict = pd.DataFrame(columns=["Ligand", "Receptor", r"$K_D$"])
     receptorList = ["IL4Rα", "gc", "IL13Rα"]
     xPow = fit * -1
@@ -319,9 +322,12 @@ def affFit(ax, confInt=np.array([False])):
     ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Receptor-ligand Affinities Multivalent")
 
 
-def affFitSeq(ax, confInt=np.array([False])):
+def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     """Displays fit affinities for the MB model."""
-    fit = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
+    if gcFit:
+        fit = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
+    else:
+        fit = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values
     fitDict = pd.DataFrame(columns=["Ligand", "Receptor", r"$K_D$"])
     receptorList = ["IL4Rα", "gc", "IL13Rα"]
     xPow = fit

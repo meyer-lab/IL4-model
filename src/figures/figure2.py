@@ -23,8 +23,8 @@ def makeFigure():
     R2_Plot_Cells(modelDFmul, ax[3:5], False)
     Exp_Pred(modelDFmul, ax[5], False)
 
-    affFitSeq(ax[6:8])
-    affFit(ax[8])
+    affFitSeq(ax[6:8], gcFit=False)
+    affFit(ax[8], gcFit=False)
 
     return f
 
