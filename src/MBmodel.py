@@ -56,23 +56,23 @@ path_here = pathlib.Path().absolute()
 recQuantDF = pd.read_csv(join(path_here, "src/data/RecQuantDonor.csv"))
 
 
-def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, donor, macIL4=False, macGC=False, gcFit=True):
+def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, ABblock=1.0, macIL4=False, macGC=False, gcFit=True):
     """Runs binding model for a given mutein, valency, dose, and cell type."""
     doseVec = np.array(doseVec)
 
     if not macIL4:
         recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
                              recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
     else:
         if gcFit:
             recCount = np.ravel([np.power(10, macIL4),
                                 np.power(10, macGC),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
         else:
             recCount = np.ravel([np.power(10, macIL4),
                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
 
     output = np.zeros([doseVec.size, 2])
 
@@ -133,11 +133,11 @@ def resids(x, retDF=False, gcFit=True):
                     ligCplx = CplxDict[ligand]
                     if animal == "Human":
                         if cell == "Macrophage":
-                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, donor, macIL4=x[13], macGC=x[14], gcFit=gcFit)
+                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macIL4=x[13], macGC=x[14], gcFit=gcFit)
                         else:
-                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, donor, gcFit=gcFit)
+                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
                     else:
-                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, donor, gcFit=gcFit)
+                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
                     masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
                                                    "Animal": animal, "Experimental": normSigs, "Predicted": results, "Donor": donor}))
 
@@ -157,22 +157,21 @@ def resids(x, retDF=False, gcFit=True):
         return masterSTAT.Predicted.values - masterSTAT.Experimental.values
 
 
-def seqBindingModel(KdVec, doseVec, cellType, animal, lig, donor, macIL4=False, macGC=False, gcFit=True):
+def seqBindingModel(KdVec, doseVec, cellType, animal, lig, ABblock=1.0, macIL4=False, macGC=False, gcFit=True):
     """Runs binding model for a given mutein, valency, dose, and cell type."""
     if not macIL4:
         recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
                              recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
     else:
         if gcFit:
             recCount = np.ravel([np.power(10, macIL4),
                                 np.power(10, macGC),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
+                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
         else:
             recCount = np.ravel([np.power(10, macIL4),
                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean()])
-
+                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
     output = np.zeros([doseVec.size, 1])
     if lig != "hIL13":
         for i, dose in enumerate(doseVec):
@@ -238,11 +237,11 @@ def residsSeq(x, retDF=False, gcFit=True):
                     ligKDs = KdDict[ligand]
                     if animal == "Human":
                         if cell == "Macrophage":
-                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, donor, macIL4=x[12], macGC=x[13], gcFit=gcFit)
+                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macIL4=x[12], macGC=x[13], gcFit=gcFit)
                         else:
-                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, donor, gcFit=gcFit)
+                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
                     else:
-                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, donor, gcFit=gcFit)
+                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
                     masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs, "Animal": animal,
                                                    "Experimental": normSigs, "Predicted": np.ravel(results), "Donor": donor}))
 
@@ -425,3 +424,122 @@ def R2_Plot_Ligs(df, ax=False):
         sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax)
         ax.set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+
+
+def residsAB(x, blockRatio, gcFit=True):
+    """"Returns residuals against signaling data"""
+    SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData = SigData.loc[SigData["AB Norm"] == True]
+    SigData['Signal'] = SigData['Signal'].clip(lower=0)
+    masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted", "Antibody"})
+    Kx = x[0]
+    xPow = np.power(10, x)
+
+    CplxDict = {"mIL4": [xPow[1], xPow[2], xPow[3]],
+                "mNeo4": [xPow[4], xPow[5], 1e2],
+                "hIL4": [xPow[6], xPow[7], xPow[8]],
+                "hNeo4": [xPow[9], xPow[10], 1e2],
+                "hIL13": [xPow[11], 1e2, xPow[12]]}
+
+    for cell in SigData.Cell.unique():
+        for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
+            for antibody in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Antibody.unique():
+                for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Antibody == antibody)].Ligand.unique():
+                    isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand) & (SigData.Antibody == antibody)]
+                    Concs = isoData.Concentration.values
+                    normSigs = isoData.Signal.values
+                    ligCplx = CplxDict[ligand]
+                    if antibody:
+                        if animal == "Human":
+                            if cell == "Macrophage":
+                                results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, blockRatio, macIL4=x[13], macGC=x[14], gcFit=gcFit)
+                            else:
+                                results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, blockRatio, gcFit=gcFit)
+                        else:
+                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, blockRatio, gcFit=gcFit)
+                    else:
+                        if animal == "Human":
+                            if cell == "Macrophage":
+                                results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macIL4=x[13], macGC=x[14], gcFit=gcFit)
+                            else:
+                                results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
+                        else:
+                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
+                    masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
+                                                   "Animal": animal, "Experimental": normSigs, "Predicted": results, "Antibody": antibody}))
+
+            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Experimental"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Experimental.max()
+
+    masterSTAT = masterSTAT.fillna(0)
+    masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
+
+    return masterSTAT
+
+
+def residsSeqAB(x, blockRatio, gcFit=True):
+    """"Returns residuals against signaling data"""
+    SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData = SigData.loc[SigData["AB Norm"] == True]
+    SigData['Signal'] = SigData['Signal'].clip(lower=0)
+    masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted", "Antibody"})
+    xPow = np.power(10, x)
+
+    KdDict = {"mIL4": [xPow[0], xPow[1], xPow[2]],
+              "mNeo4": [xPow[3], xPow[4], 10000],
+              "hIL4": [xPow[5], xPow[6], xPow[7]],
+              "hNeo4": [xPow[8], xPow[9], 10000],
+              "hIL13": [xPow[10], 10000, xPow[11]]}
+
+    for cell in SigData.Cell.unique():
+        for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
+            for antibody in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Antibody.unique():
+                for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Antibody == antibody)].Ligand.unique():
+                    isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand) & (SigData.Antibody == antibody)]
+                    Concs = isoData.Concentration.values
+                    normSigs = isoData.Signal.values
+                    ligKDs = KdDict[ligand]
+                    if antibody:
+                        if animal == "Human":
+                            if cell == "Macrophage":
+                                results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, blockRatio, macIL4=x[12], macGC=x[13], gcFit=gcFit)
+                            else:
+                                results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, blockRatio, gcFit=gcFit)
+                        else:
+                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, blockRatio, gcFit=gcFit)
+                    else:
+                        if animal == "Human":
+                            if cell == "Macrophage":
+                                results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macIL4=x[12], macGC=x[13], gcFit=gcFit)
+                            else:
+                                results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
+                        else:
+                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
+                    masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs, "Animal": animal,
+                                                   "Experimental": normSigs, "Predicted": np.ravel(results), "Antibody": antibody}))
+
+            # Normalize
+            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Experimental"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Experimental.max()
+
+    masterSTAT = masterSTAT.fillna(0)
+    masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
+
+    return masterSTAT
+
+
+def ABtest(ax, xSeq, xMult):
+    """Tests Seq vs MB model for a variety of AB blocking ratios"""
+    ABblock = np.linspace(start=0, stop=1, num=11)
+    models = ["Sequential", "Multivalent"]
+    ABtestDF = pd.DataFrame(columns=("Model", "IL13 Ratio", r"Accuracy ($R^2$)"))
+    for model in models:
+        for ratio in ABblock:
+            if model == "Sequential":
+                ABdf = residsSeqAB(xSeq, ratio)
+            else:
+                ABdf = residsAB(xMult, ratio)
+            ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "IL13 Ratio": [1 - ratio], r"Accuracy ($R^2$)": [r2_score(ABdf.Experimental.values, ABdf.Predicted.values)]}))
+
+    sns.lineplot(data=ABtestDF, x="IL13 Ratio", y=r"Accuracy ($R^2$)", hue="Model", ax=ax)
+    ax.set(xlim=(0, 1), ylim=(0, 1))
