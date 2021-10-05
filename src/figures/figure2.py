@@ -12,7 +12,7 @@ from src.MBmodel import cytBindingModel, resids, residsSeq, R2_Plot_Cells, Exp_P
 def makeFigure():
     """Get a list of the axis objects and create a figure"""
 
-    ax, f = getSetup((12, 8), (3, 3))
+    ax, f = getSetup((12, 10), (3, 3))
     xOptimalSeq = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values
     modelDFseq = residsSeq(xOptimalSeq, True, False)
     R2_Plot_Cells(modelDFseq, ax[0:2], True)

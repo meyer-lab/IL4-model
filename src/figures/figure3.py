@@ -6,25 +6,17 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from .figureCommon import getSetup
-from src.MBmodel import cytBindingModel, resids, residsSeq, R2_Plot_Cells, Exp_Pred, affFit, affFitSeq
+from src.MBmodel import cytBindingModel, resids, residsSeq, R2_Plot_Cells, Exp_Pred, affFit, affFitSeq, ABtest
 
 
 def makeFigure():
     """Get a list of the axis objects and create a figure"""
 
-    ax, f = getSetup((12, 10), (3, 3))
+    ax, f = getSetup((6, 4), (1, 1))
     xOptimalSeq = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
-    modelDFseq = residsSeq(xOptimalSeq, True)
-    R2_Plot_Cells(modelDFseq, ax[0:2], True)
-    Exp_Pred(modelDFseq, ax[2], True)
-
     xOptimalMult = pd.read_csv("src/data/CurrentFit.csv").x.values
-    modelDFmul = resids(xOptimalMult, True)
-    R2_Plot_Cells(modelDFmul, ax[3:5], False)
-    Exp_Pred(modelDFmul, ax[5], False)
 
-    affFitSeq(ax[6:8])
-    affFit(ax[8])
+    ABtest(ax[0], xOptimalSeq, xOptimalMult)
 
     return f
 
