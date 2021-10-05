@@ -530,7 +530,7 @@ def residsSeqAB(x, blockRatio, gcFit=True):
 
 def ABtest(ax, xSeq, xMult):
     """Tests Seq vs MB model for a variety of AB blocking ratios"""
-    ABblock = np.linspace(start=0, stop=1, num=11)
+    ABblock = np.linspace(start=0, stop=1, num=51)
     models = ["Sequential", "Multivalent"]
     ABtestDF = pd.DataFrame(columns=("Model", "IL13 Ratio", r"Accuracy ($R^2$)"))
     for model in models:
