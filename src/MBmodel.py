@@ -566,6 +566,7 @@ def ABtestNorm(ax, xSeq, xMult):
                 ABdf = residsAB(xMult, ratio)
             for ligand in ABdf.Ligand.unique():
                 ligDF = ABdf.loc[(ABdf.Ligand == ligand)]
-                ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)], "Ligand": [ligand], r"Prediction Accuracy ($R^2$)": [r2_score(ligDF.Experimental.values, ligDF.Predicted.values)]}))
+                ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)], "Ligand": [ligand],
+                                           r"Prediction Accuracy ($R^2$)": [r2_score(ligDF.Experimental.values, ligDF.Predicted.values)]}))
     sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y=r"Prediction Accuracy ($R^2$)", hue="Ligand", style="Model", ax=ax, palette=colors)
     ax.set(xlim=(0, 100), ylim=(-.1, 1))

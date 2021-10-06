@@ -19,5 +19,3 @@ def makeFigure():
     ABtestNorm(ax[0], xOptimalSeq, xOptimalMult)
 
     return f
-
-# calc at different valencie

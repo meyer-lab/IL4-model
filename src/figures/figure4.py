@@ -32,7 +32,6 @@ def makeFigure():
     ax[4].set(title=ax[4].get_title() + " Using Optimized Macrophage γc")
     ax[5].set(title=ax[5].get_title() + " Using Optimized Macrophage γc")
 
-
     return f
 
 # calc at different valencie
