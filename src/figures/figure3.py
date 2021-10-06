@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from .figureCommon import getSetup
-from src.MBmodel import cytBindingModel, resids, residsSeq, R2_Plot_Cells, Exp_Pred, affFit, affFitSeq, ABtest
+from src.MBmodel import cytBindingModel, resids, residsSeq, R2_Plot_Cells, Exp_Pred, affFit, affFitSeq, ABtestNorm
 
 
 def makeFigure():
@@ -16,7 +16,7 @@ def makeFigure():
     xOptimalSeq = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
     xOptimalMult = pd.read_csv("src/data/CurrentFit.csv").x.values
 
-    ABtest(ax[0], xOptimalSeq, xOptimalMult)
+    ABtestNorm(ax[0], xOptimalSeq, xOptimalMult)
 
     return f
 

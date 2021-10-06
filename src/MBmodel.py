@@ -550,3 +550,22 @@ def ABtest(ax, xSeq, xMult):
 
     sns.lineplot(data=ABtestDF, x="IL13 Ratio", y=r"Accuracy ($R^2$)", hue="Model", ax=ax)
     ax.set(xlim=(0, 1), ylim=(0, 1))
+
+
+def ABtestNorm(ax, xSeq, xMult):
+    """Tests Seq vs MB model for a variety of AB blocking ratios"""
+    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen"}
+    ABblock = np.linspace(start=0, stop=1, num=51)
+    models = ["Sequential", "Multivalent"]
+    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Ligand", r"Prediction Accuracy ($R^2$)"))
+    for model in models:
+        for ratio in ABblock:
+            if model == "Sequential":
+                ABdf = residsSeqAB(xSeq, ratio)
+            else:
+                ABdf = residsAB(xMult, ratio)
+            for ligand in ABdf.Ligand.unique():
+                ligDF = ABdf.loc[(ABdf.Ligand == ligand)]
+                ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)], "Ligand": [ligand], r"Prediction Accuracy ($R^2$)": [r2_score(ligDF.Experimental.values, ligDF.Predicted.values)]}))
+    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y=r"Prediction Accuracy ($R^2$)", hue="Ligand", style="Model", ax=ax, palette=colors)
+    ax.set(xlim=(0, 100), ylim=(-.1, 1))
