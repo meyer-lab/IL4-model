@@ -283,6 +283,8 @@ def SignalingFunc13(IL13Ra, KDs, recs, conc):
 
 def affFit(ax, gcFit=True, confInt=np.array([False])):
     """Displays fit affinities for the MB model."""
+    colors = {"IL4Rα": "mediumorchid", "gc": "gold", "IL13Rα": "lightseagreen"}
+
     if gcFit:
         fit = pd.read_csv("src/data/CurrentFit.csv").x.values
     else:
@@ -315,10 +317,11 @@ def affFit(ax, gcFit=True, confInt=np.array([False])):
         ligs = fitDict.Ligand.values
         fitDict = fitDict.append(pd.DataFrame({"Ligand": ligs, "Receptor": rec, r"$K_D$": confIntLow[1:-1]}))
         fitDict = fitDict.append(pd.DataFrame({"Ligand": ligs, "Receptor": rec, r"$K_D$": confIntHigh[1:-1]}))
-        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax)
+        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax, palette=colors)
     else:
-        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax)
-    ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Receptor-ligand Affinities Multivalent")
+        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax, palette=colors)
+    ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Fit Affinities")
+    ax.legend(prop=dict(size=9), loc="upper right")
 
 
 def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
@@ -361,7 +364,7 @@ def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
 
 
-def Exp_Pred(modelDF, ax, seq=False):
+def Exp_Pred(modelDF, ax, seq=False, Mouse=True):
     """Overall plot of experimental vs. predicted for STAT6 signaling"""
     sns.scatterplot(data=modelDF, x="Experimental", y="Predicted", hue="Ligand", style="Cell", ax=ax)
     ax.set(xlim=(-.1, 1), ylim=(-.1, 1))
@@ -372,7 +375,7 @@ def Exp_Pred(modelDF, ax, seq=False):
         ax.set(title="Mulivalent Binding Model Human")
 
 
-def R2_Plot_Cells(df, ax, seq=False):
+def R2_Plot_Cells(df, ax, seq=False, mice=True):
     """Plots all accuracies per cell"""
     accDFh = pd.DataFrame(columns={"Cell Type", "Accuracy"})
     accDFm = pd.DataFrame(columns={"Cell Type", "Accuracy"})
@@ -391,24 +394,28 @@ def R2_Plot_Cells(df, ax, seq=False):
         r2 = r2_score(exps, preds)
         accDFm = accDFm.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
 
-    sns.barplot(x="Cell Type", y="Accuracy", data=accDFh, ax=ax[0])
-    ax[0].set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
+    sns.barplot(x="Cell Type", y="Accuracy", data=accDFh, ax=ax[0], color="k")
+    ax[0].set(ylabel=r"Fitting Accuracy ($R^2$)", ylim=(0, 1))
     ax[0].set_xticklabels(ax[0].get_xticklabels(), rotation=45)
 
-    sns.barplot(x="Cell Type", y="Accuracy", data=accDFm, ax=ax[1])
-    ax[1].set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
-    ax[1].set_xticklabels(ax[1].get_xticklabels(), rotation=45)
+    if mice:
+        sns.barplot(x="Cell Type", y="Accuracy", data=accDFm, ax=ax[1], color="k")
+        ax[1].set(ylabel=r"Fitting Accuracy ($R^2$)", ylim=(0, 1))
+        ax[1].set_xticklabels(ax[1].get_xticklabels(), rotation=45)
 
     if seq:
-        ax[0].set(title="Sequential Binding Model Human")
-        ax[1].set(title="Sequential Binding Model Mouse")
+        ax[0].set(title="Human Cells")
+        if mice:
+            ax[1].set(title="Mouse Cells")
     else:
-        ax[0].set(title="Mulivalent Binding Model Human")
-        ax[1].set(title="Multivalent Binding Model Mouse")
+        ax[0].set(title="Human Cells")
+        if mice:
+            ax[1].set(title="Mouse Cells")
 
 
 def R2_Plot_Ligs(df, ax=False):
     """Plots all accuracies per ligand"""
+    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
     accDF = pd.DataFrame(columns={"Ligand", "Accuracy"})
     for ligand in df.Ligand.unique():
         preds = df.loc[(df.Ligand == ligand)].Predicted.values
@@ -416,13 +423,13 @@ def R2_Plot_Ligs(df, ax=False):
         r2 = r2_score(exps, preds)
         accDF = accDF.append(pd.DataFrame({"Ligand": [ligand], "Accuracy": [r2]}))
     if not ax:
-        sns.barplot(x="Ligand", y="Accuracy", data=accDF)
-        plt.ylabel(r"Accuracy ($R^2$)")
+        sns.barplot(x="Ligand", y="Accuracy", data=accDF, palette=colors)
+        plt.ylabel(r"Fitting Accuracy ($R^2$)")
         plt.ylim((0, 1))
         plt.xticks(rotation=45)
     else:
-        sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax)
-        ax.set(ylabel=r"Accuracy ($R^2$)", ylim=(0, 1))
+        sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax, palette=colors)
+        ax.set(ylabel=r"Fitting Accuracy ($R^2$)", ylim=(0, 1))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
 
