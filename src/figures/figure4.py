@@ -5,8 +5,11 @@ This creates Figure 1, response of bispecific IL-2 cytokines at varing valencies
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 from .figureCommon import getSetup
 from src.MBmodel import resids, R2_Plot_Cells, R2_Plot_Ligs, affFit, ABtest
+
+rcParams['svg.fonttype'] = 'none'
 
 
 def makeFigure():
@@ -31,7 +34,6 @@ def makeFigure():
     ax[3].set(title=ax[3].get_title() + " Using Optimized Macrophage γc")
     ax[4].set(title=ax[4].get_title() + " Using Optimized Macrophage γc")
     ax[5].set(title=ax[5].get_title() + " Using Optimized Macrophage γc")
-
 
     return f
 

@@ -326,6 +326,8 @@ def affFit(ax, gcFit=True, confInt=np.array([False])):
 
 def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     """Displays fit affinities for the MB model."""
+    colorsLig = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
+    colorsRec = {"IL4Rα": "mediumorchid", "gc": "gold", "IL13Rα": "lightseagreen"}
     if gcFit:
         fit = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
     else:
@@ -357,10 +359,10 @@ def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     fitDictKDSurf = fitDict.loc[(fitDict.Receptor != "IL4Rα") & (fitDict.Ligand != "hIL13")]
     fitDictKDSurf = fitDictKDSurf.append(fitDict.loc[(fitDict.Receptor == "IL4Rα") & (fitDict.Ligand == "hIL13")])
 
-    sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0])
+    sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0], palette=colorsLig)
     ax[0].set(ylabel=r"IL4Rα $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
 
-    sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1])
+    sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1], palette=colorsRec)
     ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
 
 
@@ -550,3 +552,23 @@ def ABtest(ax, xSeq, xMult):
 
     sns.lineplot(data=ABtestDF, x="IL13 Ratio", y=r"Accuracy ($R^2$)", hue="Model", ax=ax)
     ax.set(xlim=(0, 1), ylim=(0, 1))
+
+
+def ABtestNorm(ax, xSeq, xMult):
+    """Tests Seq vs MB model for a variety of AB blocking ratios"""
+    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen"}
+    ABblock = np.linspace(start=0, stop=1, num=51)
+    models = ["Sequential", "Multivalent"]
+    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Ligand", r"Prediction Accuracy ($R^2$)"))
+    for model in models:
+        for ratio in ABblock:
+            if model == "Sequential":
+                ABdf = residsSeqAB(xSeq, ratio)
+            else:
+                ABdf = residsAB(xMult, ratio)
+            for ligand in ABdf.Ligand.unique():
+                ligDF = ABdf.loc[(ABdf.Ligand == ligand)]
+                ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)], "Ligand": [ligand],
+                                           r"Prediction Accuracy ($R^2$)": [r2_score(ligDF.Experimental.values, ligDF.Predicted.values)]}))
+    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y=r"Prediction Accuracy ($R^2$)", hue="Ligand", style="Model", ax=ax, palette=colors)
+    ax.set(xlim=(0, 100), ylim=(-.1, 1))
