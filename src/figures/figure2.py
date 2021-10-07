@@ -26,6 +26,11 @@ def makeFigure():
     affFitSeq(ax[6:8], gcFit=False)
     affFit(ax[8], gcFit=False)
 
+    ax[0].set(title=ax[0].get_title() + " Using Sequential Model")
+    ax[1].set(title=ax[1].get_title() + " Using Sequential Model")
+    ax[3].set(title=ax[3].get_title() + " Using Multivalent Model")
+    ax[4].set(title=ax[4].get_title() + " Using Multivalent Model")
+
     return f
 
 # calc at different valencie
