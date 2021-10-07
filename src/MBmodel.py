@@ -326,6 +326,8 @@ def affFit(ax, gcFit=True, confInt=np.array([False])):
 
 def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     """Displays fit affinities for the MB model."""
+    colorsLig = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
+    colorsRec = {"IL4Rα": "mediumorchid", "gc": "gold", "IL13Rα": "lightseagreen"}
     if gcFit:
         fit = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
     else:
@@ -357,10 +359,10 @@ def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     fitDictKDSurf = fitDict.loc[(fitDict.Receptor != "IL4Rα") & (fitDict.Ligand != "hIL13")]
     fitDictKDSurf = fitDictKDSurf.append(fitDict.loc[(fitDict.Receptor == "IL4Rα") & (fitDict.Ligand == "hIL13")])
 
-    sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0])
+    sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0], palette=colorsLig)
     ax[0].set(ylabel=r"IL4Rα $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
 
-    sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1])
+    sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1], palette=colorsRec)
     ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
 
 
