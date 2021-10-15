@@ -87,7 +87,7 @@ def fitFunc(gcFit=True):
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, 5])
     bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., 4], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, 7])
-    parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit))
+    parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, True))
     #assert parampredicts.success
     return parampredicts.x
 
@@ -108,9 +108,14 @@ def getConfInterval():
     return conf95 * sigr
 
 
-def resids(x, retDF=False, gcFit=True):
+def resids(x, retDF=False, gcFit=True, justPrimary=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+
+    if justPrimary:
+        SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
+        SigData = SigData.loc[(SigData.Animal != "Human") | (SigData.Cell != "Macrophage")]
+
     SigData = SigData.loc[SigData["AB Norm"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted"})
@@ -192,7 +197,7 @@ def fitFuncSeq(gcFit=True):
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 1, -5, 2, 5])
     bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -4, -11, -1, 4], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 4, -3, 2.7, 7])
-    parampredicts = least_squares(residsSeq, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit))
+    parampredicts = least_squares(residsSeq, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, True))
     #assert parampredicts.success
     return parampredicts.x
 
@@ -213,9 +218,14 @@ def getConfIntervalSeq():
     return conf95 * sigr
 
 
-def residsSeq(x, retDF=False, gcFit=True):
+def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+
+    if justPrimary:
+        SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
+        SigData = SigData.loc[(SigData.Animal != "Human") & (SigData.Cell != "Macrophage")]
+
     SigData = SigData.loc[SigData["AB Norm"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted", "Donor"})
@@ -377,12 +387,19 @@ def Exp_Pred(modelDF, ax, seq=False, Mouse=True):
         ax.set(title="Mulivalent Binding Model Human")
 
 
-def R2_Plot_Cells(df, ax, seq=False, mice=True):
+def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
     """Plots all accuracies per cell"""
     accDFh = pd.DataFrame(columns={"Cell Type", "Accuracy"})
     accDFm = pd.DataFrame(columns={"Cell Type", "Accuracy"})
     dfh = df.loc[(df.Animal == "Human")]
     dfm = df.loc[(df.Animal == "Mouse")]
+    if training:
+        dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]))]
+        dfm = dfm.loc[(dfm.Cell.isin(["3T3", "A20", "Macrophage"]))]
+        ylabel = r"Fitting Accuracy ($R^2$)"
+    else:
+        dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]) == False)]
+        ylabel = r"Prediction Accuracy ($R^2$)"
 
     for cell in dfh.Cell.unique():
         preds = dfh.loc[(dfh.Cell == cell)].Predicted.values
@@ -397,12 +414,12 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True):
         accDFm = accDFm.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
 
     sns.barplot(x="Cell Type", y="Accuracy", data=accDFh, ax=ax[0], color="k")
-    ax[0].set(ylabel=r"Fitting Accuracy ($R^2$)", ylim=(0, 1))
+    ax[0].set(ylabel=ylabel, ylim=(0, 1))
     ax[0].set_xticklabels(ax[0].get_xticklabels(), rotation=45)
 
     if mice:
         sns.barplot(x="Cell Type", y="Accuracy", data=accDFm, ax=ax[1], color="k")
-        ax[1].set(ylabel=r"Fitting Accuracy ($R^2$)", ylim=(0, 1))
+        ax[1].set(ylabel=ylabel, ylim=(0, 1))
         ax[1].set_xticklabels(ax[1].get_xticklabels(), rotation=45)
 
     if seq:
@@ -435,7 +452,7 @@ def R2_Plot_Ligs(df, ax=False):
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
 
-def residsAB(x, blockRatio, gcFit=True):
+def residsAB(x, blockRatio, gcFit=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
     SigData = SigData.loc[SigData["AB Norm"] == True]
@@ -486,7 +503,7 @@ def residsAB(x, blockRatio, gcFit=True):
     return masterSTAT
 
 
-def residsSeqAB(x, blockRatio, gcFit=True):
+def residsSeqAB(x, blockRatio, gcFit=False):
     """"Returns residuals against signaling data"""
     SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
     SigData = SigData.loc[SigData["AB Norm"] == True]
