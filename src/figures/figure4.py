@@ -17,16 +17,17 @@ def makeFigure():
 
     ax, f = getSetup((10, 6), (2, 3))
 
-    xOptimalMult = pd.read_csv("src/data/CurrentFit.csv").x.values
+    #xOptimalMult = pd.read_csv("src/data/CurrentFit.csv").x.values
     xOptimalMultnoGC = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values
-    modelDFmul = resids(xOptimalMult, True, True)
+    #modelDFmul = resids(xOptimalMult, True, True)
+    resids(xOptimalMultnoGC, True, False, True)
     modelDFmulnoGC = resids(xOptimalMultnoGC, True, False)
 
     R2_Plot_Ligs(modelDFmulnoGC, ax[0])
     R2_Plot_Cells(modelDFmulnoGC, ax[1:3], False)
-    R2_Plot_Ligs(modelDFmul, ax[3])
-    R2_Plot_Cells(modelDFmul, [ax[4]], False, False)
-    affFit(ax[5], gcFit=True)
+    #R2_Plot_Ligs(modelDFmul, ax[3])
+    #R2_Plot_Cells(modelDFmul, [ax[4]], False, False)
+    affFit(ax[5], gcFit=False)
     plt.prism()
 
     ax[0].set(title=ax[0].get_title() + "Using Measured Macrophage γc")

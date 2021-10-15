@@ -13,8 +13,8 @@ def makeFigure():
     """Get a list of the axis objects and create a figure"""
 
     ax, f = getSetup((6, 4), (1, 1))
-    xOptimalSeq = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
-    xOptimalMult = pd.read_csv("src/data/CurrentFit.csv").x.values
+    xOptimalSeq = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values
+    xOptimalMult = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values
 
     ABtestNorm(ax[0], xOptimalSeq, xOptimalMult)
 
