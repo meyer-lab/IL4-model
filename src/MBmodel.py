@@ -432,10 +432,19 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
             ax[1].set(title="Mouse Cells")
 
 
-def R2_Plot_Ligs(df, ax=False):
+def R2_Plot_Ligs(df, ax=False, training=False):
     """Plots all accuracies per ligand"""
     colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
     accDF = pd.DataFrame(columns={"Ligand", "Accuracy"})
+    if training:
+        df = df.loc[(df.Cell.isin(["A549", "Ramos", "3T3", "A20", "Macrophage"]))]
+        df = df.loc[(df.Animal == "Mouse") | (df.Cell != "Macrophage")]
+        ylabel = r"Fitting Accuracy ($R^2$)"
+    else:
+        df = df.loc[(df.Cell.isin(["Monocyte", "Macrophage", "Fibroblast"]))]
+        df = df.loc[(df.Animal == "Human")]
+        ylabel = r"Prediction Accuracy ($R^2$)"
+
     for ligand in df.Ligand.unique():
         preds = df.loc[(df.Ligand == ligand)].Predicted.values
         exps = df.loc[(df.Ligand == ligand)].Experimental.values
@@ -443,12 +452,12 @@ def R2_Plot_Ligs(df, ax=False):
         accDF = accDF.append(pd.DataFrame({"Ligand": [ligand], "Accuracy": [r2]}))
     if not ax:
         sns.barplot(x="Ligand", y="Accuracy", data=accDF, palette=colors)
-        plt.ylabel(r"Fitting Accuracy ($R^2$)")
+        plt.ylabel(ylabel)
         plt.ylim((0, 1))
         plt.xticks(rotation=45)
     else:
         sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax, palette=colors)
-        ax.set(ylabel=r"Fitting Accuracy ($R^2$)", ylim=(0, 1))
+        ax.set(ylabel=ylabel, ylim=(0, 1))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
 
