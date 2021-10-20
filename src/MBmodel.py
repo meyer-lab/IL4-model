@@ -9,7 +9,18 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from os.path import join
 from scipy.optimize import root, least_squares
-from sklearn.metrics import r2_score
+from sklearn.metrics import mean_squared_error
+
+
+def loadSigData():
+    """Load Signaling Data"""
+    sigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    T3data = sigData.loc[(sigData.Cell == "3T3") & (sigData.Ligand == "mNeo4")]
+    SubtractLine = np.polyfit(T3data.Concentration.values, T3data.Signal.values, 1)
+    sigData.loc[(sigData.Cell == "3T3") & (sigData.Ligand == "mNeo4"), "Signal"] /= SubtractLine[0]
+    sigData.loc[(sigData.Cell == "3T3") & (sigData.Ligand == "mNeo4"), "Signal"] -= SubtractLine[1]
+    sigData.loc[(sigData.Cell == "3T3") & (sigData.Ligand == "mIL4") & (sigData.Concentration <= -10), "Signal"] = 0
+    return sigData
 
 
 def Req_func2(Req: np.ndarray, L0, KxStar, Rtot: np.ndarray, Kav: np.ndarray):
@@ -110,7 +121,7 @@ def getConfInterval():
 
 def resids(x, retDF=False, gcFit=True, justPrimary=False):
     """"Returns residuals against signaling data"""
-    SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData = loadSigData()
 
     if justPrimary:
         SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
@@ -134,7 +145,7 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
                 for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Donor == donor)].Ligand.unique():
                     isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
                     Concs = isoData.Concentration.values
-                    normSigs = isoData.Signal.values
+                    normSigs = isoData.Signal.values / 100
                     ligCplx = CplxDict[ligand]
                     if animal == "Human":
                         if cell == "Macrophage":
@@ -147,14 +158,18 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
                                                    "Animal": animal, "Experimental": normSigs, "Predicted": results, "Donor": donor}))
 
             # Normalize
+            """
+            CellLigData = masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)]
+            scaleFact = np.linalg.lstsq(np.reshape(CellLigData.Predicted.values, (-1, 1)), np.reshape(CellLigData.Experimental.values, (-1, 1)), rcond=None)[0][0]
+            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] *= scaleFact
+            """
             masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Experimental"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Experimental.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
 
     if retDF:
-        print(r2_score(masterSTAT.Experimental.values, masterSTAT.Predicted.values))
+        print(mean_squared_error(masterSTAT.Experimental.values, masterSTAT.Predicted.values))
         return masterSTAT
     else:
         print(x)
@@ -220,7 +235,7 @@ def getConfIntervalSeq():
 
 def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
     """"Returns residuals against signaling data"""
-    SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData = loadSigData()
 
     if justPrimary:
         SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
@@ -263,7 +278,7 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
 
     if retDF:
-        print(r2_score(masterSTAT.Experimental.values, masterSTAT.Predicted.values))
+        print(mean_squared_error(masterSTAT.Experimental.values, masterSTAT.Predicted.values))
         return masterSTAT
     else:
         print(x)
@@ -396,30 +411,30 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
     if training:
         dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]))]
         dfm = dfm.loc[(dfm.Cell.isin(["3T3", "A20", "Macrophage"]))]
-        ylabel = r"Fitting Accuracy ($R^2$)"
+        ylabel = "Fitting Accuracy (RMSE)"
     else:
         dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]) == False)]
-        ylabel = r"Prediction Accuracy ($R^2$)"
+        ylabel = "Prediction Accuracy (RMSE)"
 
     for cell in dfh.Cell.unique():
         preds = dfh.loc[(dfh.Cell == cell)].Predicted.values
         exps = dfh.loc[(dfh.Cell == cell)].Experimental.values
-        r2 = r2_score(exps, preds)
+        r2 = mean_squared_error(exps, preds)
         accDFh = accDFh.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
 
     for cell in dfm.Cell.unique():
         preds = dfm.loc[(dfm.Cell == cell)].Predicted.values
         exps = dfm.loc[(dfm.Cell == cell)].Experimental.values
-        r2 = r2_score(exps, preds)
+        r2 = mean_squared_error(exps, preds)
         accDFm = accDFm.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
 
     sns.barplot(x="Cell Type", y="Accuracy", data=accDFh, ax=ax[0], color="k")
-    ax[0].set(ylabel=ylabel, ylim=(0, 1))
+    ax[0].set(ylabel=ylabel, ylim=(0, 0.2))
     ax[0].set_xticklabels(ax[0].get_xticklabels(), rotation=45)
 
     if mice:
         sns.barplot(x="Cell Type", y="Accuracy", data=accDFm, ax=ax[1], color="k")
-        ax[1].set(ylabel=ylabel, ylim=(0, 1))
+        ax[1].set(ylabel=ylabel, ylim=(0, 0.2))
         ax[1].set_xticklabels(ax[1].get_xticklabels(), rotation=45)
 
     if seq:
@@ -432,29 +447,38 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
             ax[1].set(title="Mouse Cells")
 
 
-def R2_Plot_Ligs(df, ax=False):
+def R2_Plot_Ligs(df, ax=False, training=False):
     """Plots all accuracies per ligand"""
     colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
     accDF = pd.DataFrame(columns={"Ligand", "Accuracy"})
+    if training:
+        df = df.loc[(df.Cell.isin(["A549", "Ramos", "3T3", "A20", "Macrophage"]))]
+        df = df.loc[(df.Animal == "Mouse") | (df.Cell != "Macrophage")]
+        ylabel = "Fitting Accuracy (RMSE)"
+    else:
+        df = df.loc[(df.Cell.isin(["Monocyte", "Macrophage", "Fibroblast"]))]
+        df = df.loc[(df.Animal == "Human")]
+        ylabel = "Prediction Accuracy Human Macrophage (RMSE)"
+
     for ligand in df.Ligand.unique():
         preds = df.loc[(df.Ligand == ligand)].Predicted.values
         exps = df.loc[(df.Ligand == ligand)].Experimental.values
-        r2 = r2_score(exps, preds)
+        r2 = mean_squared_error(exps, preds)
         accDF = accDF.append(pd.DataFrame({"Ligand": [ligand], "Accuracy": [r2]}))
     if not ax:
         sns.barplot(x="Ligand", y="Accuracy", data=accDF, palette=colors)
-        plt.ylabel(r"Fitting Accuracy ($R^2$)")
+        plt.ylabel(ylabel)
         plt.ylim((0, 1))
         plt.xticks(rotation=45)
     else:
         sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax, palette=colors)
-        ax.set(ylabel=r"Fitting Accuracy ($R^2$)", ylim=(0, 1))
+        ax.set(ylabel=ylabel, ylim=(0, 0.2))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
 
 def residsAB(x, blockRatio, gcFit=False):
     """"Returns residuals against signaling data"""
-    SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData = loadSigData()
     SigData = SigData.loc[SigData["AB Norm"] == True]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted", "Antibody"})
@@ -505,7 +529,7 @@ def residsAB(x, blockRatio, gcFit=False):
 
 def residsSeqAB(x, blockRatio, gcFit=False):
     """"Returns residuals against signaling data"""
-    SigData = pd.read_csv(join(path_here, "src/data/SignalingData.csv"))
+    SigData = loadSigData()
     SigData = SigData.loc[SigData["AB Norm"] == True]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted", "Antibody"})
@@ -565,7 +589,7 @@ def ABtest(ax, xSeq, xMult):
                 ABdf = residsSeqAB(xSeq, ratio)
             else:
                 ABdf = residsAB(xMult, ratio)
-            ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "IL13 Ratio": [1 - ratio], r"Accuracy ($R^2$)": [r2_score(ABdf.Experimental.values, ABdf.Predicted.values)]}))
+            ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "IL13 Ratio": [1 - ratio], r"Accuracy ($R^2$)": [mean_squared_error(ABdf.Experimental.values, ABdf.Predicted.values)]}))
 
     sns.lineplot(data=ABtestDF, x="IL13 Ratio", y=r"Accuracy ($R^2$)", hue="Model", ax=ax)
     ax.set(xlim=(0, 1), ylim=(0, 1))
@@ -576,7 +600,7 @@ def ABtestNorm(ax, xSeq, xMult):
     colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen"}
     ABblock = np.linspace(start=0, stop=1, num=51)
     models = ["Sequential", "Multivalent"]
-    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Ligand", r"Prediction Accuracy ($R^2$)"))
+    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Ligand", "Prediction Accuracy (RMSE)"))
     for model in models:
         for ratio in ABblock:
             if model == "Sequential":
@@ -586,6 +610,48 @@ def ABtestNorm(ax, xSeq, xMult):
             for ligand in ABdf.Ligand.unique():
                 ligDF = ABdf.loc[(ABdf.Ligand == ligand)]
                 ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)], "Ligand": [ligand],
-                                           r"Prediction Accuracy ($R^2$)": [r2_score(ligDF.Experimental.values, ligDF.Predicted.values)]}))
-    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y=r"Prediction Accuracy ($R^2$)", hue="Ligand", style="Model", ax=ax, palette=colors)
+                                           "Prediction Accuracy (RMSE)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)]}))
+    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (RMSE)", hue="Ligand", style="Model", ax=ax, palette=colors)
     ax.set(xlim=(0, 100), ylim=(-.1, 1))
+
+
+def doseResponsePlot(ax, modelDF, allCells=True):
+    """Plot dose response curves for all cells and ligands"""
+    meanDF = modelDF.groupby(["Animal", "Cell", "Ligand", "Concentration"])['Experimental'].mean().reset_index()
+    stdDF = modelDF.groupby(["Animal", "Cell", "Ligand", "Concentration"])['Experimental'].std().reset_index()
+    colorDict = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
+    ligOrder = ["hIL4", "hNeo4", "mIL4", "mNeo4", "hIL13"]
+    index = 0
+
+    if allCells:
+        cells = modelDF.Cell.unique()
+    else:
+        cells = ["Macrophage", "Fibroblast", "Monocyte"]
+
+    for cell in cells:
+        if allCells:
+            animals = modelDF.loc[modelDF.Cell == cell].Animal.unique()
+        else:
+            animals = ["Human"]
+        for animal in animals:
+            isoData = modelDF.loc[(modelDF.Cell == cell) & (modelDF.Animal == animal)]
+            means = meanDF.loc[(meanDF.Cell == cell) & (meanDF.Animal == animal)]
+            stds = stdDF.loc[(stdDF.Cell == cell) & (stdDF.Animal == animal)]
+            if animal == "Human":
+                ligOrder = ["hIL4", "hNeo4", "hIL13"]
+            else:
+                ligOrder = ["mIL4", "mNeo4"]
+            sns.lineplot(data=isoData, x="Concentration", y="Predicted", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
+            #sns.scatterplot(data=isoData, x="Concentration", y="Experimental", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
+            for j, ligand in enumerate(means.Ligand.values):
+                ax[index].scatter(x=means.Concentration.values[j], y=means.Experimental.values[j], color=colorDict[ligand])
+                ax[index].errorbar(x=means.Concentration.values[j], y=means.Experimental.values[j], yerr=stds.Experimental.values[j], ls='none', color=colorDict[ligand], elinewidth=2, capthick=1)
+
+            ax[index].set(title="Dose Response Curve for " + animal + " " + cell, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
+            handles, labels = ax[index].get_legend_handles_labels()
+            if len(isoData.Ligand.unique()) == 3:
+                ax[index].legend([handles[0]] + handles[3::], [labels[0]] + labels[3::])
+            else:
+                ax[index].legend([handles[0]] + handles[2::], [labels[0]] + labels[2::])
+
+            index += 1
