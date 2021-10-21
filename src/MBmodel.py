@@ -239,7 +239,7 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
 
     if justPrimary:
         SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
-        SigData = SigData.loc[(SigData.Animal != "Human") & (SigData.Cell != "Macrophage")]
+        SigData = SigData.loc[(SigData.Animal != "Human") | (SigData.Cell != "Macrophage")]
 
     SigData = SigData.loc[SigData["AB Norm"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
@@ -411,10 +411,10 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
     if training:
         dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]))]
         dfm = dfm.loc[(dfm.Cell.isin(["3T3", "A20", "Macrophage"]))]
-        ylabel = "Fitting Accuracy (RMSE)"
+        ylabel = "Fitting Accuracy (MSE)"
     else:
         dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]) == False)]
-        ylabel = "Prediction Accuracy (RMSE)"
+        ylabel = "Prediction Accuracy (MSE)"
 
     for cell in dfh.Cell.unique():
         preds = dfh.loc[(dfh.Cell == cell)].Predicted.values
@@ -454,11 +454,11 @@ def R2_Plot_Ligs(df, ax=False, training=False):
     if training:
         df = df.loc[(df.Cell.isin(["A549", "Ramos", "3T3", "A20", "Macrophage"]))]
         df = df.loc[(df.Animal == "Mouse") | (df.Cell != "Macrophage")]
-        ylabel = "Fitting Accuracy (RMSE)"
+        ylabel = "Fitting Accuracy (MSE)"
     else:
         df = df.loc[(df.Cell.isin(["Monocyte", "Macrophage", "Fibroblast"]))]
         df = df.loc[(df.Animal == "Human")]
-        ylabel = "Prediction Accuracy Human Macrophage (RMSE)"
+        ylabel = "Prediction Accuracy Human Macrophage (MSE)"
 
     for ligand in df.Ligand.unique():
         preds = df.loc[(df.Ligand == ligand)].Predicted.values
@@ -472,6 +472,40 @@ def R2_Plot_Ligs(df, ax=False, training=False):
         plt.xticks(rotation=45)
     else:
         sns.barplot(x="Ligand", y="Accuracy", data=accDF, ax=ax, palette=colors)
+        ax.set(ylabel=ylabel, ylim=(0, 0.2))
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+
+
+def R2_Plot_Mods(dfMult, dfSeq, ax=False, training=False):
+    """Plots all accuracies per ligand"""
+    accDF = pd.DataFrame(columns={"Model", "Accuracy (MSE)"})
+    if training:
+        dfMult = dfMult.loc[(dfMult.Cell.isin(["A549", "Ramos", "3T3", "A20", "Macrophage"]))]
+        dfMult = dfMult.loc[(dfMult.Animal == "Mouse") | (dfMult.Cell != "Macrophage")]
+        dfSeq = dfSeq.loc[(dfSeq.Cell.isin(["A549", "Ramos", "3T3", "A20", "Macrophage"]))]
+        dfSeq = dfSeq.loc[(dfSeq.Animal == "Mouse") | (dfSeq.Cell != "Macrophage")]
+        ylabel = "Fitting Accuracy (MSE)"
+    else:
+        dfMult = dfMult.loc[(dfMult.Cell.isin(["Monocyte", "Macrophage", "Fibroblast"]))]
+        dfMult = dfMult.loc[(dfMult.Animal == "Human")]
+        dfSeq = dfSeq.loc[(dfSeq.Cell.isin(["Monocyte", "Macrophage", "Fibroblast"]))]
+        dfSeq = dfSeq.loc[(dfSeq.Animal == "Human")]
+        ylabel = "Prediction Accuracy (MSE)"
+
+    models = [dfMult, dfSeq]
+    labels = ["Multivalent Binding Model", "Sequential Binding Model"]
+    for i, model in enumerate(models):
+        preds = model.Predicted.values
+        exps = model.Experimental.values
+        MSE = mean_squared_error(exps, preds)
+        accDF = accDF.append(pd.DataFrame({"Model": [labels[i]], "Accuracy": [MSE]}))
+    if not ax:
+        sns.barplot(x="Ligand", y="Accuracy", data=accDF, color="k")
+        plt.ylabel(ylabel)
+        plt.ylim((0, 1))
+        plt.xticks(rotation=45)
+    else:
+        sns.barplot(x="Model", y="Accuracy", data=accDF, ax=ax, color="k")
         ax.set(ylabel=ylabel, ylim=(0, 0.2))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
@@ -600,7 +634,7 @@ def ABtestNorm(ax, xSeq, xMult):
     colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen"}
     ABblock = np.linspace(start=0, stop=1, num=51)
     models = ["Sequential", "Multivalent"]
-    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Ligand", "Prediction Accuracy (RMSE)"))
+    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Ligand", "Prediction Accuracy (MSE)"))
     for model in models:
         for ratio in ABblock:
             if model == "Sequential":
@@ -610,12 +644,12 @@ def ABtestNorm(ax, xSeq, xMult):
             for ligand in ABdf.Ligand.unique():
                 ligDF = ABdf.loc[(ABdf.Ligand == ligand)]
                 ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)], "Ligand": [ligand],
-                                           "Prediction Accuracy (RMSE)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)]}))
-    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (RMSE)", hue="Ligand", style="Model", ax=ax, palette=colors)
-    ax.set(xlim=(0, 100), ylim=(-.1, 1))
+                                           "Prediction Accuracy (MSE)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)]}))
+    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Ligand", style="Model", ax=ax, palette=colors)
+    ax.set(xlim=(0, 100), ylim=(-.1, 0.2))
 
 
-def doseResponsePlot(ax, modelDF, allCells=True):
+def doseResponsePlot(ax, modelDF, allCells=True, model=False):
     """Plot dose response curves for all cells and ligands"""
     meanDF = modelDF.groupby(["Animal", "Cell", "Ligand", "Concentration"])['Experimental'].mean().reset_index()
     stdDF = modelDF.groupby(["Animal", "Cell", "Ligand", "Concentration"])['Experimental'].std().reset_index()
@@ -647,7 +681,10 @@ def doseResponsePlot(ax, modelDF, allCells=True):
                 ax[index].scatter(x=means.Concentration.values[j], y=means.Experimental.values[j], color=colorDict[ligand])
                 ax[index].errorbar(x=means.Concentration.values[j], y=means.Experimental.values[j], yerr=stds.Experimental.values[j], ls='none', color=colorDict[ligand], elinewidth=2, capthick=1)
 
-            ax[index].set(title="Dose Response Curve for " + animal + " " + cell, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
+            if model:
+                ax[index].set(title=animal + " " + cell + " - " + model, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
+            else:
+                ax[index].set(title=animal + " " + cell, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
             handles, labels = ax[index].get_legend_handles_labels()
             if len(isoData.Ligand.unique()) == 3:
                 ax[index].legend([handles[0]] + handles[3::], [labels[0]] + labels[3::])
