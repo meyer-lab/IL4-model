@@ -345,8 +345,9 @@ def affFit(ax, gcFit=True, confInt=np.array([False])):
         sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax, palette=colors)
     else:
         sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax, palette=colors)
-    ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Fit Affinities")
+    ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Binding Rates Multivalent")
     ax.legend(prop=dict(size=9), loc="upper right")
+    fitDict.to_csv("MultivalentFit.csv")
 
 
 def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
@@ -385,10 +386,12 @@ def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     fitDictKDSurf = fitDictKDSurf.append(fitDict.loc[(fitDict.Receptor == "IL4Rα") & (fitDict.Ligand == "hIL13")])
 
     sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0], palette=colorsLig)
-    ax[0].set(ylabel=r"IL4Rα $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
+    ax[0].set(ylabel=r"Initial association $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
+    fitDictKDNorm.to_csv("InitialAssociationParamsSequential.csv")
 
     sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1], palette=colorsRec)
     ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
+    fitDictKDSurf.to_csv("MultimerizationParamsSequential.csv")
 
 
 def Exp_Pred(modelDF, ax, seq=False, Mouse=True):
@@ -508,6 +511,7 @@ def R2_Plot_Mods(dfMult, dfSeq, ax=False, training=False):
         sns.barplot(x="Model", y="Accuracy", data=accDF, ax=ax, color="k")
         ax.set(ylabel=ylabel, ylim=(0, 0.2))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+    accDF.to_csv("ModelComparison_1a.csv")
 
 
 def residsAB(x, blockRatio, gcFit=False):
@@ -631,22 +635,20 @@ def ABtest(ax, xSeq, xMult):
 
 def ABtestNorm(ax, xSeq, xMult):
     """Tests Seq vs MB model for a variety of AB blocking ratios"""
-    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen"}
     ABblock = np.linspace(start=0, stop=1, num=51)
     models = ["Sequential", "Multivalent"]
-    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Ligand", "Prediction Accuracy (MSE)"))
+    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Prediction Accuracy (MSE)"))
     for model in models:
         for ratio in ABblock:
             if model == "Sequential":
                 ABdf = residsSeqAB(xSeq, ratio)
             else:
                 ABdf = residsAB(xMult, ratio)
-            for ligand in ABdf.Ligand.unique():
-                ligDF = ABdf.loc[(ABdf.Ligand == ligand)]
-                ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)], "Ligand": [ligand],
-                                           "Prediction Accuracy (MSE)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)]}))
-    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Ligand", style="Model", ax=ax, palette=colors)
-    ax.set(xlim=(0, 100), ylim=(-.1, 0.2))
+            ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)],
+                                                     "Prediction Accuracy (MSE)": [mean_squared_error(ABdf.Experimental.values, ABdf.Predicted.values)]}))
+    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Model", style="Model", ax=ax)
+    ax.set(xlim=(0, 100), ylim=(0, 0.1))
+    ABtestDF.to_csv("AntagonistAccDF.csv")
 
 
 def doseResponsePlot(ax, modelDF, allCells=True, model=False):
@@ -655,40 +657,36 @@ def doseResponsePlot(ax, modelDF, allCells=True, model=False):
     stdDF = modelDF.groupby(["Animal", "Cell", "Ligand", "Concentration"])['Experimental'].std().reset_index()
     colorDict = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
     ligOrder = ["hIL4", "hNeo4", "mIL4", "mNeo4", "hIL13"]
-    index = 0
 
     if allCells:
         cells = modelDF.Cell.unique()
+        cells = ["Ramos", "A549", "Macrophage", "Monocyte", "Fibroblast", "3T3", "A20", "Macrophage"]
+        animals = ["Human", "Human", "Human", "Human", "Human", "Mouse", "Mouse", "Mouse"]
     else:
         cells = ["Macrophage", "Fibroblast", "Monocyte"]
+        animals = ["Human", "Human", "Human"]
 
-    for cell in cells:
-        if allCells:
-            animals = modelDF.loc[modelDF.Cell == cell].Animal.unique()
+    for index, cell in enumerate(cells):
+        animal = animals[index]
+        isoData = modelDF.loc[(modelDF.Cell == cell) & (modelDF.Animal == animal)]
+        means = meanDF.loc[(meanDF.Cell == cell) & (meanDF.Animal == animal)]
+        stds = stdDF.loc[(stdDF.Cell == cell) & (stdDF.Animal == animal)]
+        if animal == "Human":
+            ligOrder = ["hIL4", "hNeo4", "hIL13"]
         else:
-            animals = ["Human"]
-        for animal in animals:
-            isoData = modelDF.loc[(modelDF.Cell == cell) & (modelDF.Animal == animal)]
-            means = meanDF.loc[(meanDF.Cell == cell) & (meanDF.Animal == animal)]
-            stds = stdDF.loc[(stdDF.Cell == cell) & (stdDF.Animal == animal)]
-            if animal == "Human":
-                ligOrder = ["hIL4", "hNeo4", "hIL13"]
-            else:
-                ligOrder = ["mIL4", "mNeo4"]
-            sns.lineplot(data=isoData, x="Concentration", y="Predicted", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
-            #sns.scatterplot(data=isoData, x="Concentration", y="Experimental", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
-            for j, ligand in enumerate(means.Ligand.values):
-                ax[index].scatter(x=means.Concentration.values[j], y=means.Experimental.values[j], color=colorDict[ligand])
-                ax[index].errorbar(x=means.Concentration.values[j], y=means.Experimental.values[j], yerr=stds.Experimental.values[j], ls='none', color=colorDict[ligand], elinewidth=2, capthick=1)
+            ligOrder = ["mIL4", "mNeo4"]
+        sns.lineplot(data=isoData, x="Concentration", y="Predicted", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
+        #sns.scatterplot(data=isoData, x="Concentration", y="Experimental", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
+        for j, ligand in enumerate(means.Ligand.values):
+            ax[index].scatter(x=means.Concentration.values[j], y=means.Experimental.values[j], color=colorDict[ligand])
+            ax[index].errorbar(x=means.Concentration.values[j], y=means.Experimental.values[j], yerr=stds.Experimental.values[j], ls='none', color=colorDict[ligand], elinewidth=2, capthick=1)
 
-            if model:
-                ax[index].set(title=animal + " " + cell + " - " + model, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
-            else:
-                ax[index].set(title=animal + " " + cell, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
-            handles, labels = ax[index].get_legend_handles_labels()
-            if len(isoData.Ligand.unique()) == 3:
-                ax[index].legend([handles[0]] + handles[3::], [labels[0]] + labels[3::])
-            else:
-                ax[index].legend([handles[0]] + handles[2::], [labels[0]] + labels[2::])
-
-            index += 1
+        if model:
+            ax[index].set(title=animal + " " + cell + " - " + model, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
+        else:
+            ax[index].set(title=animal + " " + cell, ylabel="Normalized pSTAT6 (MFI)", ylim=(-.05, 1.25), xlim=(-14, -5))
+        handles, labels = ax[index].get_legend_handles_labels()
+        if len(isoData.Ligand.unique()) == 3:
+            ax[index].legend([handles[0]] + handles[3::], [labels[0]] + labels[3::])
+        else:
+            ax[index].legend([handles[0]] + handles[2::], [labels[0]] + labels[2::])

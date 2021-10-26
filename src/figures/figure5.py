@@ -26,8 +26,9 @@ def makeFigure():
     residsSeq(xOptimalSeqnoGC, True, False, True)
     modelDFSeqnoGC = residsSeq(xOptimalSeqnoGC, True, False)
 
-    doseResponsePlot(ax[0:3], modelDFmulnoGCnoIL13, allCells=False)
-    R2_Plot_Mods(modelDFmulnoGC, modelDFSeqnoGC, ax=ax[3], training=False)
+    R2_Plot_Mods(modelDFmulnoGC, modelDFSeqnoGC, ax=ax[0], training=False)
+    doseResponsePlot(ax[1:4], modelDFmulnoGCnoIL13, allCells=False)
+
     plt.prism()
 
     return f
