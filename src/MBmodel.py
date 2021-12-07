@@ -22,7 +22,6 @@ def loadSigData():
     sigData.loc[(sigData.Cell == "3T3") & (sigData.Ligand == "mIL4") & (sigData.Concentration <= -10), "Signal"] = 0
     return sigData
 
-
 def Req_func2(Req: np.ndarray, L0, KxStar, Rtot: np.ndarray, Kav: np.ndarray):
     Psi = Req * Kav * KxStar
     Psi = np.pad(Psi, ((0, 0), (0, 1)), constant_values=1)
@@ -141,21 +140,20 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
 
     for cell in SigData.Cell.unique():
         for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
-            for donor in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Donor.unique():
-                for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Donor == donor)].Ligand.unique():
-                    isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
-                    Concs = isoData.Concentration.values
-                    normSigs = isoData.Signal.values / 100
-                    ligCplx = CplxDict[ligand]
-                    if animal == "Human":
-                        if cell == "Macrophage":
-                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macIL4=x[13], macGC=x[14], gcFit=gcFit)
-                        else:
-                            results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
+            for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Ligand.unique():
+                isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
+                Concs = isoData.Concentration.values
+                normSigs = isoData.Signal.values / 100
+                ligCplx = CplxDict[ligand]
+                if animal == "Human":
+                    if cell == "Macrophage":
+                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macIL4=x[13], macGC=x[14], gcFit=gcFit)
                     else:
                         results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
-                    masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
-                                                   "Animal": animal, "Experimental": normSigs, "Predicted": results, "Donor": donor}))
+                else:
+                    results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
+                masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
+                                                "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
             # Normalize
             """
@@ -254,21 +252,20 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
 
     for cell in SigData.Cell.unique():
         for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
-            for donor in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Donor.unique():
-                for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Donor == donor)].Ligand.unique():
-                    isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
-                    Concs = isoData.Concentration.values
-                    normSigs = isoData.Signal.values
-                    ligKDs = KdDict[ligand]
-                    if animal == "Human":
-                        if cell == "Macrophage":
-                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macIL4=x[12], macGC=x[13], gcFit=gcFit)
-                        else:
-                            results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
+            for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Ligand.unique():
+                isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
+                Concs = isoData.Concentration.values
+                normSigs = isoData.Signal.values
+                ligKDs = KdDict[ligand]
+                if animal == "Human":
+                    if cell == "Macrophage":
+                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macIL4=x[12], macGC=x[13], gcFit=gcFit)
                     else:
                         results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
-                    masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs, "Animal": animal,
-                                                   "Experimental": normSigs, "Predicted": np.ravel(results), "Donor": donor}))
+                else:
+                    results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
+                masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs, "Animal": animal,
+                                                   "Experimental": normSigs, "Predicted": np.ravel(results)}))
 
             # Normalize
             masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
