@@ -8,6 +8,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from os.path import join
+from copy import copy
 from scipy.optimize import root, least_squares
 from sklearn.metrics import mean_squared_error
 
@@ -97,7 +98,7 @@ def fitFunc(gcFit=True):
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, 5])
     bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., 4], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, 7])
-    parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, True))
+    parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, False))
     #assert parampredicts.success
     return parampredicts.x
 
@@ -156,11 +157,6 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
                                                 "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
             # Normalize
-            """
-            CellLigData = masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)]
-            scaleFact = np.linalg.lstsq(np.reshape(CellLigData.Predicted.values, (-1, 1)), np.reshape(CellLigData.Experimental.values, (-1, 1)), rcond=None)[0][0]
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] *= scaleFact
-            """
             masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
@@ -172,7 +168,14 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
     else:
         print(x)
         print(np.linalg.norm(masterSTAT.Predicted.values - masterSTAT.Experimental.values))
-        return masterSTAT.Predicted.values - masterSTAT.Experimental.values
+        errorCalcDF = copy(masterSTAT)
+        for cell in errorCalcDF.Cell.unique():
+            for animal in errorCalcDF.loc[errorCalcDF.Cell == cell].Animal.unique():
+                cellNum = errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal)].shape[0]
+                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Predicted"] /= np.sqrt(cellNum)
+                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Experimental"] /= np.sqrt(cellNum)
+
+        return errorCalcDF.Predicted.values - errorCalcDF.Experimental.values
 
 
 def seqBindingModel(KdVec, doseVec, cellType, animal, lig, ABblock=1.0, macIL4=False, macGC=False, gcFit=True):
