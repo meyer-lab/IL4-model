@@ -11,6 +11,8 @@ from os.path import join
 from copy import copy
 from scipy.optimize import root, least_squares
 from sklearn.metrics import mean_squared_error
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
 
 
 def loadSigData():
@@ -22,6 +24,7 @@ def loadSigData():
     sigData.loc[(sigData.Cell == "3T3") & (sigData.Ligand == "mNeo4"), "Signal"] -= SubtractLine[1]
     sigData.loc[(sigData.Cell == "3T3") & (sigData.Ligand == "mIL4") & (sigData.Concentration <= -10), "Signal"] = 0
     return sigData
+
 
 def Req_func2(Req: np.ndarray, L0, KxStar, Rtot: np.ndarray, Kav: np.ndarray):
     Psi = Req * Kav * KxStar
@@ -72,18 +75,18 @@ def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, ABblock=1.0, macIL4=Fal
     doseVec = np.array(doseVec)
 
     if not macIL4:
-        recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                             recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
-    else:
-        if gcFit:
-            recCount = np.ravel([np.power(10, macIL4),
-                                np.power(10, macGC),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
+        if cellType == "Monocyte" and animal == "Human" and gcFit:
+            recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                                 np.power(10, macGC),
+                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
         else:
-            recCount = np.ravel([np.power(10, macIL4),
+            recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
+    else:
+        recCount = np.ravel([np.power(10, macIL4),
+                            recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                            recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
 
     output = np.zeros([doseVec.size, 2])
 
@@ -97,7 +100,7 @@ def fitFunc(gcFit=True):
     "Runs least squares fitting for various model parameters, and returns the minimizers"
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, 5])
-    bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., 4], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, 7])
+    bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., 3], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, 7])
     parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, False))
     #assert parampredicts.success
     return parampredicts.x
@@ -147,14 +150,16 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
                 normSigs = isoData.Signal.values / 100
                 ligCplx = CplxDict[ligand]
                 if animal == "Human":
-                    if cell == "Macrophage":
-                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macIL4=x[13], macGC=x[14], gcFit=gcFit)
+                    if cell == "Monocyte":
+                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macGC=x[14], gcFit=gcFit)
+                    elif cell == "Macrophage":
+                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macIL4=x[13], gcFit=gcFit)
                     else:
                         results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
                 else:
                     results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
                 masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
-                                                "Animal": animal, "Experimental": normSigs, "Predicted": results}))
+                                                             "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
             # Normalize
             masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
@@ -213,7 +218,7 @@ def fitFuncSeq(gcFit=True):
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 1, -5, 2, 5])
     bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -4, -11, -1, 4], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 4, -3, 2.7, 7])
-    parampredicts = least_squares(residsSeq, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, True))
+    parampredicts = least_squares(residsSeq, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, False))
     #assert parampredicts.success
     return parampredicts.x
 
@@ -268,7 +273,7 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
                 else:
                     results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
                 masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs, "Animal": animal,
-                                                   "Experimental": normSigs, "Predicted": np.ravel(results)}))
+                                                             "Experimental": normSigs, "Predicted": np.ravel(results)}))
 
             # Normalize
             masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
@@ -405,6 +410,18 @@ def Exp_Pred(modelDF, ax, seq=False, Mouse=True):
         ax.set(title="Mulivalent Binding Model Human")
 
 
+def affDemo(ax):
+    """Overall plot of experimental vs. predicted for STAT6 signaling"""
+    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
+    fit = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values * -1 + 9
+    fit = np.power(10, fit)
+    affDF = pd.read_csv("src/data/ExpAffinities.csv")
+    affDF["Predicted IL4Ra Affinity"] = [fit[6], fit[9], fit[1], fit[4]]
+    sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Predicted IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
+    ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
+    ax.set(xscale="log", yscale="log")
+
+
 def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
     """Plots all accuracies per cell"""
     accDFh = pd.DataFrame(columns={"Cell Type", "Accuracy"})
@@ -416,8 +433,8 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
         dfm = dfm.loc[(dfm.Cell.isin(["3T3", "A20", "Macrophage"]))]
         ylabel = "Fitting Accuracy (MSE)"
     else:
-        dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]) == False)]
-        ylabel = "Prediction Accuracy (MSE)"
+        #dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]) == False)]
+        ylabel = "Fitting Accuracy (MSE)"
 
     for cell in dfh.Cell.unique():
         preds = dfh.loc[(dfh.Cell == cell)].Predicted.values
@@ -431,9 +448,9 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
         r2 = mean_squared_error(exps, preds)
         accDFm = accDFm.append(pd.DataFrame({"Cell Type": [cell], "Accuracy": [r2]}))
 
-    sns.barplot(x="Cell Type", y="Accuracy", data=accDFh, ax=ax[0], color="k")
-    ax[0].set(ylabel=ylabel, ylim=(0, 0.2))
-    ax[0].set_xticklabels(ax[0].get_xticklabels(), rotation=45)
+    sns.barplot(x="Cell Type", y="Accuracy", data=accDFh, ax=ax, color="k")
+    ax.set(ylabel=ylabel, ylim=(0, 0.1))
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
     if mice:
         sns.barplot(x="Cell Type", y="Accuracy", data=accDFm, ax=ax[1], color="k")
@@ -441,11 +458,11 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
         ax[1].set_xticklabels(ax[1].get_xticklabels(), rotation=45)
 
     if seq:
-        ax[0].set(title="Human Cells")
+        ax.set(title="Human Cells - Sequential Binding Model")
         if mice:
             ax[1].set(title="Mouse Cells")
     else:
-        ax[0].set(title="Human Cells")
+        ax.set(title="Human Cells - Multivalent Binding Model")
         if mice:
             ax[1].set(title="Mouse Cells")
 
@@ -512,6 +529,29 @@ def R2_Plot_Mods(dfMult, dfSeq, ax=False, training=False):
         ax.set(ylabel=ylabel, ylim=(0, 0.2))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
     accDF.to_csv("ModelComparison_1a.csv")
+
+
+def R2_Plot_RecS(dfMult, ax=False):
+    """Plots all accuracies per ligand"""
+    colors = {"IL4Ra": "mediumorchid", "Gamma": "gold", "IL13Ra": "lightseagreen"}
+    sensDF = pd.read_csv("src/data/ReceptorFitDF.csv")
+    sensDF = sensDF.loc[sensDF.Animal == "Human"]
+    sensDF["MSE"] = 100 * (mean_squared_error(dfMult.Experimental, dfMult.Predicted) - sensDF["MSE"]) / mean_squared_error(dfMult.Experimental, dfMult.Predicted)
+    sensDF["MSE"] = sensDF["MSE"].clip(lower=0)
+    sensDF["Cell"] = sensDF.Animal.values + " " + sensDF.Cell.values
+    sns.barplot(data=sensDF, x="Cell", y="MSE", hue="Receptor", palette=colors, ax=ax)
+    ax.set(ylabel="MSE Improvement (%)")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+
+
+def R2_Plot_CV(ax=False):
+    """Plots all accuracies per ligand"""
+    cvDF = pd.read_csv("src/data/CellCV.csv")
+    cvDF["Cell"] = cvDF.Animal.values + " " + cvDF.Cell.values
+    cvDF = cvDF.loc[cvDF.Animal == "Human"]
+    sns.barplot(data=cvDF, x="Cell", y=r"$R^2$", color='k', ax=ax)
+    ax.set(ylabel=r"Cross Validation $R^2$")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
 
 def residsAB(x, blockRatio, gcFit=False):
@@ -690,3 +730,34 @@ def doseResponsePlot(ax, modelDF, allCells=True, model=False):
             ax[index].legend([handles[0]] + handles[3::], [labels[0]] + labels[3::])
         else:
             ax[index].legend([handles[0]] + handles[2::], [labels[0]] + labels[2::])
+
+
+def EC50PCA(ax, IL13=True):
+    """Plot dose response curves for all cells and ligands"""
+    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
+    if IL13:
+        ligands = ["hIL13", "hIL4", "hNeo4"]
+    else:
+        ligands = ["hIL4", "hNeo4"]
+    EC50df = pd.read_csv("src/data/EC50df.csv", na_values=["not tested", "ND"])
+    EC50df.replace({"not tested": np.nan})
+    EC50df.replace({"ND": np.nan})
+    EC50df["EC50"] = np.log10(EC50df["EC50"].values)
+    EC50df["Cell Donor"] = EC50df["Cell"] + " " + EC50df["Donor"].astype(str)
+    EC50df = EC50df.pivot(index=["Cell", "Cell Donor", "Antibody"], columns="Ligand", values="EC50").reset_index()
+    if not IL13:
+        EC50df = EC50df.drop("hIL13", axis=1)
+    EC50df = EC50df.dropna()
+    EC50pca = EC50df[ligands].values
+    scaler = StandardScaler()
+    EC50pca = scaler.fit_transform(EC50pca)
+    pca = PCA(n_components=2)
+    scores = pca.fit_transform(EC50pca)
+    loadings = pca.components_
+    scoresDF = pd.DataFrame({"Cell": EC50df.Cell.values, "Antibody": EC50df.Antibody.values, "Component 1": scores[:, 0], "Component 2": scores[:, 1]})
+    loadingsDF = pd.DataFrame({"Ligand": ligands, "Component 1": loadings[0, :], "Component 2": loadings[1, :]})
+
+    sns.scatterplot(data=scoresDF, x="Component 1", y="Component 2", hue="Cell", style="Antibody", ax=ax[0])
+    ax[0].set(xlim=(-3, 3), ylim=(-3, 3))
+    sns.scatterplot(data=loadingsDF, x="Component 1", y="Component 2", hue="Ligand", style="Ligand", ax=ax[1], palette=colors)
+    ax[1].set(xlim=(-3, 3), ylim=(-3, 3))
