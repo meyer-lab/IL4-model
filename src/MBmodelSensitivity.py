@@ -95,7 +95,7 @@ def fitFunc(gcFit=True):
     "Runs least squares fitting for various model parameters, and returns the minimizers"
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     resDF = pd.DataFrame()
-    paramPredicts = False
+    #paramPredicts = False
     for cell in recQuantDF.Cell.unique():
         for animal in recQuantDF.loc[recQuantDF.Cell == cell].Animal.unique():
             for receptor in recQuantDF.loc[(recQuantDF.Cell == cell) & (recQuantDF.Animal == animal)].Receptor.unique():
@@ -104,11 +104,11 @@ def fitFunc(gcFit=True):
                         init = recQuantDF.loc[(recQuantDF.Receptor == receptor) & (recQuantDF["Cell"] == cell) & (recQuantDF["Animal"] == animal)].Amount.mean()
                         recCellAn = [receptor, cell, animal]
                         print(recCellAn)
-                        if not paramPredicts:
-                            x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, np.log10(init)])
-                        else:
-                            x0 = parampredicts.x
-                            x0[-1] = np.log10(init)
+                        # if not paramPredicts:
+                        x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, np.log10(init)])
+                        # else:
+                        #    x0 = parampredicts.x
+                        #    x0[-1] = np.log10(init)
                         bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., np.log10(init) - 2], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, np.log10(init) + 2])
                         parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(recCellAn, False))
                         resultsDF = resids(parampredicts.x, retDF=True, recCellAn=recCellAn)
@@ -117,7 +117,7 @@ def fitFunc(gcFit=True):
                         print("MSE = ", MSE)
                         print("R2 = ", R2)
                         resDF = resDF.append(pd.DataFrame({"Cell": [cell], "Animal": [animal], "Receptor": [receptor], "MSE": [MSE], r"$R^2$": [R2]}))
-    resDF.to_csv("ReceptorFitDF.csv")
+    resDF.to_csv("ReceptorFitDF2.csv")
 
 
 def resids(x, recCellAn=False, retDF=False):
@@ -151,7 +151,7 @@ def resids(x, recCellAn=False, retDF=False):
                 else:
                     results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, recOpt=x[14], recCellAn=recCellAn)
                 masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
-                                                "Animal": animal, "Experimental": normSigs, "Predicted": results}))
+                                                             "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
             # Normalize
             masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
@@ -161,20 +161,23 @@ def resids(x, recCellAn=False, retDF=False):
 
     if retDF:
         errorCalcDF = copy(masterSTAT)
+        """
         for cell in errorCalcDF.Cell.unique():
             for animal in errorCalcDF.loc[errorCalcDF.Cell == cell].Animal.unique():
-                cellNum = errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal)].shape[0]
-                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Predicted"] /= np.sqrt(cellNum)
-                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Experimental"] /= np.sqrt(cellNum)
+                for ligand in errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal)].Ligand.unique():
+                    cellNum = errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal) & (errorCalcDF.Ligand == ligand)].shape[0]
+                    errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Predicted"] /= np.sqrt(cellNum)
+                    errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Experimental"] /= np.sqrt(cellNum)
+        """
         return errorCalcDF
     else:
         errorCalcDF = copy(masterSTAT)
+        """
         for cell in errorCalcDF.Cell.unique():
             for animal in errorCalcDF.loc[errorCalcDF.Cell == cell].Animal.unique():
-                cellNum = errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal)].shape[0]
-                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Predicted"] /= np.sqrt(cellNum)
-                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Experimental"] /= np.sqrt(cellNum)
-
+                for ligand in errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal)].Ligand.unique():
+                    cellNum = errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal) & (errorCalcDF.Ligand == ligand)].shape[0]
+                    errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Predicted"] /= np.sqrt(cellNum)
+                    errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Experimental"] /= np.sqrt(cellNum)
+        """
         return errorCalcDF.Predicted.values - errorCalcDF.Experimental.values
-
-
