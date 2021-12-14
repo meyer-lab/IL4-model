@@ -1,0 +1,67 @@
+Animal,Ligand,Cell,Antibody,Emax,Donor
+Human,hIL4,A549,FALSE,1,210929
+Human,hIL13,A549,FALSE,0.87,210929
+Human,hNeo4,A549,FALSE,ND,210929
+Human,hIL4,Ramos,FALSE,1,210929
+Human,hIL13,Ramos,FALSE,ND,210929
+Human,hNeo4,Ramos,FALSE,1.02,210929
+Human,hIL4,Monocyte,FALSE,1,210903
+Human,hIL13,Monocyte,FALSE,0.9733,210903
+Human,hNeo4,Monocyte,FALSE,0.8216,210903
+Human,hIL4,Monocyte,FALSE,1,210831
+Human,hIL13,Monocyte,FALSE,0.72,210831
+Human,hNeo4,Monocyte,FALSE,0.50,210831
+Human,hIL4,Macrophage,FALSE,1,210820
+Human,hIL13,Macrophage,FALSE,0.92,210820
+Human,hNeo4,Macrophage,FALSE,0.27,210820
+Human,hIL4,Macrophage,FALSE,,210806
+Human,hIL13,Macrophage,FALSE,0.97,210806
+Human,hNeo4,Macrophage,FALSE,0.08,210806
+Human,hIL4,Monocyte,FALSE,1,210722
+Human,hIL13,Monocyte,FALSE,1.13,210722
+Human,hNeo4,Monocyte,FALSE,0.89,210722
+Human,hIL4,Fibroblast,FALSE,1.00,210526
+Human,hIL13,Fibroblast,FALSE,not tested,210526
+Human,hNeo4,Fibroblast,FALSE,ND,210526
+Human,hIL4,Macrophage,FALSE,1.00,210522
+Human,hIL13,Macrophage,FALSE,not tested,210522
+Human,hNeo4,Macrophage,FALSE,0.06,210522
+Human,hIL4,Fibroblast,FALSE,1,210517
+Human,hIL13,Fibroblast,FALSE,not tested,210517
+Human,hNeo4,Fibroblast,FALSE,ND,210517
+Human,hIL4,Macrophage,FALSE,1,210504
+Human,hIL13,Macrophage,FALSE,not tested,210504
+Human,hNeo4,Macrophage,FALSE,0.17,210504
+Human,hIL4,Monocyte,FALSE,1,210426
+Human,hIL13,Monocyte,FALSE,1.08,210426
+Human,hNeo4,Monocyte,FALSE,0.8,210426
+Human,hIL4,Monocyte,FALSE,1,210319
+Human,hIL13,Monocyte,FALSE,not tested,210319
+Human,hNeo4,Monocyte,FALSE,0.96,210319
+Human,hIL4,Monocyte,FALSE,1,210312
+Human,hIL13,Monocyte,FALSE,not tested,210312
+Human,hNeo4,Monocyte,FALSE,,210312
+Human,hIL4,Ramos,FALSE,1,210309
+Human,hIL13,Ramos,FALSE,ND,210309
+Human,hNeo4,Ramos,FALSE,0.98,210309
+Human,hIL4,A549,FALSE,1,210309
+Human,hIL13,A549,FALSE,0.90,210309
+Human,hNeo4,A549,FALSE,ND,210309
+Human,hIL4,Ramos,TRUE,9.70E-01,210929
+Human,hIL13,Ramos,TRUE,ND,210929
+Human,hNeo4,Ramos,TRUE,1.00E+00,210929
+Human,hIL4,Monocyte,TRUE,1.13E+00,210903
+Human,hIL13,Monocyte,TRUE,1.06E+00,210903
+Human,hNeo4,Monocyte,TRUE,8.57E-01,210903
+Human,hIL4,Monocyte,TRUE,7.30E-01,210831
+Human,hIL13,Monocyte,TRUE,5.86E-01,210831
+Human,hNeo4,Monocyte,TRUE,5.14E-01,210831
+Human,hIL4,Macrophage,TRUE,6.76E-01,210820
+Human,hIL13,Macrophage,TRUE,9.87E-01,210820
+Human,hNeo4,Macrophage,TRUE,2.77E-01,210820
+Human,hIL4,Macrophage,TRUE,8.04E-01,210806
+Human,hIL13,Macrophage,TRUE,1.04E+00,210806
+Human,hNeo4,Macrophage,TRUE,5.28E-02,210806
+Human,hIL4,Monocyte,TRUE,1.04E+00,210722
+Human,hIL13,Monocyte,TRUE,1.05E+00,210722
+Human,hNeo4,Monocyte,TRUE,8.10E-01,210722
