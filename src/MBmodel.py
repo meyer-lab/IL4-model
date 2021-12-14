@@ -417,7 +417,7 @@ def affDemo(ax):
     fit = np.power(10, fit)
     affDF = pd.read_csv("src/data/ExpAffinities.csv")
     affDF["Predicted IL4Ra Affinity"] = [fit[6], fit[9], fit[1], fit[4]]
-    sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Predicted IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
+    sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
     ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
     ax.set(xscale="log", yscale="log")
 
@@ -540,7 +540,7 @@ def R2_Plot_RecS(dfMult, ax=False):
     sensDF["MSE"] = sensDF["MSE"].clip(lower=0)
     sensDF["Cell"] = sensDF.Animal.values + " " + sensDF.Cell.values
     sns.barplot(data=sensDF, x="Cell", y="MSE", hue="Receptor", palette=colors, ax=ax)
-    ax.set(ylabel="MSE Improvement (%)")
+    ax.set(ylabel="% Reduction MSE")
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
 
@@ -550,7 +550,7 @@ def R2_Plot_CV(ax=False):
     cvDF["Cell"] = cvDF.Animal.values + " " + cvDF.Cell.values
     cvDF = cvDF.loc[cvDF.Animal == "Human"]
     sns.barplot(data=cvDF, x="Cell", y=r"$R^2$", color='k', ax=ax)
-    ax.set(ylabel=r"Cross Validation $R^2$")
+    ax.set(ylabel=r"Cross Validation $R^2$", ylim=(0, 1))
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
 
 
@@ -703,7 +703,7 @@ def doseResponsePlot(ax, modelDF, allCells=True, model=False):
         cells = ["Ramos", "A549", "Macrophage", "Monocyte", "Fibroblast", "3T3", "A20", "Macrophage"]
         animals = ["Human", "Human", "Human", "Human", "Human", "Mouse", "Mouse", "Mouse"]
     else:
-        cells = ["Macrophage", "Fibroblast", "Monocyte"]
+        cells = ["Ramos", "Macrophage", "Monocyte"]
         animals = ["Human", "Human", "Human"]
 
     for index, cell in enumerate(cells):
@@ -740,8 +740,6 @@ def EC50PCA(ax, IL13=True):
     else:
         ligands = ["hIL4", "hNeo4"]
     EC50df = pd.read_csv("src/data/EC50df.csv", na_values=["not tested", "ND"])
-    EC50df.replace({"not tested": np.nan})
-    EC50df.replace({"ND": np.nan})
     EC50df["EC50"] = np.log10(EC50df["EC50"].values)
     EC50df["Cell Donor"] = EC50df["Cell"] + " " + EC50df["Donor"].astype(str)
     EC50df = EC50df.pivot(index=["Cell", "Cell Donor", "Antibody"], columns="Ligand", values="EC50").reset_index()
@@ -753,8 +751,38 @@ def EC50PCA(ax, IL13=True):
     EC50pca = scaler.fit_transform(EC50pca)
     pca = PCA(n_components=2)
     scores = pca.fit_transform(EC50pca)
+    varExp = pca.explained_variance_ratio_ * 100
     loadings = pca.components_
     scoresDF = pd.DataFrame({"Cell": EC50df.Cell.values, "Antibody": EC50df.Antibody.values, "Component 1": scores[:, 0], "Component 2": scores[:, 1]})
+    loadingsDF = pd.DataFrame({"Ligand": ligands, "Component 1": loadings[0, :], "Component 2": loadings[1, :]})
+
+    sns.scatterplot(data=scoresDF, x="Component 1", y="Component 2", hue="Cell", style="Antibody", ax=ax[0])
+    ax[0].set(xlim=(-3, 3), ylim=(-3, 3), xlabel="PC1 (" + str(varExp[0])[0:4] + "%)", ylabel="PC2 (" + str(varExp[1])[0:4] + "%)")
+    sns.scatterplot(data=loadingsDF, x="Component 1", y="Component 2", hue="Ligand", style="Ligand", ax=ax[1], palette=colors)
+    ax[1].set(xlim=(-1, 1), ylim=(-1, 1), xlabel="PC1 (" + str(varExp[0])[0:4] + "%)", ylabel="PC2 (" + str(varExp[1])[0:4] + "%)")
+
+
+def EmaxPCA(ax, IL13=True):
+    """Plot dose response curves for all cells and ligands"""
+    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
+    if IL13:
+        ligands = ["hIL13", "hIL4", "hNeo4"]
+    else:
+        ligands = ["hIL4", "hNeo4"]
+    EmaxDF = pd.read_csv("src/data/EmaxDF.csv", na_values=["not tested", "ND"])
+    EmaxDF["Cell Donor"] = EmaxDF["Cell"] + " " + EmaxDF["Donor"].astype(str)
+    EmaxDF = EmaxDF.pivot(index=["Cell", "Cell Donor", "Antibody"], columns="Ligand", values="Emax").reset_index()
+    if not IL13:
+        EmaxDF = EmaxDF.drop("hIL13", axis=1)
+    EmaxDF = EmaxDF.dropna()
+    EmaxPCA = EmaxDF[ligands].values
+    print(EmaxDF)
+    scaler = StandardScaler()
+    EmaxPCA = scaler.fit_transform(EmaxPCA)
+    pca = PCA(n_components=2)
+    scores = pca.fit_transform(EmaxPCA)
+    loadings = pca.components_
+    scoresDF = pd.DataFrame({"Cell": EmaxDF.Cell.values, "Antibody": EmaxDF.Antibody.values, "Component 1": scores[:, 0], "Component 2": scores[:, 1]})
     loadingsDF = pd.DataFrame({"Ligand": ligands, "Component 1": loadings[0, :], "Component 2": loadings[1, :]})
 
     sns.scatterplot(data=scoresDF, x="Component 1", y="Component 2", hue="Cell", style="Antibody", ax=ax[0])
