@@ -216,7 +216,7 @@ def seqBindingModel(KdVec, doseVec, cellType, animal, lig, ABblock=1.0, macIL4=F
 
 def fitFuncSeq(gcFit=True):
     "Runs least squares fitting for various model parameters, and returns the minimizers"
-    # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
+    # mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array([-5, 1, 1, -5, 1, -5, 1, 1, -5, 1, 1, -5, 2, 5])
     bnds = ([-11, -4, -4, -11, -4, -11, -4, -4, -11, -4, -4, -11, -1, 4], [-3, 4, 4, -3, 4, -3, 4, 4, -3, 4, 4, -3, 2.7, 7])
     parampredicts = least_squares(residsSeq, x0, bounds=bnds, ftol=1e-5, args=(False, gcFit, False))
@@ -226,7 +226,7 @@ def fitFuncSeq(gcFit=True):
 
 def getConfIntervalSeq():
     "Runs least squares fitting for various model parameters, and returns the minimizers"
-    # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
+    # mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     x0 = np.array(pd.read_csv("src/data/CurrentFitSeq.csv").x)
     bnds = (x0 - 0.0000001, x0 + 0.0000001)
     parampredicts = least_squares(residsSeq, x0, bounds=bnds)
@@ -411,16 +411,25 @@ def Exp_Pred(modelDF, ax, seq=False, Mouse=True):
         ax.set(title="Mulivalent Binding Model Human")
 
 
-def affDemo(ax):
+def affDemo(ax, MB=True):
     """Overall plot of experimental vs. predicted for STAT6 signaling"""
     colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
-    fit = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values * -1 + 9
-    fit = np.power(10, fit)
-    affDF = pd.read_csv("src/data/ExpAffinities.csv")
-    affDF["Predicted IL4Ra Affinity"] = [fit[6], fit[9], fit[1], fit[4]]
-    sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
-    ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
-    ax.set(xscale="log", yscale="log")
+    if MB:
+        fit = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values * -1 + 9
+        fit = np.power(10, fit)
+        affDF = pd.read_csv("src/data/ExpAffinities.csv")
+        affDF["Inferred IL4Ra Affinity"] = [fit[6], fit[9], fit[1], fit[4]]
+        sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
+        ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
+        ax.set(xscale="log", yscale="log")
+    else:
+        fit = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values * -1 + 9
+        fit = np.power(10, fit)
+        affDF = pd.read_csv("src/data/ExpAffinities.csv")
+        affDF["Inferred IL4Ra Affinity"] = [fit[5], fit[8], fit[0], fit[3]]
+        sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
+        ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
+        ax.set(xscale="log", yscale="log")
 
 
 def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
