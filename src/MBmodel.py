@@ -814,6 +814,7 @@ def AUC_PCA(ax, IL13=True):
     else:
         ligands = ["hIL4", "hNeo4"]
     EC50df = pd.read_csv("src/data/EC50df.csv", na_values=["not tested", "ND"])
+    EC50df = EC50df.loc[EC50df.Antibody == False]
     EC50df["EC50"] = np.log10(EC50df["EC50"].values)
     EC50df["Cell Donor"] = EC50df["Cell"] + " " + EC50df["Donor"].astype(str)
     sigDF = loadSigData()
