@@ -15,7 +15,7 @@ rcParams['svg.fonttype'] = 'none'
 def makeFigure():
     """Get a list of the axis objects and create a figure"""
 
-    ax, f = getSetup((12, 6), (2, 5))
+    ax, f = getSetup((14, 7), (2, 5))
 
     xOptimalMultnoGC = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values
     modelDFmulnoGC = resids(xOptimalMultnoGC, True, False)
@@ -23,11 +23,11 @@ def makeFigure():
     xOptimalSeqnoGC = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values
     modelDFSeqnoGC = residsSeq(xOptimalSeqnoGC, True, False)
 
-    AUC_PCA(ax[0:2], True)
+    AUC_PCA(ax[0:3], True)
 
-    R2_Plot_Cells(modelDFSeqnoGC, ax[2], seq=True, mice=False, training=False)
-    R2_Plot_Cells(modelDFmulnoGC, ax[3], seq=False, mice=False, training=False)
-    affDemo(ax[4])
+    R2_Plot_Cells(modelDFSeqnoGC, ax[3], seq=True, mice=False, training=False)
+    R2_Plot_Cells(modelDFmulnoGC, ax[4], seq=False, mice=False, training=False)
+    #affDemo(ax[4])
     doseResponsePlot(ax[5:8], modelDFmulnoGC, allCells=False)
 
     R2_Plot_CV(ax[8])

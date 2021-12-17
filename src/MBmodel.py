@@ -13,6 +13,7 @@ import scipy.integrate as integrate
 from scipy.optimize import root, least_squares
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.decomposition import PCA
+from sklearn.decomposition import NMF
 from sklearn.preprocessing import StandardScaler
 
 
@@ -802,7 +803,7 @@ def EmaxPCA(ax, IL13=True):
 
 def sigmoidFunc(x, EC50, upper, lower):
     """Returns the sigmoid function for a given EC50, max, and min"""
-    return lower + (upper-lower) / (1 + 10^(EC50-x))
+    return lower + (upper-lower) / (1 + np.power(10, (EC50-x)))
 
 
 def AUC_PCA(ax, IL13=True):
@@ -815,15 +816,18 @@ def AUC_PCA(ax, IL13=True):
     EC50df = pd.read_csv("src/data/EC50df.csv", na_values=["not tested", "ND"])
     EC50df["EC50"] = np.log10(EC50df["EC50"].values)
     EC50df["Cell Donor"] = EC50df["Cell"] + " " + EC50df["Donor"].astype(str)
-    EC50df["AUC"] = 0
     sigDF = loadSigData()
     minDose, maxDose = np.amin(sigDF.Concentration.values), np.amax(sigDF.Concentration.values)
+    AUC = np.zeros(EC50df.shape[0])
 
     for index, row in EC50df.iterrows():
-        if row["Upper"] != 0:
+        if np.isnan(row["EC50"]):
+            AUC[index] = np.nan
+        elif row["Upper"] != 0:
             EC50, upper, lower = row.EC50, row.Upper, row.Lower
-            EC50df[index].AUC = integrate.quad(sigmoidFunc, minDose, maxDose, args=(EC50, upper, lower))[0]
+            AUC[index] = np.asarray(integrate.quad(sigmoidFunc, minDose, maxDose, args=(EC50, upper, lower)))[0]
 
+    EC50df["AUC"] = AUC
     AUCdf = EC50df.pivot(index=["Cell", "Cell Donor", "Antibody"], columns="Ligand", values="AUC").reset_index()
     if not IL13:
         AUCdf = AUCdf.drop("hIL13", axis=1)
@@ -835,10 +839,19 @@ def AUC_PCA(ax, IL13=True):
     scores = pca.fit_transform(AUCpca)
     varExp = pca.explained_variance_ratio_ * 100
     loadings = pca.components_
-    scoresDF = pd.DataFrame({"Cell": AUCdf.Cell.values, "Antibody": AUCdf.Antibody.values, "Component 1": scores[:, 0], "Component 2": scores[:, 1]})
+    scoresDF = pd.DataFrame({"Cell": AUCdf.Cell.values, "Antibody": AUCdf.Antibody.values, "Component 1": scores[:, 0], "Component 2": scores[:, 1], "Cell Donor": AUCdf["Cell Donor"].values})
     loadingsDF = pd.DataFrame({"Ligand": ligands, "Component 1": loadings[0, :], "Component 2": loadings[1, :]})
 
     sns.scatterplot(data=scoresDF, x="Component 1", y="Component 2", hue="Cell", style="Antibody", ax=ax[0])
     ax[0].set(xlim=(-3, 3), ylim=(-3, 3), xlabel="PC1 (" + str(varExp[0])[0:4] + "%)", ylabel="PC2 (" + str(varExp[1])[0:4] + "%)")
+    ax[0].legend(loc="upper left")
     sns.scatterplot(data=loadingsDF, x="Component 1", y="Component 2", hue="Ligand", style="Ligand", ax=ax[1], palette=colors)
     ax[1].set(xlim=(-1, 1), ylim=(-1, 1), xlabel="PC1 (" + str(varExp[0])[0:4] + "%)", ylabel="PC2 (" + str(varExp[1])[0:4] + "%)")
+
+    Ratio = np.zeros(scoresDF.shape[0])
+
+    for index, row in scoresDF.reset_index().iterrows():
+        Ratio[index] = EC50df.loc[EC50df["Cell Donor"] == row["Cell Donor"]].Ratio.values[0]
+    scoresDF["Ratio"] = Ratio
+    sns.scatterplot(data=scoresDF, x="Component 1", y="Ratio", hue="Cell", style="Antibody", ax=ax[2])
+    ax[2].set(xlim=(-3, 3), yscale="log", xlabel="PC1", ylabel="Type 1 / Type 2 Bias")
