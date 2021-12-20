@@ -422,15 +422,15 @@ def affDemo(ax, MB=True):
         affDF["Inferred IL4Ra Affinity"] = [fit[6], fit[9], fit[1], fit[4]]
         sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
         ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
-        ax.set(xscale="log", yscale="log")
+        ax.set(xscale="log", yscale="log", title="Multivalent Model")
     else:
-        fit = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values * -1 + 9
+        fit = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values + 9
         fit = np.power(10, fit)
         affDF = pd.read_csv("src/data/ExpAffinities.csv")
         affDF["Inferred IL4Ra Affinity"] = [fit[5], fit[8], fit[0], fit[3]]
         sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
-        ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
-        ax.set(xscale="log", yscale="log")
+        ax.set(xlim=(1e-1, 1e7), ylim=(1e-1, 1e7), xscale="log", yscale="log")
+        ax.set(xscale="log", yscale="log", title="Sequential Model")
 
 
 def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
@@ -803,7 +803,7 @@ def EmaxPCA(ax, IL13=True):
 
 def sigmoidFunc(x, EC50, upper, lower):
     """Returns the sigmoid function for a given EC50, max, and min"""
-    return lower + (upper-lower) / (1 + np.power(10, (EC50-x)))
+    return lower + (upper - lower) / (1 + np.power(10, (EC50 - x)))
 
 
 def AUC_PCA(ax, IL13=True):
@@ -845,7 +845,7 @@ def AUC_PCA(ax, IL13=True):
 
     sns.scatterplot(data=scoresDF, x="Component 1", y="Component 2", hue="Cell", style="Antibody", ax=ax[0])
     ax[0].set(xlim=(-3, 3), ylim=(-3, 3), xlabel="PC1 (" + str(varExp[0])[0:4] + "%)", ylabel="PC2 (" + str(varExp[1])[0:4] + "%)")
-    ax[0].legend(loc="upper left")
+    ax[0].legend(loc="lower left")
     sns.scatterplot(data=loadingsDF, x="Component 1", y="Component 2", hue="Ligand", style="Ligand", ax=ax[1], palette=colors)
     ax[1].set(xlim=(-1, 1), ylim=(-1, 1), xlabel="PC1 (" + str(varExp[0])[0:4] + "%)", ylabel="PC2 (" + str(varExp[1])[0:4] + "%)")
 
