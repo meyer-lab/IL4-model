@@ -27,7 +27,6 @@ def makeFigure():
 
     R2_Plot_Cells(modelDFSeqnoGC, ax[3], seq=True, mice=False, training=False)
     R2_Plot_Cells(modelDFmulnoGC, ax[4], seq=False, mice=False, training=False)
-    #affDemo(ax[4])
     doseResponsePlot(ax[5:8], modelDFmulnoGC, allCells=False)
 
     R2_Plot_CV(ax[8])

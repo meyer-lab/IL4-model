@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 from .figureCommon import getSetup
-from src.MBmodel import doseResponsePlot, resids, residsSeq, affFit, affFitSeq, ABtestNorm
+from src.MBmodel import doseResponsePlot, resids, residsSeq, affFit, affFitSeq, ABtestNorm, affDemo
 
 rcParams['svg.fonttype'] = 'none'
 
@@ -15,7 +15,8 @@ rcParams['svg.fonttype'] = 'none'
 def makeFigure():
     """Get a list of the axis objects and create a figure"""
 
-    ax, f = getSetup((10, 15), (5, 4))
+    ax, f = getSetup((10, 18), (6, 4), multz={21: 1})
+    ax[22].axis("off")
 
     xOptimalMultnoGC = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values
     modelDF = resids(xOptimalMultnoGC, retDF=True, gcFit=False, justPrimary=False)
@@ -28,7 +29,9 @@ def makeFigure():
     modelDFSeq.to_csv("SequentialModelOutput.csv")
 
     affFit(ax[16], gcFit=False)
-    affFitSeq(ax[17:19], gcFit=False)
-    ABtestNorm(ax[19], xOptimalSeqnoGC, xOptimalMultnoGC)
+    affDemo(ax[17])
+    affFitSeq(ax[18:20], gcFit=False)
+    affDemo(ax[20], False)
+    ABtestNorm(ax[21], xOptimalSeqnoGC, xOptimalMultnoGC)
 
     return f

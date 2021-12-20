@@ -68,11 +68,10 @@ path_here = pathlib.Path().absolute()
 recQuantDF = pd.read_csv(join(path_here, "src/data/RecQuantDonor.csv"))
 
 
-def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, recOpt, recCellAn, macIL4=False):
+def cytBindingModel(Kx, Cplx, doseVec, cellType, animal, macIL4=False):
     """Runs binding model for a given mutein, valency, dose, and cell type."""
     doseVec = np.array(doseVec)
     recQuantDFS = pd.read_csv(join(path_here, "src/data/RecQuantDonor.csv"))
-    recQuantDFS.loc[(recQuantDFS.Receptor == recCellAn[0]) & (recQuantDFS["Cell"] == recCellAn[1]) & (recQuantDFS["Animal"] == recCellAn[2]), "Amount"] = np.power(10, recOpt)
 
     if not macIL4:
         recCount = np.ravel([recQuantDFS.loc[(recQuantDFS.Receptor == "IL4Ra") & (recQuantDFS["Cell"] == cellType) & (recQuantDFS["Animal"] == animal)].Amount.mean(),
@@ -95,47 +94,32 @@ def fitFunc(gcFit=True):
     "Runs least squares fitting for various model parameters, and returns the minimizers"
     # KXSTAR, slopeT2, mIL4-IL4Ra, mIL4-Gamma, mIL4-IL13Ra, mNeo4-IL4Ra, mNeo4-Gamma, mNeo4-IL13Ra, hIL4-IL4Ra, hIL4-Gamma, hIL4-IL13Ra, hNeo4-IL4Ra, hNeo4-Gamma, hNeo4-IL13Ra (Log 10)
     resDF = pd.DataFrame()
-    parampredicts = False
+    #paramPredicts = False
     for cell in recQuantDF.Cell.unique():
         for animal in recQuantDF.loc[recQuantDF.Cell == cell].Animal.unique():
-            for receptor in recQuantDF.loc[(recQuantDF.Cell == cell) & (recQuantDF.Animal == animal)].Receptor.unique():
-                if cell != "Macrophage" or animal != "Human" or receptor != "IL4Ra":
-                    if cell != "Ramos" or animal != "Human" or receptor != "IL13Ra":
-                        init = recQuantDF.loc[(recQuantDF.Receptor == receptor) & (recQuantDF["Cell"] == cell) & (recQuantDF["Animal"] == animal)].Amount.mean()
-                        recCellAn = [receptor, cell, animal]
-                        print(recCellAn)
-                        if not parampredicts:
-                            x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, np.log10(init)])
-                        else:
-                            print("What")
-                            print(cell == "Monocyte")
-                            print(animal == "Human")
-                            print(receptor == "IL13Ra")
-                            if cell == "Monocyte" and animal == "Human" and receptor == "IL13Ra":
-                                print("Hello Dumbass")
-                                x0 = parampredicts.x
-                                x0[-1] = np.log10(init) - 2
-                            else:
-                                x0 = parampredicts.x
-                                x0[-1] = np.log10(init)
-                        bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2., np.log10(init) - 2], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7, np.log10(init) + 2])
-                        parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(recCellAn, False))
-                        print(parampredicts.x)
-                        resultsDF = resids(parampredicts.x, retDF=True, recCellAn=recCellAn)
-                        MSE = mean_squared_error(resultsDF.Experimental, resultsDF.Predicted)
-                        R2 = r2_score(resultsDF.Experimental, resultsDF.Predicted)
-                        print("MSE = ", MSE)
-                        print("R2 = ", R2)
-                        resDF = resDF.append(pd.DataFrame({"Cell": [cell], "Animal": [animal], "Receptor": [receptor], "MSE": [MSE], r"$R^2$": [R2]}))
-    resDF.to_csv("ReceptorFitDF2.csv")
+            CellAn = [cell, animal]
+            print(CellAn)
+            x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2])
+            bnds = ([-14, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2.], [-10, 11, 6, 6, 11, 6, 11, 6, 6, 11, 6, 6, 11, 2.7])
+            parampredicts = least_squares(resids, x0, bounds=bnds, ftol=1e-5, args=(CellAn, False))
+            resultsDF = resids(parampredicts.x, retDF=True, CellAn=False)
+            resultsDF = resultsDF.loc[(resultsDF.Cell == CellAn[0]) & (resultsDF.Animal == CellAn[1])]
+            MSE = mean_squared_error(resultsDF.Experimental, resultsDF.Predicted)
+            R2 = r2_score(resultsDF.Experimental, resultsDF.Predicted)
+            print("MSE = ", MSE)
+            print("R2 = ", R2)
+            resDF = resDF.append(pd.DataFrame({"Cell": [cell], "Animal": [animal], "MSE": [MSE], r"$R^2$": [R2]}))
+    resDF.to_csv("CellCV.csv")
 
 
-def resids(x, recCellAn=False, retDF=False):
+def resids(x, CellAn=False, retDF=False):
     """"Returns residuals against signaling data"""
     SigData = loadSigData()
 
     SigData = SigData.loc[SigData["AB Norm"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
+    if CellAn != False:
+        SigData = SigData.loc[(SigData.Cell != CellAn[0]) | (SigData.Animal != CellAn[1])]
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted"})
     Kx = x[0]
     xPow = np.power(10, x)
@@ -155,11 +139,11 @@ def resids(x, recCellAn=False, retDF=False):
                 ligCplx = CplxDict[ligand]
                 if animal == "Human":
                     if cell == "Macrophage":
-                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, recOpt=x[14], recCellAn=recCellAn, macIL4=x[13])
+                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, macIL4=x[13])
                     else:
-                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, recOpt=x[14], recCellAn=recCellAn)
+                        results = cytBindingModel(Kx, ligCplx, Concs, cell, animal)
                 else:
-                    results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, recOpt=x[14], recCellAn=recCellAn)
+                    results = cytBindingModel(Kx, ligCplx, Concs, cell, animal)
                 masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
                                                              "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
@@ -170,15 +154,7 @@ def resids(x, recCellAn=False, retDF=False):
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
 
     if retDF:
-        errorCalcDF = copy(masterSTAT)
-        """
-        for cell in errorCalcDF.Cell.unique():
-            for animal in errorCalcDF.loc[errorCalcDF.Cell == cell].Animal.unique():
-                cellNum = errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal)].shape[0]
-                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Predicted"] /= np.sqrt(cellNum)
-                errorCalcDF.loc[(errorCalcDF.Cell == cell) & (errorCalcDF.Animal == animal), "Experimental"] /= np.sqrt(cellNum)
-        """
-        return errorCalcDF
+        return masterSTAT
     else:
         errorCalcDF = copy(masterSTAT)
         for cell in errorCalcDF.Cell.unique():
