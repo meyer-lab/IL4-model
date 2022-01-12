@@ -354,7 +354,7 @@ def affFit(ax, gcFit=True, confInt=np.array([False])):
         sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax, palette=colors)
     ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Binding Rates Multivalent")
     ax.legend(prop=dict(size=9), loc="upper right")
-    fitDict.to_csv("MultivalentFit.csv")
+    fitDict.to_csv("LinData/Multivalent Fit.csv")
 
 
 def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
@@ -394,11 +394,11 @@ def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
 
     sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0], palette=colorsLig)
     ax[0].set(ylabel=r"Initial association $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
-    fitDictKDNorm.to_csv("InitialAssociationParamsSequential.csv")
+    fitDictKDNorm.to_csv("LinData/Initial Association Params Sequential.csv")
 
     sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1], palette=colorsRec)
     ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
-    fitDictKDSurf.to_csv("MultimerizationParamsSequential.csv")
+    fitDictKDSurf.to_csv("LinData/Multimerization ParamsSequential.csv")
 
 
 def Exp_Pred(modelDF, ax, seq=False, Mouse=True):
@@ -423,6 +423,7 @@ def affDemo(ax, MB=True):
         sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
         ax.set(xlim=(1e-2, 1e2), ylim=(1e-2, 1e2), xscale="log", yscale="log")
         ax.set(xscale="log", yscale="log", title="Multivalent Model")
+        affDF.to_csv("LinData/Inferred vs. Experimental Affinities Multivalent.csv")
     else:
         fit = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values + 9
         fit = np.power(10, fit)
@@ -431,6 +432,7 @@ def affDemo(ax, MB=True):
         sns.scatterplot(data=affDF, x="Experimental IL4Ra KD", y="Inferred IL4Ra Affinity", hue="Ligand", style="Ligand", palette=colors, ax=ax)
         ax.set(xlim=(1e-1, 1e7), ylim=(1e-1, 1e7), xscale="log", yscale="log")
         ax.set(xscale="log", yscale="log", title="Sequential Model")
+        affDF.to_csv("LinData/Inferred vs. Experimental Affinities Sequential.csv")
 
 
 def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
@@ -470,10 +472,14 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
 
     if seq:
         ax.set(title="Human Cells - Sequential Binding Model")
+        accDFm.to_csv("LinData/Accuracy Mousece Cells Sequential.csv")
+        accDFh.to_csv("LinData/Accuracy Human Cells Sequential.csv")
         if mice:
             ax[1].set(title="Mouse Cells")
     else:
-        ax.set(title="Human Cells - Multivalent Binding Model")
+        ax.set(title="Human Cells - Sequential Binding Model")
+        accDFm.to_csv("LinData/Accuracy Mousece Cells Multivalent.csv")
+        accDFh.to_csv("LinData/Accuracy Human Cells Multivalent.csv")
         if mice:
             ax[1].set(title="Mouse Cells")
 
@@ -539,7 +545,7 @@ def R2_Plot_Mods(dfMult, dfSeq, ax=False, training=False):
         sns.barplot(x="Model", y="Accuracy", data=accDF, ax=ax, color="k")
         ax.set(ylabel=ylabel, ylim=(0, 0.2))
         ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
-    accDF.to_csv("ModelComparison_1a.csv")
+    accDF.to_csv("LinData/ModelComparison_1a.csv")
 
 
 def R2_Plot_RecS(dfMult, ax=False):
@@ -553,6 +559,7 @@ def R2_Plot_RecS(dfMult, ax=False):
     sns.barplot(data=sensDF, x="Cell", y="MSE", hue="Receptor", palette=colors, ax=ax)
     ax.set(ylabel="% Reduction MSE")
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+    sensDF.to_csv("LinData/Receptor Sensitivity Data.csv")
 
 
 def R2_Plot_CV(ax=False):
@@ -563,6 +570,7 @@ def R2_Plot_CV(ax=False):
     sns.barplot(data=cvDF, x="Cell", y=r"$R^2$", color='k', ax=ax)
     ax.set(ylabel=r"Cross Validation $R^2$", ylim=(0, 1))
     ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+    cvDF.to_csv("LinData/Cross Validation Accuracy.csv")
 
 
 def residsAB(x, blockRatio, gcFit=False):
@@ -671,14 +679,19 @@ def ABtest(ax, xSeq, xMult):
     """Tests Seq vs MB model for a variety of AB blocking ratios"""
     ABblock = np.linspace(start=0, stop=1, num=51)
     models = ["Sequential", "Multivalent"]
-    ABtestDF = pd.DataFrame(columns=("Model", "IL13 Ratio", r"Accuracy ($R^2$)"))
+    ABtestDF = pd.DataFrame(columns=("Model", "IL13 Ratio", r"Accuracy ($R^2$)", "Ligand"))
     for model in models:
         for ratio in ABblock:
             if model == "Sequential":
                 ABdf = residsSeqAB(xSeq, ratio)
             else:
                 ABdf = residsAB(xMult, ratio)
-            ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "IL13 Ratio": [1 - ratio], r"Accuracy ($R^2$)": [mean_squared_error(ABdf.Experimental.values, ABdf.Predicted.values)]}))
+            ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "IL13 Ratio": [1 - ratio],
+                                       r"Accuracy ($R^2$)": [mean_squared_error(ABdf.Experimental.values, ABdf.Predicted.values)], "Ligand": "All"}))
+            for ligand in ABdf.Ligand.unique():
+                ligDF = ABdf.loc[ABdf.Ligand == ligand]
+                ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "IL13 Ratio": [1 -
+                                                                                          ratio], r"Accuracy ($R^2$)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)], "Ligand": ligand}))
 
     sns.lineplot(data=ABtestDF, x="IL13 Ratio", y=r"Accuracy ($R^2$)", hue="Model", ax=ax)
     ax.set(xlim=(0, 1), ylim=(0, 1))
@@ -686,9 +699,10 @@ def ABtest(ax, xSeq, xMult):
 
 def ABtestNorm(ax, xSeq, xMult):
     """Tests Seq vs MB model for a variety of AB blocking ratios"""
+    colors = {"hIL4": "k", "hNeo4": "lime", "hIL13": "lightseagreen", "mIL4": "k", "mNeo4": "lime"}
     ABblock = np.linspace(start=0, stop=1, num=51)
     models = ["Sequential", "Multivalent"]
-    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Prediction Accuracy (MSE)"))
+    ABtestDF = pd.DataFrame(columns=("Model", "% Available IL13Rα", "Prediction Accuracy (MSE)", "Ligand"))
     for model in models:
         for ratio in ABblock:
             if model == "Sequential":
@@ -696,10 +710,16 @@ def ABtestNorm(ax, xSeq, xMult):
             else:
                 ABdf = residsAB(xMult, ratio)
             ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)],
-                                                     "Prediction Accuracy (MSE)": [mean_squared_error(ABdf.Experimental.values, ABdf.Predicted.values)]}))
-    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Model", style="Model", ax=ax)
+                                       "Prediction Accuracy (MSE)": [mean_squared_error(ABdf.Experimental.values, ABdf.Predicted.values)], "Ligand": "All"}))
+            for ligand in ABdf.Ligand.unique():
+                ligDF = ABdf.loc[ABdf.Ligand == ligand]
+                ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)],
+                                           "Prediction Accuracy (MSE)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)], "Ligand": ligand}))
+
+    ABtestDF = ABtestDF.loc[(ABtestDF.Model == "Multivalent") & (ABtestDF.Ligand != "All")]
+    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Ligand", style="Ligand", palette=colors, ax=ax)
     ax.set(xlim=(0, 100), ylim=(0, 0.1))
-    ABtestDF.to_csv("AntagonistAccDF.csv")
+    ABtestDF.to_csv("LinData/Antibody Treated Accuracy Data.csv")
 
 
 def doseResponsePlot(ax, modelDF, allCells=True, model=False):
@@ -856,3 +876,6 @@ def AUC_PCA(ax, IL13=True):
     scoresDF["Ratio"] = Ratio
     sns.scatterplot(data=scoresDF, x="Component 1", y="Ratio", hue="Cell", style="Antibody", ax=ax[2])
     ax[2].set(xlim=(-3, 3), yscale="log", xlabel="PC1", ylabel="Type 1 / Type 2 Bias")
+
+    scoresDF.to_csv("LinData/PCA AUC Scores Data.csv")
+    loadingsDF.to_csv("LinData/PCA AUC Loadings Data.csv")
