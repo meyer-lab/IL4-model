@@ -116,7 +116,7 @@ def resids(x, CellAn=False, retDF=False):
     """"Returns residuals against signaling data"""
     SigData = loadSigData()
 
-    SigData = SigData.loc[SigData["AB Norm"] == False]
+    SigData = SigData.loc[SigData["Antibody"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     if CellAn != False:
         SigData = SigData.loc[(SigData.Cell != CellAn[0]) | (SigData.Animal != CellAn[1])]
@@ -148,7 +148,10 @@ def resids(x, CellAn=False, retDF=False):
                                                              "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
             # Normalize
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Human":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Mouse":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)

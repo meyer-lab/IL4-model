@@ -134,7 +134,7 @@ def resids(x, recCellAn=False, retDF=False):
     """"Returns residuals against signaling data"""
     SigData = loadSigData()
 
-    SigData = SigData.loc[SigData["AB Norm"] == False]
+    SigData = SigData.loc[SigData["Antibody"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted"})
     Kx = x[0]
@@ -164,7 +164,10 @@ def resids(x, recCellAn=False, retDF=False):
                                                              "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
             # Normalize
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Human":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Mouse":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
