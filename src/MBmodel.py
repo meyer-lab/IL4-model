@@ -132,7 +132,7 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
         SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
         SigData = SigData.loc[(SigData.Animal != "Human") | (SigData.Cell != "Macrophage")]
 
-    SigData = SigData.loc[SigData["AB Norm"] == False]
+    SigData = SigData.loc[SigData["Antibody"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted"})
     Kx = x[0]
@@ -164,7 +164,11 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
                                                              "Animal": animal, "Experimental": normSigs, "Predicted": results}))
 
             # Normalize
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Human":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Mouse":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -249,7 +253,7 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
         SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
         SigData = SigData.loc[(SigData.Animal != "Human") | (SigData.Cell != "Macrophage")]
 
-    SigData = SigData.loc[SigData["AB Norm"] == False]
+    SigData = SigData.loc[SigData["Antibody"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTAT = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Experimental", "Predicted", "Donor"})
     xPow = np.power(10, x)
@@ -265,7 +269,7 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
             for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Ligand.unique():
                 isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
                 Concs = isoData.Concentration.values
-                normSigs = isoData.Signal.values
+                normSigs = isoData.Signal.values / 100
                 ligKDs = KdDict[ligand]
                 if animal == "Human":
                     if cell == "Macrophage":
@@ -277,9 +281,12 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
                 masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs, "Animal": animal,
                                                              "Experimental": normSigs, "Predicted": np.ravel(results)}))
 
-            # Normalize
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Experimental"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Experimental.max()
+             # Normalize
+
+            if animal == "Human":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Mouse":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -477,7 +484,7 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
         if mice:
             ax[1].set(title="Mouse Cells")
     else:
-        ax.set(title="Human Cells - Sequential Binding Model")
+        ax.set(title="Human Cells - Multivalent Binding Model")
         accDFm.to_csv("LinData/Accuracy Mousece Cells Multivalent.csv")
         accDFh.to_csv("LinData/Accuracy Human Cells Multivalent.csv")
         if mice:
@@ -615,8 +622,11 @@ def residsAB(x, blockRatio, gcFit=False):
                     masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
                                                    "Animal": animal, "Experimental": normSigs, "Predicted": results, "Antibody": antibody}))
 
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Experimental"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Experimental.max()
+            # Normalize
+            if animal == "Human":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Mouse":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -644,7 +654,7 @@ def residsSeqAB(x, blockRatio, gcFit=False):
                 for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Antibody == antibody)].Ligand.unique():
                     isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand) & (SigData.Antibody == antibody)]
                     Concs = isoData.Concentration.values
-                    normSigs = isoData.Signal.values
+                    normSigs = isoData.Signal.values / 100
                     ligKDs = KdDict[ligand]
                     if antibody:
                         if animal == "Human":
@@ -666,8 +676,10 @@ def residsSeqAB(x, blockRatio, gcFit=False):
                                                    "Experimental": normSigs, "Predicted": np.ravel(results), "Antibody": antibody}))
 
             # Normalize
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
-            masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Experimental"] /= masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Experimental.max()
+            if animal == "Human":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+            if animal == "Mouse":
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -717,7 +729,7 @@ def ABtestNorm(ax, xSeq, xMult):
                                            "Prediction Accuracy (MSE)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)], "Ligand": ligand}))
 
     ABtestDF = ABtestDF.loc[(ABtestDF.Model == "Multivalent") & (ABtestDF.Ligand != "All")]
-    sns.lineplot(data=ABtestDF, x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Ligand", style="Ligand", palette=colors, ax=ax)
+    sns.lineplot(data=ABtestDF.reset_index(), x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Ligand", style="Ligand", palette=colors, ax=ax)
     ax.set(xlim=(0, 100), ylim=(0, 0.1))
     ABtestDF.to_csv("LinData/Antibody Treated Accuracy Data.csv")
 
@@ -746,7 +758,7 @@ def doseResponsePlot(ax, modelDF, allCells=True, model=False):
             ligOrder = ["hIL4", "hNeo4", "hIL13"]
         else:
             ligOrder = ["mIL4", "mNeo4"]
-        sns.lineplot(data=isoData, x="Concentration", y="Predicted", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
+        sns.lineplot(data=isoData.reset_index(), x="Concentration", y="Predicted", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
         #sns.scatterplot(data=isoData, x="Concentration", y="Experimental", hue="Ligand", label="Predicted", ax=ax[index], hue_order=ligOrder, palette=colorDict)
         for j, ligand in enumerate(means.Ligand.values):
             ax[index].scatter(x=means.Concentration.values[j], y=means.Experimental.values[j], color=colorDict[ligand])
