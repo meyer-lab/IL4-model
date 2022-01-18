@@ -484,6 +484,7 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
         if mice:
             ax[1].set(title="Mouse Cells")
     else:
+
         ax.set(title="Human Cells - Multivalent Binding Model")
         accDFm.to_csv("LinData/Accuracy Mousece Cells Multivalent.csv")
         accDFh.to_csv("LinData/Accuracy Human Cells Multivalent.csv")
