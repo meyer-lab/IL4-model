@@ -165,10 +165,11 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
 
             # Normalize
             if animal == "Human":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
             if animal == "Mouse":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
-
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -284,9 +285,11 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
              # Normalize
 
             if animal == "Human":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
             if animal == "Mouse":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -625,9 +628,11 @@ def residsAB(x, blockRatio, gcFit=False):
 
             # Normalize
             if animal == "Human":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
             if animal == "Mouse":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -678,9 +683,11 @@ def residsSeqAB(x, blockRatio, gcFit=False):
 
             # Normalize
             if animal == "Human":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
             if animal == "Mouse":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
@@ -723,11 +730,11 @@ def ABtestNorm(ax, xSeq, xMult):
             else:
                 ABdf = residsAB(xMult, ratio)
             ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)],
-                                       "Prediction Accuracy (MSE)": [mean_squared_error(ABdf.Experimental.values, ABdf.Predicted.values)], "Ligand": "All"}))
+                                       "Prediction Accuracy (MSE)": [mean_squared_error(ABdf.Experimental.values / 100, ABdf.Predicted.values)], "Ligand": "All"}))
             for ligand in ABdf.Ligand.unique():
                 ligDF = ABdf.loc[ABdf.Ligand == ligand]
                 ABtestDF = ABtestDF.append(pd.DataFrame({"Model": [model], "% Available IL13Rα": [100 * (1 - ratio)],
-                                           "Prediction Accuracy (MSE)": [mean_squared_error(ligDF.Experimental.values, ligDF.Predicted.values)], "Ligand": ligand}))
+                                           "Prediction Accuracy (MSE)": [mean_squared_error(ligDF.Experimental.values / 100, ligDF.Predicted.values)], "Ligand": ligand}))
 
     ABtestDF = ABtestDF.loc[(ABtestDF.Model == "Multivalent") & (ABtestDF.Ligand != "All")]
     sns.lineplot(data=ABtestDF.reset_index(), x="% Available IL13Rα", y="Prediction Accuracy (MSE)", hue="Ligand", style="Ligand", palette=colors, ax=ax)
@@ -853,6 +860,7 @@ def AUC_PCA(ax, IL13=True):
     sigDF = loadSigData()
     minDose, maxDose = np.amin(sigDF.Concentration.values), np.amax(sigDF.Concentration.values)
     AUC = np.zeros(EC50df.shape[0])
+    EC50df = EC50df.reset_index()
 
     for index, row in EC50df.iterrows():
         if np.isnan(row["EC50"]):
