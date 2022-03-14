@@ -149,9 +149,11 @@ def resids(x, CellAn=False, retDF=False):
 
             # Normalize
             if animal == "Human":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
             if animal == "Mouse":
-                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4") & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
+                masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "mIL4")
+                                                                                                                         & (masterSTAT.Cell == cell) & (masterSTAT.Animal == animal)].Predicted.max()
 
     masterSTAT = masterSTAT.fillna(0)
     masterSTAT.replace([np.inf, -np.inf], 0, inplace=True)
