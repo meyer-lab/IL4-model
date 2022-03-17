@@ -193,18 +193,18 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
 def seqBindingModel(KdVec, doseVec, cellType, animal, lig, ABblock=1.0, macIL4=False, macGC=False, gcFit=True):
     """Runs binding model for a given mutein, valency, dose, and cell type."""
     if not macIL4:
-        recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                             recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
-                             recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
-    else:
-        if gcFit:
-            recCount = np.ravel([np.power(10, macIL4),
-                                np.power(10, macGC),
-                                recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
+        if cellType == "Monocyte" and animal == "Human" and gcFit:
+            recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                                 np.power(10, macGC),
+                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
         else:
-            recCount = np.ravel([np.power(10, macIL4),
+            recCount = np.ravel([recQuantDF.loc[(recQuantDF.Receptor == "IL4Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
                                 recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
                                 recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
+    else:
+        recCount = np.ravel([np.power(10, macIL4),
+                            recQuantDF.loc[(recQuantDF.Receptor == "Gamma") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean(),
+                            recQuantDF.loc[(recQuantDF.Receptor == "IL13Ra") & (recQuantDF["Cell"] == cellType) & (recQuantDF["Animal"] == animal)].Amount.mean() * ABblock])
     output = np.zeros([doseVec.size, 1])
     if lig != "hIL13":
         for i, dose in enumerate(doseVec):
@@ -900,3 +900,125 @@ def AUC_PCA(ax, IL13=True):
 
     scoresDF.to_csv("LinData/PCA AUC Scores Data.csv")
     loadingsDF.to_csv("LinData/PCA AUC Loadings Data.csv")
+
+
+def respCurvesAll(xgc, xnogc, xseqgc, xseqnogc, retDF=False, gcFit=True, justPrimary=False):
+    """Returns Dose Response DF for all"""
+    SigData = loadSigData()
+    if justPrimary:
+        SigData = SigData.loc[(SigData.Cell != "Fibroblast") & (SigData.Cell != "Monocyte")]
+        SigData = SigData.loc[(SigData.Animal != "Human") | (SigData.Cell != "Macrophage")]
+
+    SigData = SigData.loc[SigData["Antibody"] == False]
+    SigData['Signal'] = SigData['Signal'].clip(lower=0)
+    masterSTATgc = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
+    masterSTATnoGc = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
+    masterSTATseq = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
+    Kxgc = xgc[0]
+    Kxnogc = xnogc[0]
+
+    xPowgc = np.power(10, xgc)
+    xPownogc = np.power(10, xnogc)
+    xPowSeqgc = np.power(10, xseqgc)
+    xPowSeqnogc = np.power(10, xseqnogc)
+    
+    CplxDictgc = {"mIL4": [xPowgc[1], xPowgc[2], xPowgc[3]],
+                "mNeo4": [xPowgc[4], xPowgc[5], 1e2],
+                "hIL4": [xPowgc[6], xPowgc[7], xPowgc[8]],
+                "hNeo4": [xPowgc[9], xPowgc[10], 1e2],
+                "hIL13": [xPowgc[11], 1e2, xPowgc[12]]}
+    CplxDictnogc = {"mIL4": [xPownogc[1], xPowgc[2], xPowgc[3]],
+                "mNeo4": [xPownogc[4], xPownogc[5], 1e2],
+                "hIL4": [xPownogc[6], xPownogc[7], xPownogc[8]],
+                "hNeo4": [xPownogc[9], xPownogc[10], 1e2],
+                "hIL13": [xPownogc[11], 1e2, xPownogc[12]]}
+    KdDictSeqgc = {"mIL4": [xPowSeqgc[0], xPowSeqgc[1], xPowSeqgc[2]],
+              "mNeo4": [xPowSeqgc[3], xPowSeqgc[4], 10000],
+              "hIL4": [xPowSeqgc[5], xPowSeqgc[6], xPowSeqgc[7]],
+              "hNeo4": [xPowSeqgc[8], xPowSeqgc[9], 10000],
+              "hIL13": [xPowSeqgc[10], 10000, xPowSeqgc[11]]}
+    KdDictSeqnogc = {"mIL4": [xPowSeqnogc[0], xPowSeqnogc[1], xPowSeqnogc[2]],
+              "mNeo4": [xPowSeqnogc[3], xPowSeqnogc[4], 10000],
+              "hIL4": [xPowSeqnogc[5], xPowSeqnogc[6], xPowSeqnogc[7]],
+              "hNeo4": [xPowSeqnogc[8], xPowSeqnogc[9], 10000],
+              "hIL13": [xPowSeqnogc[10], 10000, xPowSeqnogc[11]]}
+
+
+
+    for cell in SigData.Cell.unique():
+        for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
+            for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Ligand.unique():
+                isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
+                Concs = np.linspace(isoData.Concentration.values.amin(), isoData.Concentration.values.amax(), 300)
+
+                ligCplxgc = CplxDictgc[ligand]
+                ligCplxnogc = CplxDictnogc[ligand]
+                ligKDsgc = KdDictSeqgc[ligand]
+                ligKDsnogc = KdDictSeqnogc[ligand]
+                if animal == "Human":
+                    if cell == "Monocyte":
+                        resultsgc = cytBindingModel(Kxgc, ligCplxgc, Concs, cell, animal, macGC=xgc[14], gcFit=True)
+                        resultsnogc = cytBindingModel(Kxnogc, ligCplxnogc, Concs, cell, animal, macGC=xgc[14], gcFit=False)
+                        resultsseqgc = seqBindingModel(ligKDsgc, Concs, cell, animal, ligand, macGC=xseqgc[13], gcFit=True)
+                        resultsseqnogc = seqBindingModel(ligKDsnogc, Concs, cell, animal, ligand, macGC=xseqnogc[13], gcFit=False)
+                    elif cell == "Macrophage":
+                        resultsgc = cytBindingModel(Kxgc, ligCplxgc, Concs, cell, animal, macIL4=xgc[13], gcFit=True)
+                        resultsnogc = cytBindingModel(Kxnogc, ligCplxnogc, Concs, cell, animal, macIL4=xnogc[13], gcFit=False)
+                        resultsseqgc = seqBindingModel(ligKDsgc, Concs, cell, animal, ligand, macIL4=xseqgc[12], gcFit=True)
+                        resultsseqnogc = seqBindingModel(ligKDsnogc, Concs, cell, animal, ligand, macIL4=xseqnogc[12], gcFit=False)
+                    else:
+                        resultsgc = cytBindingModel(Kxgc, ligCplxgc, Concs, cell, animal, gcFit=True)
+                        resultsnogc = cytBindingModel(Kxnogc, ligCplxnogc, Concs, cell, animal, gcFit=False)
+                        resultsseqgc = seqBindingModel(ligKDsgc, Concs, cell, animal, ligand, gcFit=True)
+                        resultsseqnogc = seqBindingModel(ligKDsnogc, Concs, cell, animal, ligand, gcFit=False)
+                else:
+                    resultsgc = cytBindingModel(Kxgc, ligCplxgc, Concs, cell, animal, gcFit=True)
+                    resultsnogc = cytBindingModel(Kxnogc, ligCplxnogc, Concs, cell, animal, gcFit=False)
+                    resultsseqgc = seqBindingModel(ligKDsgc, Concs, cell, animal, ligand, gcFit=True)
+                    resultsseqnogc = seqBindingModel(ligKDsnogc, Concs, cell, animal, ligand, gcFit=False)
+                masterSTATgc = masterSTATgc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
+                                                             "Animal": animal, "Predicted": resultsgc}))
+                masterSTATnogc = masterSTATnogc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
+                                                             "Animal": animal, "Predicted": resultsnogc}))
+                masterSTATseqgc = masterSTATseqgc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
+                                                             "Animal": animal, "Predicted": resultsseqgc}))
+                masterSTATseqnogc = masterSTATseqnogc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
+                                                             "Animal": animal, "Predicted": resultsseqnogc}))                                             
+
+            # Normalize
+            if animal == "Human":
+                masterSTATgc.loc[(masterSTATgc.Cell == cell) & (masterSTATgc.Animal == animal), "Predicted"] /= masterSTATgc.loc[(masterSTATgc.Ligand == "hIL4")
+                                                                                                                         & (masterSTATgc.Cell == cell) & (masterSTATgc.Animal == animal)].Predicted.max()
+                masterSTATnogc.loc[(masterSTATnogc.Cell == cell) & (masterSTATnogc.Animal == animal), "Predicted"] /= masterSTATnogc.loc[(masterSTATnogc.Ligand == "hIL4")
+                                                                                                                         & (masterSTATnogc.Cell == cell) & (masterSTATnogc.Animal == animal)].Predicted.max()
+                masterSTATseqgc.loc[(masterSTATseqgc.Cell == cell) & (masterSTATseqgc.Animal == animal), "Predicted"] /= masterSTATseqgc.loc[(masterSTATseqgc.Ligand == "hIL4")
+                                                                                                                         & (masterSTATseqgc.Cell == cell) & (masterSTATseqgc.Animal == animal)].Predicted.max()
+                masterSTATseqnogc.loc[(masterSTATseqnogc.Cell == cell) & (masterSTATseqnogc.Animal == animal), "Predicted"] /= masterSTATseqnogc.loc[(masterSTATseqnogc.Ligand == "hIL4")
+                                                                                                                         & (masterSTATseqnogc.Cell == cell) & (masterSTATseqnogc.Animal == animal)].Predicted.max()
+            if animal == "Mouse":
+                masterSTATgc.loc[(masterSTATgc.Cell == cell) & (masterSTATgc.Animal == animal), "Predicted"] /= masterSTATgc.loc[(masterSTATgc.Ligand == "mIL4")
+                                                                                                                         & (masterSTATgc.Cell == cell) & (masterSTATgc.Animal == animal)].Predicted.max()
+                masterSTATnogc.loc[(masterSTATnogc.Cell == cell) & (masterSTATnogc.Animal == animal), "Predicted"] /= masterSTATnogc.loc[(masterSTATnogc.Ligand == "mIL4")
+                                                                                                                         & (masterSTATnogc.Cell == cell) & (masterSTATnogc.Animal == animal)].Predicted.max()
+                masterSTATseqgc.loc[(masterSTATseqgc.Cell == cell) & (masterSTATseqgc.Animal == animal), "Predicted"] /= masterSTATseqgc.loc[(masterSTATseqgc.Ligand == "mIL4")
+                                                                                                                         & (masterSTATseqgc.Cell == cell) & (masterSTATseqgc.Animal == animal)].Predicted.max()
+                masterSTATseqnogc.loc[(masterSTATseqnogc.Cell == cell) & (masterSTATseqnogc.Animal == animal), "Predicted"] /= masterSTATseqnogc.loc[(masterSTATseqnogc.Ligand == "mIL4")
+                                                                                                                         & (masterSTATseqnogc.Cell == cell) & (masterSTATseqnogc.Animal == animal)].Predicted.max()
+    masterSTATgc = masterSTATgc.fillna(0)
+    masterSTATgc.replace([np.inf, -np.inf], 0, inplace=True)
+
+    masterSTATnogc = masterSTATnogc.fillna(0)
+    masterSTATnogc.replace([np.inf, -np.inf], 0, inplace=True)
+
+    masterSTATseqgc = masterSTATseqgc.fillna(0)
+    masterSTATseqgc.replace([np.inf, -np.inf], 0, inplace=True)
+
+    masterSTATseqnogc = masterSTATseqnogc.fillna(0)
+    masterSTATseqnogc.replace([np.inf, -np.inf], 0, inplace=True)
+
+    masterSTATgc.to_csv("LinData/Multivalent Dose Curves Monocyte GC Adjusted.csv")
+    masterSTATnogc.to_csv("LinData/Multivalent Dose Curves not GC Adjusted.csv")
+    masterSTATseqgc.to_csv("LinData/Sequential Dose Curves Monocyte GC Adjusted.csv")
+    masterSTATseqnogc.to_csv("LinData/Sequential Dose Curves not GC Adjusted.csv")
+
+    return masterSTATgc
