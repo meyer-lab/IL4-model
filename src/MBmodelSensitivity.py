@@ -107,12 +107,7 @@ def fitFunc(gcFit=True):
                         if not parampredicts:
                             x0 = np.array([-11, 8.6, 5, 5, 7.6, 5, 9.08, 5, 5, 8.59, 5, 5, 5, 2, np.log10(init)])
                         else:
-                            print("What")
-                            print(cell == "Monocyte")
-                            print(animal == "Human")
-                            print(receptor == "IL13Ra")
                             if cell == "Monocyte" and animal == "Human" and receptor == "IL13Ra":
-                                print("Hello Dumbass")
                                 x0 = parampredicts.x
                                 x0[-1] = np.log10(init) - 2
                             else:
