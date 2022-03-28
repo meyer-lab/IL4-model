@@ -162,7 +162,6 @@ def resids(x, retDF=False, gcFit=True, justPrimary=False):
                     results = cytBindingModel(Kx, ligCplx, Concs, cell, animal, gcFit=gcFit)
                 masterSTAT = masterSTAT.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
                                                              "Animal": animal, "Experimental": normSigs, "Predicted": results}))
-
             # Normalize
             if animal == "Human":
                 masterSTAT.loc[(masterSTAT.Cell == cell) & (masterSTAT.Animal == animal), "Predicted"] /= masterSTAT.loc[(masterSTAT.Ligand == "hIL4")
@@ -273,8 +272,10 @@ def residsSeq(x, retDF=False, gcFit=True, justPrimary=False):
                 normSigs = isoData.Signal.values / 100
                 ligKDs = KdDict[ligand]
                 if animal == "Human":
-                    if cell == "Macrophage":
-                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macIL4=x[12], macGC=x[13], gcFit=gcFit)
+                    if cell == "Monocyte":
+                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macGC=x[13], gcFit=gcFit)
+                    elif cell == "Macrophage":
+                        results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, macIL4=x[12], gcFit=gcFit)
                     else:
                         results = seqBindingModel(ligKDs, Concs, cell, animal, ligand, gcFit=gcFit)
                 else:
@@ -364,7 +365,10 @@ def affFit(ax, gcFit=True, confInt=np.array([False])):
         sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDict, ax=ax, palette=colors)
     ax.set(ylabel=r"$log_{10}(K_D$ (nM))", ylim=(-2, 6), title="Binding Rates Multivalent")
     ax.legend(prop=dict(size=9), loc="upper right")
-    fitDict.to_csv("LinData/Multivalent Fit.csv")
+    if gcFit:
+        fitDict.to_csv("LinData/Multivalent Fit GC Fit.csv")
+    if gcFit:
+        fitDict.to_csv("LinData/Multivalent Fit no GC Fit.csv")
 
 
 def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
@@ -402,13 +406,22 @@ def affFitSeq(ax, gcFit=True, confInt=np.array([False])):
     fitDictKDSurf = fitDict.loc[(fitDict.Receptor != "IL4Rα") & (fitDict.Ligand != "hIL13")]
     fitDictKDSurf = fitDictKDSurf.append(fitDict.loc[(fitDict.Receptor == "IL4Rα") & (fitDict.Ligand == "hIL13")])
 
-    sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0], palette=colorsLig)
-    ax[0].set(ylabel=r"Initial association $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
-    fitDictKDNorm.to_csv("LinData/Initial Association Params Sequential.csv")
+    if gcFit:
+        sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0], palette=colorsLig)
+        ax[0].set(ylabel=r"Initial association $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
+        fitDictKDNorm.to_csv("LinData/Initial Association Params Sequential GC Fit.csv")
 
-    sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1], palette=colorsRec)
-    ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
-    fitDictKDSurf.to_csv("LinData/Multimerization ParamsSequential.csv")
+        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1], palette=colorsRec)
+        ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
+        fitDictKDSurf.to_csv("LinData/Multimerization ParamsSequential GC Fit.csv")
+    else:
+        sns.barplot(x="Ligand", y=r"$K_D$", data=fitDictKDNorm, ax=ax[0], palette=colorsLig)
+        ax[0].set(ylabel=r"Initial association $log_{10}(K_D)$ (nM))", ylim=(-1, 7), title="Surface Binding Rates Sequential")
+        fitDictKDNorm.to_csv("LinData/Initial Association Params Sequential no GC Fit.csv")
+
+        sns.barplot(x="Ligand", y=r"$K_D$", hue="Receptor", data=fitDictKDSurf, ax=ax[1], palette=colorsRec)
+        ax[1].set(ylabel=r"$log_{10}(K_D)$ (#/cell)", ylim=(-5, 5), title="Receptor Multimerization Rates Sequential")
+        fitDictKDSurf.to_csv("LinData/Multimerization ParamsSequential no GC Fit.csv")
 
 
 def Exp_Pred(modelDF, ax, seq=False, Mouse=True):
@@ -445,12 +458,16 @@ def affDemo(ax, MB=True):
         affDF.to_csv("LinData/Inferred vs. Experimental Affinities Sequential.csv")
 
 
-def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
+def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True, gcFit=True):
     """Plots all accuracies per cell"""
     accDFh = pd.DataFrame(columns={"Cell Type", "Accuracy"})
     accDFm = pd.DataFrame(columns={"Cell Type", "Accuracy"})
     dfh = df.loc[(df.Animal == "Human")]
     dfm = df.loc[(df.Animal == "Mouse")]
+    if gcFit:
+        add = " with Gc Fit"
+    else:
+        add = " without Gc Fit"
     if training:
         dfh = dfh.loc[(dfh.Cell.isin(["A549", "Ramos"]))]
         dfm = dfm.loc[(dfm.Cell.isin(["3T3", "A20", "Macrophage"]))]
@@ -482,15 +499,14 @@ def R2_Plot_Cells(df, ax, seq=False, mice=True, training=True):
 
     if seq:
         ax.set(title="Human Cells - Sequential Binding Model")
-        accDFm.to_csv("LinData/Accuracy Mousece Cells Sequential.csv")
-        accDFh.to_csv("LinData/Accuracy Human Cells Sequential.csv")
+        accDFm.to_csv("LinData/Accuracy Mouse Cells Sequential" + add + ".csv")
+        accDFh.to_csv("LinData/Accuracy Human Cells Sequential" + add + ".csv")
         if mice:
             ax[1].set(title="Mouse Cells")
     else:
-
         ax.set(title="Human Cells - Multivalent Binding Model")
-        accDFm.to_csv("LinData/Accuracy Mousece Cells Multivalent.csv")
-        accDFh.to_csv("LinData/Accuracy Human Cells Multivalent.csv")
+        accDFm.to_csv("LinData/Accuracy Mouse Cells Multivalent" + add + ".csv")
+        accDFh.to_csv("LinData/Accuracy Human Cells Multivalent" + add + ".csv")
         if mice:
             ax[1].set(title="Mouse Cells")
 
@@ -902,7 +918,7 @@ def AUC_PCA(ax, IL13=True):
     loadingsDF.to_csv("LinData/PCA AUC Loadings Data.csv")
 
 
-def respCurvesAll(xgc, xnogc, xseqgc, xseqnogc, retDF=False, gcFit=True, justPrimary=False):
+def respCurvesAll(xgc, xnogc, xseqgc, xseqnogc, justPrimary=False):
     """Returns Dose Response DF for all"""
     SigData = loadSigData()
     if justPrimary:
@@ -912,8 +928,9 @@ def respCurvesAll(xgc, xnogc, xseqgc, xseqnogc, retDF=False, gcFit=True, justPri
     SigData = SigData.loc[SigData["Antibody"] == False]
     SigData['Signal'] = SigData['Signal'].clip(lower=0)
     masterSTATgc = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
-    masterSTATnoGc = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
-    masterSTATseq = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
+    masterSTATnogc = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
+    masterSTATseqgc = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
+    masterSTATseqnogc = pd.DataFrame(columns={"Cell", "Ligand", "Concentration", "Animal", "Predicted"})
     Kxgc = xgc[0]
     Kxnogc = xnogc[0]
 
@@ -921,7 +938,7 @@ def respCurvesAll(xgc, xnogc, xseqgc, xseqnogc, retDF=False, gcFit=True, justPri
     xPownogc = np.power(10, xnogc)
     xPowSeqgc = np.power(10, xseqgc)
     xPowSeqnogc = np.power(10, xseqnogc)
-    
+
     CplxDictgc = {"mIL4": [xPowgc[1], xPowgc[2], xPowgc[3]],
                 "mNeo4": [xPowgc[4], xPowgc[5], 1e2],
                 "hIL4": [xPowgc[6], xPowgc[7], xPowgc[8]],
@@ -949,7 +966,7 @@ def respCurvesAll(xgc, xnogc, xseqgc, xseqnogc, retDF=False, gcFit=True, justPri
         for animal in SigData.loc[SigData.Cell == cell].Animal.unique():
             for ligand in SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal)].Ligand.unique():
                 isoData = SigData.loc[(SigData.Cell == cell) & (SigData.Animal == animal) & (SigData.Ligand == ligand)]
-                Concs = np.linspace(isoData.Concentration.values.amin(), isoData.Concentration.values.amax(), 300)
+                Concs = np.linspace(np.amin(isoData.Concentration.values), np.amax(isoData.Concentration.values), 300)
 
                 ligCplxgc = CplxDictgc[ligand]
                 ligCplxnogc = CplxDictnogc[ligand]
@@ -976,14 +993,15 @@ def respCurvesAll(xgc, xnogc, xseqgc, xseqnogc, retDF=False, gcFit=True, justPri
                     resultsnogc = cytBindingModel(Kxnogc, ligCplxnogc, Concs, cell, animal, gcFit=False)
                     resultsseqgc = seqBindingModel(ligKDsgc, Concs, cell, animal, ligand, gcFit=True)
                     resultsseqnogc = seqBindingModel(ligKDsnogc, Concs, cell, animal, ligand, gcFit=False)
+                
                 masterSTATgc = masterSTATgc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
                                                              "Animal": animal, "Predicted": resultsgc}))
                 masterSTATnogc = masterSTATnogc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
                                                              "Animal": animal, "Predicted": resultsnogc}))
                 masterSTATseqgc = masterSTATseqgc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
-                                                             "Animal": animal, "Predicted": resultsseqgc}))
+                                                             "Animal": animal, "Predicted": np.ravel(resultsseqgc)}))
                 masterSTATseqnogc = masterSTATseqnogc.append(pd.DataFrame({"Cell": cell, "Ligand": ligand, "Concentration": Concs,
-                                                             "Animal": animal, "Predicted": resultsseqnogc}))                                             
+                                                             "Animal": animal, "Predicted": np.ravel(resultsseqnogc)}))                                             
 
             # Normalize
             if animal == "Human":
