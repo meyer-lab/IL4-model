@@ -5,8 +5,6 @@ Implementation of a simple multivalent binding model.
 import pathlib
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 from os.path import join
 from copy import copy
 from scipy.optimize import root, least_squares
@@ -122,7 +120,7 @@ def fitFunc(gcFit=True):
                         print("MSE = ", MSE)
                         print("R2 = ", R2)
                         resDF = resDF.append(pd.DataFrame({"Cell": [cell], "Animal": [animal], "Receptor": [receptor], "MSE": [MSE], r"$R^2$": [R2]}))
-    resDF.to_csv("ReceptorFitDF2.csv")
+    resDF.to_csv("FinalData/ReceptorFitDF2.csv")
 
 
 def resids(x, recCellAn=False, retDF=False):

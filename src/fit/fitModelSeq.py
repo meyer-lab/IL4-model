@@ -1,9 +1,8 @@
 """
-Implementation of a simple multivalent binding model.
+Fit Sequential Model to data.
 """
 
 import pandas as pd
-import numpy as np
 from sklearn.metrics import r2_score
 from src.MBmodel import residsSeq, fitFuncSeq
 
