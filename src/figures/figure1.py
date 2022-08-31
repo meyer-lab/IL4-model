@@ -1,36 +1,45 @@
 """
-This creates Figure 1, response of bispecific IL-2 cytokines at varing valencies and abundances using binding model.
+This creates Figure 5, main figure.
 """
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 from .figureCommon import getSetup
-from src.MBmodel import cytBindingModel, resids, residsSeq, R2_Plot_Cells, Exp_Pred, affFit, affFitSeq
+from src.MBmodel import resids, residsSeq, doseResponsePlot, R2_Plot_Cells, R2_Plot_RecS, R2_Plot_CV, affDemo, AUC_PCA, respCurvesAll
+
+rcParams['svg.fonttype'] = 'none'
 
 
 def makeFigure():
     """Get a list of the axis objects and create a figure"""
 
-    ax, f = getSetup((12, 10), (3, 3))
-    xOptimalSeq = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
-    modelDFseq = residsSeq(xOptimalSeq, True)
-    R2_Plot_Cells(modelDFseq, ax[0:2], True)
-    Exp_Pred(modelDFseq, ax[2], True)
+    ax, f = getSetup((14, 10), (3, 5))
+
+    xOptimalMultnoGC = pd.read_csv("src/data/CurrentFitnoGC.csv").x.values
+    modelDFmulnoGC = resids(xOptimalMultnoGC, True, False)
+
+    xOptimalSeqnoGC = pd.read_csv("src/data/CurrentFitSeqnoGC.csv").x.values
+    modelDFSeqnoGC = residsSeq(xOptimalSeqnoGC, True, False)
 
     xOptimalMult = pd.read_csv("src/data/CurrentFit.csv").x.values
-    modelDFmul = resids(xOptimalMult, True)
-    R2_Plot_Cells(modelDFmul, ax[3:5], False)
-    Exp_Pred(modelDFmul, ax[5], False)
+    modelDFmul = resids(xOptimalMult, True, True)
 
-    affFitSeq(ax[6:8])
-    affFit(ax[8])
+    xOptimalSeq = pd.read_csv("src/data/CurrentFitSeq.csv").x.values
+    modelDFSeq = residsSeq(xOptimalSeq, True, True)
 
-    ax[0].set(title=ax[0].get_title() + " Using Sequential Model")
-    ax[1].set(title=ax[1].get_title() + " Using Sequential Model")
-    ax[3].set(title=ax[3].get_title() + " Using Multivalent Model")
-    ax[4].set(title=ax[4].get_title() + " Using Multivalent Model")
+    AUC_PCA(ax[0:3], True)
+
+    R2_Plot_Cells(modelDFSeqnoGC, ax[3], seq=True, mice=False, training=False, gcFit=False)
+    R2_Plot_Cells(modelDFmulnoGC, ax[4], seq=False, mice=False, training=False, gcFit=False)
+    R2_Plot_Cells(modelDFSeq, ax[5], seq=True, mice=False, training=False, gcFit=True)
+    R2_Plot_Cells(modelDFmul, ax[6], seq=False, mice=False, training=False, gcFit=True)
+    doseResponsePlot(ax[7:10], modelDFmulnoGC, allCells=False)
+
+    R2_Plot_CV(ax[10])
+    R2_Plot_RecS(modelDFmulnoGC, ax[11])
+    plt.prism()
+    respCurvesAll(xOptimalMult, xOptimalMultnoGC, xOptimalSeq , xOptimalSeqnoGC, justPrimary=False)
 
     return f
-
-# calc at different valencie

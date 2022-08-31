@@ -5,8 +5,6 @@ Implementation of a simple multivalent binding model.
 import pathlib
 import numpy as np
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 from os.path import join
 from copy import copy
 from scipy.optimize import root, least_squares

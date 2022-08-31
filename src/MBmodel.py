@@ -13,7 +13,6 @@ import scipy.integrate as integrate
 from scipy.optimize import root, least_squares
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.decomposition import PCA
-from sklearn.decomposition import NMF
 from sklearn.preprocessing import StandardScaler
 
 

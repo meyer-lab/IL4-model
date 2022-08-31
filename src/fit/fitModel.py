@@ -1,5 +1,5 @@
 """
-Implementation of a simple multivalent binding model.
+Fit multivalent binding model to data.
 """
 
 import pandas as pd
