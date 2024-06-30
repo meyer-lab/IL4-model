@@ -1,3 +1,3 @@
-# IL4-model
+# Design of cell-type-specific hyperstable IL-4 mimetics via modular _de novo_ scaffolds
 
-Using surface binding models to predict how cell type affects response to IL-4, IL-13, and IL-4 variants.
+This is the analysis code for [Yang _et al_](https://doi.org/10.1038/s41589-023-01313-6).
